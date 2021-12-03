@@ -22,24 +22,28 @@ public class TwoFactorAuthenticationPage {
       frame=new JFrame();//creating instance of JFrame  
       
       contentPane = new JPanel();
-      frame.getContentPane().setBackground(new Color(255, 215, 0));
+      frame.getContentPane().setBackground(new Color(255, 215, 0));//Making Background Color GOLD.
       
+      //Title: Two-Factor Authentication
       title = new JLabel("Two-Factor Verification");
       title.setBounds(70,60,250, 40);//x axis, y axis, width, height 
       title.setFont(new Font("Serif", Font.BOLD, 22));
       
+      //Prompts users on how they would like to get verification code.
       verifyOptions = new JLabel("Send Code By: ");
       verifyOptions.setBounds(130,100,100, 40);
       
-      
+      //Option: Via Email
       sendCodeByEmail=new JButton("Email");//creating instance of JButton  
       sendCodeByEmail.setBounds(130,140,100, 40);//x axis, y axis, width, height 
       sendCodeByEmail.setForeground(Color.BLUE);
       
+      //Option: Via Text Message
       sendCodeByText=new JButton("Text");//creating instance of JButton  
       sendCodeByText.setBounds(130,190,100, 40);//x axis, y axis, width, height 
       sendCodeByText.setForeground(Color.BLUE);
       
+      //Verify Button to Verify Code
       verifyCode=new JButton("VERIFY");//creating instance of JButton  
       verifyCode.setBounds(120,260,130, 40);//x axis, y axis, width, height  
       verifyCode.setForeground(Color.BLACK);
