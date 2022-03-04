@@ -11,13 +11,16 @@ public class Account_Recovery extends JFrame {
     private JPanel mainPanel;
     private JLabel titleLabel;
     private JLabel question1Label;
-    private JLabel InsertQuestion1Label;
+    private JLabel insertQuestion1Label;
     private JLabel question2Label;
     private JLabel insertQuestion2Label;
     private JLabel question3Label;
     private JLabel insertQuestion3Label;
     private JLabel incorrectAnswerLabel;
     private JLabel imageLabel;
+    private JLabel emailLabel;
+    private JTextField enterEmailHereTextField;
+    private JButton emailButton;
 
     public Account_Recovery() {
         setContentPane(mainPanel);
@@ -25,12 +28,31 @@ public class Account_Recovery extends JFrame {
         setSize(600, 600);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
+        question1Label.setVisible(false);
+        insertQuestion1Label.setVisible(false);
+        question2Label.setVisible(false);
+        insertQuestion2Label.setVisible(false);
+        question3Label.setVisible(false);
+        insertQuestion3Label.setVisible(false);
         incorrectAnswerLabel.setVisible(false);
         ImageIcon imageIcon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("card2cart_logo.jpg")));
         Image image = imageIcon.getImage();
         Image modifyImage = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         ImageIcon nuImageIcon = new ImageIcon(modifyImage);
         imageLabel.setIcon(nuImageIcon);
+        emailButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!enterEmailHereTextField.getText().isEmpty()) {
+                    question1Label.setVisible(true);
+                    insertQuestion1Label.setVisible(true);
+                    question2Label.setVisible(true);
+                    insertQuestion2Label.setVisible(true);
+                    question3Label.setVisible(true);
+                    insertQuestion3Label.setVisible(true);
+                }
+            }
+        });
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -14,6 +14,9 @@ public class Password_Recovery extends JFrame {
     private JLabel codeSentLabel;
     private JLabel incorrectCodeLabel;
     private JLabel imageLabel;
+    private JLabel enterUsernameHereLabel;
+    private JTextField enterUsernameHereTextField;
+    private JButton confirmUsernameButton;
 
     public Password_Recovery() {
         setContentPane(mainPanel);
@@ -21,12 +24,26 @@ public class Password_Recovery extends JFrame {
         setSize(600, 600);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
+        codeSentLabel.setVisible(false);
+        enterCodeHereTextField.setVisible(false);
+        submitButton.setVisible(false);
         incorrectCodeLabel.setVisible(false);
         ImageIcon imageIcon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("card2cart_logo.jpg")));
         Image image = imageIcon.getImage();
         Image modifyImage = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         ImageIcon nuImageIcon = new ImageIcon(modifyImage);
         imageLabel.setIcon(nuImageIcon);
+        confirmUsernameButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!enterCodeHereTextField.getText().isEmpty()) {
+                    codeSentLabel.setVisible(true);
+                    enterCodeHereTextField.setVisible(true);
+                    submitButton.setVisible(true);
+                    incorrectCodeLabel.setVisible(true);
+                }
+            }
+        });
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

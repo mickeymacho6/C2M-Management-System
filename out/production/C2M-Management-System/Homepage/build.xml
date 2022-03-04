@@ -627,7 +627,7 @@
             <jvmarg value="-Dcli=true"/>
             <arg value="-css"/>
             <arg file="css/theme.css"/>
-            <arg file="src/theme.res"/>
+            <arg file="../theme.res"/>
         </java>
     </target>
 
