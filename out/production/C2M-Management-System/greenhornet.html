@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+<style>
+body,h1,h2,h3,h4,h5 {font-family: "Poppins", sans-serif}
+body {font-size:16px;}
+.w3-half img{margin-bottom:-6px;margin-top:16px;opacity:0.8;cursor:pointer}
+.w3-half img:hover{opacity:1}
+</style>
+<body>
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-green w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;" id="mySidebar"><br>
+  <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft" style="width:100%;font-size:22px">Close Menu</a>
+  <div class="w3-container">
+    <h3 class="w3-padding-32"><b>Green Hornets</b></h3>
+  </div>
+  <div class="w3-bar-block">
+    <a href="#" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Home</a> 
+    <a href="#teammembers" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Team Members</a> 
+    <a href="#faculty" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Faculty Advisor</a>
+    <a href="#background" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Background</a> 
+    <a href="#scope" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Scope</a> 
+    <a href="#solution" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Solution</a> 
+    <a href="#highlights" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Highlights</a> 
+    <a href="#prototypes" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Prototype Showcase</a>
+    <a href="#timeline" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Timeline</a> 
+  </div>
+</nav>
+
+<!-- Top menu on small screens -->
+<header class="w3-container w3-top w3-hide-large w3-green w3-xlarge w3-padding">
+  <a href="javascript:void(0)" class="w3-button w3-green w3-margin-right" onclick="w3_open()">☰</a>
+  <span>Company Name</span>
+</header>
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" style="margin-left:340px;margin-right:40px">
+
+  <!-- Header -->
+  <div class="w3-container" style="margin-top:80px" id="showcase">
+    <h1 class="w3-jumbo"><b>Card 2 Manage Website</b></h1>
+
+  <!-- Team Members -->
+  <div class="w3-container" id="teammembers" style="margin-top:75px">
+    <h1 class="w3-xxxlarge w3-text-green"><b>Team Members</b></h1>
+    <hr style="width:50px;border:5px solid rgb(255, 208, 0)" class="w3-round">
+    <p>The best team in the CSC Green Hornets Category.</p>
+    <p>We are a team of college students from Sacramento State, who have come together to create the Card 2 Manage System for our CSC 191 course. This system will be built upon in the next semester to better serve the client's needs.
+    </p>
+    <p><b>Our team members are listed below:</b>:</p>
+  </div>
+
+  <!-- The Team -->
+  <div class="w3-row-padding">
+    <div class="w3-col m4 w3-margin-bottom">
+      <div class="w3-light-grey">
+        <img src="C:\Users\wyant\Pictures\Ethan.jpg" alt="John" style="width:100%">
+        <div class="w3-container">
+          <h3>Ethan Wyant</h3>
+          <p class="w3-opacity">Webpage Design and Coordination</p>
+          <p>Ethan is an HTML and Python programmer who creates our client-facing webpage designs and collates project pages.</p>
+        </div>
+      </div>
+    </div>
+    <div class="w3-col m4 w3-margin-bottom">
+      <div class="w3-light-grey">
+        <img src="C:\Users\wyant\Pictures\Vyas.jpeg" alt="Jane" style="width:100%">
+        <div class="w3-container">
+          <h3>Vyas Srinivasan</h3>
+          <p class="w3-opacity">Site Security</p>
+          <p>Vyas implements the security feature that keeps the customers shopping online with a peace of mind. Security features include two-factor authentication and password hashing.
+            </p>
+        </div>
+      </div>
+    </div>
+    <div class="w3-col m4 w3-margin-bottom">
+      <div class="w3-light-grey">
+        <img src="C:\Users\wyant\Pictures\Harlan.jpg" alt="Mike" style="width:100%">
+        <div class="w3-container">
+          <h3>Harlan Nguyen</h3>
+          <p class="w3-opacity">Passwords and Recovery</p>
+          <p>Harlan develops the username and password recovery for accounts. Username recovery utilizes security questions set by the user for authentication. Password recovery instead sends a code to the user's email address.
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+   <!-- The Team (Row 2) -->
+   <div class="w3-row-padding">  
+    <div class="w3-col m4 w3-margin-bottom">
+      <div class="w3-light-grey">
+        <img src="C:\Users\wyant\Pictures\Robert.png" alt="John" style="width:100%">
+        <div class="w3-container">
+          <h3>Robert DeYoung</h3>
+          <p class="w3-opacity">Backend Internal Architect</p>
+          <p>Robert DeYoung is the SQL/Java developer of our internal package searching feature.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="w3-col m4 w3-margin-bottom">
+      <div class="w3-light-grey">
+        <img src="C:\Users\wyant\Pictures\Michael.jpg" alt="Jane" style="width:100%">
+        <div class="w3-container">
+          <h3>Michael Mateo</h3>
+          <p class="w3-opacity">Transactions and Logging Developer</p>
+          <p>Michael Mateo is a java developer who handles the Transaction Log With Sellers feature of Card 2 Manage.</p>
+        </div>
+      </div>
+    </div>
+    <div class="w3-col m4 w3-margin-bottom">
+      <div class="w3-light-grey">
+        <img src="C:\Users\wyant\Pictures\Trisdon.jpg" alt="Mike" style="width:100%">
+        <div class="w3-container">
+          <h3>Trisdon Zepeda</h3>
+          <p class="w3-opacity">UI Developer</p>
+          <p>Trisdon Zepeda is a java developer creating the user interface for C2M's homepage.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+   <!-- The Team (Row 3) -->
+  <div class="w3-row-padding">
+    <div class="w3-col m4 w3-margin-bottom">
+      <div class="w3-light-grey">
+        <img src="C:\Users\wyant\Pictures\Myles.png" alt="John" style="width:100%">
+        <div class="w3-container">
+          <h3>Myles Eastman</h3>
+          <p class="w3-opacity">Tracking and Transactions Developer</p>
+          <p>Myles Eastman is a Java developer who implements the transaction history page that tracks each purchase from the seller
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="w3-col m4 w3-margin-bottom">
+      <div class="w3-light-grey">
+        <img src="C:\Users\wyant\Pictures\Reza.jfif" alt="Jane" style="width:100%">
+        <div class="w3-container">
+          <h3>Reza Salmanian</h3>
+          <p class="w3-opacity">Login UI</p>
+          <p>Reza Salmanian is the Java developer who is creating the user interface for C2M login page.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  <!-- Faculty Advisor -->
+  <div class="w3-container" id="faculty" style="margin-top:75px">
+    <h1 class="w3-xxxlarge w3-text-green"><b>Faculty Advisor</b></h1>
+    <hr style="width:50px;border:5px solid rgb(255, 208, 0)" class="w3-round">
+    <p>This project would not be possible without our Faculty Advisor, Professor Kenneth Elliott, to whom we would like to thank for helping us this semester!!
+    </p>
+  </div>
+
+  <div class="w3-col m4 w3-margin-bottom">
+    <div class="w3-light-grey">
+      <img src="C:\Users\wyant\Pictures\Auto.jpg" alt="John" style="width:100%">
+      <div class="w3-container">
+        <h3>Kenneth Elliot</h3>
+        <p class="w3-opacity">Faculty Advisor</p>
+        <p>Professor Kenneth Elliott is a member of the Sacramento State University Computer Science Department, and just a super rad dude all around! </p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Background -->
+  <div class="w3-container" id="background" style="margin-top:75px">
+    <h1 class="w3-xxxlarge w3-text-green"><b>Background</b></h1>
+    <hr style="width:50px;border:5px solid rgb(255, 208, 0)" class="w3-round">
+    <p>Sports trading cards are a form of collectibles where each cards’ value depends on the player and their performance in their respective sports. People are treating this as investment: Players’ performances impact the value of these cards; and depending on their variation and rarity, each card has a value that can be worth up to a million dollars. The clients that we have for this project have a small business named Card2Cart. Card2Cart is a Philippines-based card shop where they buy and sell basketball trading cards. They buy products here in the US, have them shipped through a forwarder, and resell them in the Philippines.
+       They are having difficulties in keeping track of their inventory, monitoring their transactions, and looking up shipping information. The Green Hornets have proposed a solution to assist them in their needs: the Card 2 Manage Management System.
+    </p>
+  </div>
+
+
+  <!-- Scope -->
+  <div class="w3-container" id="scope" style="margin-top:75px">
+    <h1 class="w3-xxxlarge w3-text-green"><b>Scope</b></h1>
+    <hr style="width:50px;border:5px solid rgb(255, 208, 0)" class="w3-round">
+    <p>
+      Client’s “Problem” to be solved:<br>
+      The clients require a business management application to assist them in<br>
+      logging transactions, managing their inventory, and handling invoices.<br>
+      All the work that need to be done for this Project. <br>
+      1.Login page with 10-15 hours work estimated<br>
+      2.Home page with 10-15 hours work estimated<br> 
+      3.Pakeje search page with 15-20 hours work estimated<br>
+      4. Transaction page with 15-20 hours work estimated<br>
+      <br>
+      
+    </p>
+  </div>
+
+  <!-- Highlights -->
+  <div class="w3-container" id="highlights" style="margin-top:75px">
+    <h1 class="w3-xxxlarge w3-text-green"><b>Highlights</b></h1>
+    <hr style="width:50px;border:5px solid rgb(255, 208, 0)" class="w3-round">
+    <p>Card 2 Manage Management System offers variety of features that makes clients’ record tracking easier.<br>
+      When logging in, users have the ability to recover their account if they forgot their password. After the
+      application asks for a series of questions to verify the identity of the user, the application will grant them
+      access to change their password. Two-step authentication is also involved to further enhance the
+      security of Card 2 Manage. The application will send a code to the user’s email to verify their log in
+      activity.
+      In the homepage, a quick information banner is present at the top to display the latest update made on
+      the application. Since Card2Cart is a Philippines-based client, the team has included the current
+      exchange rate from Philippine Peso to U.S. Dollar, as well as the current date and time in Philippines and
+      in the U.S. There are three main features that helps the clients manage their records: an Inventory
+      Management feature, a Package Information feature, and a Transaction Log feature.
+      The Inventory Management feature shows the availability of the clients’ products. It displays the
+      product name, inventory status, price, and the quantity. It also features a search box to quickly look for
+      a specific item, and a sort feature to easily sort the items based on the user’s preference.
+      The Package Information feature contains information about the package of the clients. It shows the
+      order number of the package, the purchase date, shipping status, product summary, and the details of
+      the item. It also contains a search and sort feature to easily look for information about packages.
+      Lastly, the Transaction Log feature contains two sub-features to cover both the buyer side and the seller
+      side of the client: Transactions with Merchants and Transactions with Customers. Transactions with
+      Merchants records the invoices with sellers where Card2Cart buys from. Transactions with Customers
+      records the transactions with their customers. Both sub-feature shows a table to show the transaction;
+      and in addition to the search and sort feature of the page, it also displays the current budget available to
+      keep track of their spending. Users also have the ability to add a transaction by clicking the “Add
+      Transaction” feature.</p>
+      <img src="login.png" alt="login" width="200px">
+      <img src="Homepage.png" alt="Homepage" width="300px"><br>
+      <img src="TransactionHistory.png" alt="TransactionHistory" width="300px">
+      <img src="PackageSearch.png" alt="PackageSearch" width="300px">
+    
+  </div>
+
+
+  <!-- Solution -->
+  <div class="w3-container" id="solution" style="margin-top:75px">
+    <h1 class="w3-xxxlarge w3-text-green"><b>Solution</b></h1>
+    <hr style="width:50px;border:5px solid rgb(255, 208, 0)" class="w3-round">
+    <p>The team aims to create a management system web application that allows clients to monitor net and gross income, inventory, and package information. Card2Manage Management System offers inventory management, package information, transaction log, and security features. The Inventory Management feature shows items in stock, while the Package Information feature tracks shipping for each package.
+       Lastly, the Transaction Log feature includes transaction tracking both from buyer and seller side. The application involves two-step authentication and provide backup feature for forgotten passwords.
+    </p>
+  </div>
+
+
+  <!-- Prototypes -->
+  <div class="w3-container" id="prototypes" style="margin-top:75px">
+    <h1 class="w3-xxxlarge w3-text-green"><b>Prototype Showcase</b></h1>
+    <hr style="width:50px;border:5px solid rgb(255, 208, 0)" class="w3-round">
+    <p>Take a look at our current UI prototypes! Selecting an image will show more information about each page.
+    </p>
+  </div>
+
+  <!-- Photo grid (modal) -->
+  <div class="w3-row-padding">
+    <div class="w3-half">
+      <img src="C:\Users\wyant\pictures\Homepage.png" style="width:100%" onclick="onClick(this)" alt="Home page
+      displays time zone differences, currency exchange rate and information about the last transaction">
+      <img src="C:\Users\wyant\pictures\TransactionHistory.png" style="width:100%" onclick="onClick(this)" alt="Transactions page with a log of all sales and purchases">
+      <img src="C:\Users\wyant\pictures\PackageSearch.png" style="width:100%" onclick="onClick(this)" alt="Packages page with search function      ">
+
+      </div>
+
+      <div class="w3-half">
+        <img src="C:\Users\wyant\pictures\Login.png" style="width:100%" onclick="onClick(this)" alt="Login page with account recovery for each of our clients">
+    </div>
+  </div>
+
+  <!-- Modal for full size images on click-->
+  <div id="modal01" class="w3-modal w3-black" style="padding-top:0" onclick="this.style.display='none'">
+    <span class="w3-button w3-black w3-xxlarge w3-display-topright">×</span>
+    <div class="w3-modal-content w3-animate-zoom w3-center w3-transparent w3-padding-64">
+      <img id="img01" class="w3-image">
+      <p id="caption"></p>
+    </div>
+  </div>
+
+
+    <!-- Timeline -->
+    <div class="w3-container" id="timeline" style="margin-top:75px">
+      <h1 class="w3-xxxlarge w3-text-green"><b>Timeline</b></h1>
+      <hr style="width:50px;border:5px solid rgb(255, 208, 0)" class="w3-round">
+      <p>
+        Give a projected timeline. <br>
+        You will update this timeline periodically in CSC191. <br>
+      </p>
+    </div>
+
+
+<!-- End page content -->
+</div>
+
+<!-- W3.CSS Container -->
+<div class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px;padding-right:58px"><p class="w3-right">Powered by <a href="https://www.w3schools.com/w3css/default.asp" title="W3.CSS" target="_blank" class="w3-hover-opacity">w3.css</a></p></div>
+
+<script>
+// Script to open and close sidebar
+function w3_open() {
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("myOverlay").style.display = "block";
+}
+
+function w3_close() {
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("myOverlay").style.display = "none";
+}
+
+// Modal Image Gallery
+function onClick(element) {
+  document.getElementById("img01").src = element.src;
+  document.getElementById("modal01").style.display = "block";
+  var captionText = document.getElementById("caption");
+  captionText.innerHTML = element.alt;
+}
+</script>
+
+</body>
+</html>
