@@ -1,11 +1,7 @@
-package CSC191_Card2Cart_AccountPasswordRecovery;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import java.util.*;
 //import javax.mail.*;
 //import javax.mail.internet.*;
 //import javax.activation.*;

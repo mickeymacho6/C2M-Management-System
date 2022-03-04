@@ -1,7 +1,4 @@
-package SecurityFeature.src;
-
 import javax.swing.*;
-import java.awt.*;
 
 public class TwoFactorAuthentication_Email extends Two_Factor_Authentication {
     private static JLabel title;

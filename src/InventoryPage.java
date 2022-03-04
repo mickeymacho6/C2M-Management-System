@@ -1,5 +1,3 @@
-package InventoryPage;
-
 import javax.swing.*;
 import java.awt.*;
 

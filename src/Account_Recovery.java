@@ -1,5 +1,3 @@
-package CSC191_Card2Cart_AccountPasswordRecovery;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

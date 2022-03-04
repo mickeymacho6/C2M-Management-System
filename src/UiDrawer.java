@@ -1,5 +1,3 @@
-package Homepage.src.C2MHomepage;
-
 import com.codename1.charts.util.ColorUtil;
 import com.codename1.ui.Image;
 import com.codename1.ui.Graphics;

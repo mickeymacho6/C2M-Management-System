@@ -1,5 +1,3 @@
-package Homepage.src.C2MHomepage;
-
 import com.codename1.components.InteractionDialog;
 import com.codename1.ui.*;
 import com.codename1.ui.events.ActionEvent;

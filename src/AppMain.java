@@ -1,5 +1,3 @@
-package Homepage.src.C2MHomepage;
-
 import static com.codename1.ui.CN.*;
 import com.codename1.ui.Form;
 import com.codename1.ui.Dialog;
