@@ -1,101 +1,91 @@
-import com.codename1.components.InteractionDialog;
-import com.codename1.ui.*;
-import com.codename1.ui.events.ActionEvent;
-import com.codename1.ui.events.ActionListener;
-import com.codename1.ui.layouts.BorderLayout;
-import java.io.IOException;
-import com.codename1.ui.layouts.FlowLayout;
-import com.codename1.ui.layouts.GridLayout;
-import com.codename1.ui.layouts.LayeredLayout;
+package C2M;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import static javax.swing.JOptionPane.showMessageDialog;
+
+public class Homepage extends JFrame {
+    private JPanel HomepageForm;
+    private JPanel Banner;
+    private JPanel LastTransaction;
+    private JPanel Currency;
+    private JButton inventoryManagementButton;
+    private JButton packageInformationButton;
+    private JButton transactionLogButton;
+    private JPanel Footer;
+    private JLabel logoLabel;
+    private JLabel date;
+    private JPanel center;
+    private JButton logOut;
+    private JButton accountOptions;
+
+    public Homepage()
+    {
+        setContentPane(HomepageForm);
+        setTitle("C2M");
+        setSize(1525, 900);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setVisible(true);
 
 
-public class Homepage extends Form {
+        Image logo = new ImageIcon(this.getClass().getResource("/logo.png")).getImage();
+        Image button1 = new ImageIcon(this.getClass().getResource("/inventory.png")).getImage();
+        Image button2 = new ImageIcon(this.getClass().getResource("/package.png")).getImage();
+        Image button3 = new ImageIcon(this.getClass().getResource("/translog.png")).getImage();
+        Image button4 = new ImageIcon(this.getClass().getResource("/accountOptions.png")).getImage();
+        Image button5 = new ImageIcon(this.getClass().getResource("/logOut.png")).getImage();
 
-    private UiDrawer UI;
-    Image buttonImage;
+        logoLabel.setIcon(new ImageIcon(logo));
+        inventoryManagementButton.setIcon(new ImageIcon(button1));
+        packageInformationButton.setIcon(new ImageIcon(button2));
+        transactionLogButton.setIcon(new ImageIcon(button3));
+        accountOptions.setIcon(new ImageIcon(button4));
+        logOut.setIcon(new ImageIcon(button5));
+        logoLabel.setSize(150,100);
 
-    public Homepage() {
+        //To do: getBannerInformation();
+        //To do: JLabel.setText(); for all JLabels in the banner
 
-        try{
-            buttonImage = Image.createImage("/optionButton.png");
-
-        }catch (IOException e) {e.printStackTrace();}
-
-
-
-        UI = new UiDrawer();
-        Button inventoryButton = new Button(buttonImage);
-        Button packageButton = new Button(buttonImage);
-        Button transactionButton = new Button(buttonImage);
-
-        Container buttons = new Container();
-        buttons.add(inventoryButton);
-        buttons.add(packageButton);
-        buttons.add(transactionButton);
-
-
-        //Placeholder messages for clicking option tabs. When homepage is linked to other pages this would be changed to open the selected page.
-        ActionListener selectInventory = new ActionListener()
-        {
-
+        accountOptions.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent evt) {
-                InteractionDialog promp = new InteractionDialog();
-                Container option = new Container(new GridLayout(1, 1));
-                promp .setLayout(new BorderLayout());
-                promp .add(BorderLayout.CENTER, new Label("Would open another page"));
-                Button ok = new Button("ok");
-                ok.addActionListener((ee)-> promp .dispose());
-                option.add(ok);
-                promp.addComponent(BorderLayout.SOUTH, option);
-                promp.show(100, 100, 100, 100);
+            public void actionPerformed(ActionEvent e) {
+                showMessageDialog(null, "Would have opened another page");
+                //To do: openAccountOptions();
             }
-        };
+        });
 
-        ActionListener selectPackage = new ActionListener()
-        {
-
+        inventoryManagementButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent evt) {
-                InteractionDialog promp = new InteractionDialog();
-                Container option = new Container(new GridLayout(1, 1));
-                promp .setLayout(new BorderLayout());
-                promp .add(BorderLayout.CENTER, new Label("Would open another page"));
-                Button ok = new Button("ok");
-                ok.addActionListener((ee)-> promp .dispose());
-                option.add(ok);
-                promp.addComponent(BorderLayout.SOUTH, option);
-                promp.show(100, 100, 100, 100);
+            public void actionPerformed(ActionEvent e) {
+                showMessageDialog(null, "Would have opened another page");
+                //To do: openInventoryManagement();
             }
-        };
+        });
 
-        ActionListener selectTransaction = new ActionListener()
-        {
-
+        packageInformationButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent evt) {
-                InteractionDialog promp = new InteractionDialog();
-                Container option = new Container(new GridLayout(1, 1));
-                promp .setLayout(new BorderLayout());
-                promp .add(BorderLayout.CENTER, new Label("Would open another page"));
-                Button ok = new Button("ok");
-                ok.addActionListener((ee)-> promp .dispose());
-                option.add(ok);
-                promp.addComponent(BorderLayout.SOUTH, option);
-                promp.show(100, 100, 100, 100);
+            public void actionPerformed(ActionEvent e) {
+                showMessageDialog(null, "Would have opened another page");
+                //To do: openPackageInformation();
             }
-        };
+        });
 
-        inventoryButton.addActionListener(selectInventory);
-        packageButton.addActionListener(selectPackage);
-        transactionButton.addActionListener(selectTransaction);
+        transactionLogButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showMessageDialog(null, "Would have opened another page");
+                //To do: openTransactionLog();
+            }
+        });
 
-        Form display = new Form("C2M UI Prototype", new BorderLayout());
-        display.add(BorderLayout.CENTER,LayeredLayout.encloseIn(UI, FlowLayout.encloseCenterBottom(buttons)));
-        display.show();
-
+        logOut.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                showMessageDialog(null, "Would have opened another page");
+                //To do: logOut();
+            }
+        });
     }
-
-
 }
-
