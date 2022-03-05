@@ -6,6 +6,11 @@ import java.awt.event.ActionListener;
 //import javax.mail.internet.*;
 //import javax.activation.*;
 
+/**
+ * The page for password recovery.
+ * @author Harlan Nguyen
+ * Date: 03/04/2022
+ */
 public class Password_Recovery extends JFrame {
     private JTextField enterCodeHereTextField;
     private JButton submitButton;

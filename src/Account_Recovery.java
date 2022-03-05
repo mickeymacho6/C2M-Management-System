@@ -2,7 +2,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.*;
 
+/**
+ * The page for account recovery.
+ * @author Harlan Nguyen
+ * Date: 03/04/2022
+ */
 public class Account_Recovery extends JFrame {
     private JTextField insertAnswer1HereTextField;
     private JTextField insertAnswer2HereTextField;
