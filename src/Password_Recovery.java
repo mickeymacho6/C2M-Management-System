@@ -22,6 +22,7 @@ public class Password_Recovery extends JFrame {
     private JLabel enterUsernameHereLabel;
     private JTextField enterUsernameHereTextField;
     private JButton confirmUsernameButton;
+    private JLabel incorrectUsernameLabel;
 
     public Password_Recovery() {
         setContentPane(mainPanel);
@@ -29,10 +30,12 @@ public class Password_Recovery extends JFrame {
         setSize(600, 600);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
+        incorrectUsernameLabel.setVisible(false);
         codeSentLabel.setVisible(false);
         enterCodeHereTextField.setVisible(false);
         submitButton.setVisible(false);
         incorrectCodeLabel.setVisible(false);
+        submitButton.setVisible(false);
         ImageIcon imageIcon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("card2cart_logo.jpg")));
         Image image = imageIcon.getImage();
         Image modifyImage = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
@@ -41,11 +44,17 @@ public class Password_Recovery extends JFrame {
         confirmUsernameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!enterCodeHereTextField.getText().isEmpty()) {
+                if (!enterUsernameHereTextField.getText().isEmpty()) {
+                    enterUsernameHereLabel.setVisible(false);
+                    enterUsernameHereTextField.setVisible(false);
+                    confirmUsernameButton.setVisible(false);
+                    incorrectUsernameLabel.setVisible(false);
                     codeSentLabel.setVisible(true);
                     enterCodeHereTextField.setVisible(true);
                     submitButton.setVisible(true);
-                    incorrectCodeLabel.setVisible(true);
+                    submitButton.setVisible(true);
+                } else {
+                    incorrectUsernameLabel.setVisible(true);
                 }
             }
         });
