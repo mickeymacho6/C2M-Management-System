@@ -2,14 +2,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.*;
 
 /**
  * The page for account recovery.
  * @author Harlan Nguyen
  * Date: 03/04/2022
  */
-public class Account_Recovery extends JFrame {
+public class Username_Recovery extends JFrame {
     private JTextField insertAnswer1HereTextField;
     private JTextField insertAnswer2HereTextField;
     private JTextField insertAnswer3HereTextField;
@@ -28,7 +27,7 @@ public class Account_Recovery extends JFrame {
     private JTextField enterEmailHereTextField;
     private JButton emailButton;
 
-    public Account_Recovery() {
+    public Username_Recovery() {
         setContentPane(mainPanel);
         setTitle("Account Recovery");
         setSize(600, 600);
@@ -68,6 +67,6 @@ public class Account_Recovery extends JFrame {
     }
 
     public static void main(String[] args) {
-        Account_Recovery accountRecovery = new Account_Recovery();
+        Username_Recovery accountRecovery = new Username_Recovery();
     }
 }
