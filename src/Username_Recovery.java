@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.sql.*;
 
 /**
  * The page for username recovery.
@@ -76,12 +76,20 @@ public class Username_Recovery extends JFrame {
                 } else {
                     incorrectEmailLabel.setVisible(true);
                 }
+                String sql = "select EmailAddress from SalesLT.Customer where EmailAddress = " + enterEmailHereTextField.getText();
+                //Statement statement = connection.createStatement();
+                //String result = statement.executeUpdate(sql);
+
             }
         });
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                incorrectAnswerLabel.setVisible(true);
+                if (!insertAnswer1HereTextField.getText().isEmpty() | !insertAnswer2HereTextField.getText().isEmpty() | !insertAnswer3HereTextField.getText().isEmpty()) {
+                    dispose();
+                } else {
+                    incorrectAnswerLabel.setVisible(true);
+                }
             }
         });
     }

@@ -10,9 +10,9 @@ public class AzureSQLConnection {
         /**
          * setting the parameters.
          */
-        String connectionUrl = "jdbc:sqlserver:// ;databaseName=Green Hornets Card 2 Manage";
-        String username = "";
-        String password = "";
+        String connectionUrl = "jdbc:sqlserver:greenhornetscard2manage.database.windows.net;databaseName=Green Hornets Card 2 Manage";
+        String username = "greenhornetsadmin";
+        String password = "GreenHornetsUp!";
 
         /**
          * Declare the JDBC object.
@@ -21,8 +21,10 @@ public class AzureSQLConnection {
 
         try {
             //Establish the connection.
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+            DriverManager.registerDriver(new com.microsoft.sqlserver.jdbc.SQLServerDriver());
             connection = DriverManager.getConnection(connectionUrl, username, password);
+            System.out.println("Connected to SQL Server");
+            connection.close();
         } catch (Exception e) {
             e.printStackTrace();
         }

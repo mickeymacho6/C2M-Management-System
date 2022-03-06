@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.*;
 //import javax.mail.*;
 //import javax.mail.internet.*;
 //import javax.activation.*;
@@ -56,12 +57,17 @@ public class Password_Recovery extends JFrame {
                 } else {
                     incorrectUsernameLabel.setVisible(true);
                 }
+
             }
         });
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                incorrectCodeLabel.setVisible(true);
+                if (!enterCodeHereTextField.getText().isEmpty()) {
+                    dispose();
+                } else {
+                    incorrectCodeLabel.setVisible(true);
+                }
             }
         });
     }
