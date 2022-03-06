@@ -10,18 +10,18 @@ import java.sql.*;
  * Date: 03/04/2022
  */
 public class Username_Recovery extends JFrame {
-    private JTextField insertAnswer1HereTextField;
-    private JTextField insertAnswer2HereTextField;
-    private JTextField insertAnswer3HereTextField;
+    private JTextField enterAnswer1HereTextField;
+    private JTextField enterAnswer2HereTextField;
+    private JTextField enterAnswer3HereTextField;
     private JButton submitButton;
     private JPanel mainPanel;
     private JLabel titleLabel;
     private JLabel question1Label;
-    private JLabel insertQuestion1Label;
+
     private JLabel question2Label;
-    private JLabel insertQuestion2Label;
+
     private JLabel question3Label;
-    private JLabel insertQuestion3Label;
+
     private JLabel incorrectAnswerLabel;
     private JLabel imageLabel;
     private JLabel emailLabel;
@@ -40,14 +40,11 @@ public class Username_Recovery extends JFrame {
         setVisible(true);
         incorrectEmailLabel.setVisible(false);
         question1Label.setVisible(false);
-        insertQuestion1Label.setVisible(false);
-        insertAnswer1HereTextField.setVisible(false);
+        enterAnswer1HereTextField.setVisible(false);
         question2Label.setVisible(false);
-        insertQuestion2Label.setVisible(false);
-        insertAnswer2HereTextField.setVisible(false);
+        enterAnswer2HereTextField.setVisible(false);
         question3Label.setVisible(false);
-        insertQuestion3Label.setVisible(false);
-        insertAnswer3HereTextField.setVisible(false);
+        enterAnswer3HereTextField.setVisible(false);
         incorrectAnswerLabel.setVisible(false);
         submitButton.setVisible(false);
         ImageIcon imageIcon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("card2cart_logo.jpg")));
@@ -58,34 +55,34 @@ public class Username_Recovery extends JFrame {
         emailButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!enterEmailHereTextField.getText().isEmpty()) {
+                String emailText = enterEmailHereTextField.getText();
+                account = getAuthenicatedAccount(emailText);
+
+                if (account != null) {
                     emailLabel.setVisible(false);
                     enterEmailHereTextField.setVisible(false);
                     emailButton.setVisible(false);
                     incorrectEmailLabel.setVisible(false);
                     question1Label.setVisible(true);
-                    insertQuestion1Label.setVisible(true);
-                    insertAnswer1HereTextField.setVisible(true);
+                    question1Label.setText(account.question1);
+                    enterAnswer1HereTextField.setVisible(true);
                     question2Label.setVisible(true);
-                    insertQuestion2Label.setVisible(true);
-                    insertAnswer2HereTextField.setVisible(true);
+                    question2Label.setText(account.question2);
+                    enterAnswer2HereTextField.setVisible(true);
                     question3Label.setVisible(true);
-                    insertQuestion3Label.setVisible(true);
-                    insertAnswer3HereTextField.setVisible(true);
+                    question3Label.setText(account.question3);
+                    enterAnswer3HereTextField.setVisible(true);
                     submitButton.setVisible(true);
                 } else {
                     incorrectEmailLabel.setVisible(true);
                 }
-                String sql = "select EmailAddress from SalesLT.Customer where EmailAddress = " + enterEmailHereTextField.getText();
-                //Statement statement = connection.createStatement();
-                //String result = statement.executeUpdate(sql);
-
             }
         });
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!insertAnswer1HereTextField.getText().isEmpty() | !insertAnswer2HereTextField.getText().isEmpty() | !insertAnswer3HereTextField.getText().isEmpty()) {
+                if (enterAnswer1HereTextField.getText().equals(account.answer1) | enterAnswer2HereTextField.getText().equals(account.answer2)
+                        | enterAnswer3HereTextField.getText().equals(account.answer3)) {
                     dispose();
                 } else {
                     incorrectAnswerLabel.setVisible(true);
@@ -94,7 +91,42 @@ public class Username_Recovery extends JFrame {
         });
     }
 
+    public Account account;
+    private Account getAuthenicatedAccount(String email) {
+        Account account = null;
+        final String DB_URL = "jdbc:mysql://localhost/card2cardaccount?serverTimezone=UTC";
+        final String USERNAME = "harlan";
+        final String PASSWORD = "19tk9989";
+        try {
+            Connection connection = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
+            Statement statement = connection.createStatement();
+            String sql = "Select * from accounts where email=?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, email);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            account = new Account();
+            account.name = resultSet.getString("name");
+            account.email = resultSet.getString("email");
+            account.question1 = resultSet.getString("question1");
+            account.answer1 = resultSet.getString("answer1");
+            account.question2 = resultSet.getString("question2");
+            account.answer2 = resultSet.getString("answer2");
+            account.question3 = resultSet.getString("question3");
+            account.answer3 = resultSet.getString("answer3");
+
+        } catch (Exception e) {
+
+        }
+        return account;
+    }
     public static void main(String[] args) {
         Username_Recovery accountRecovery = new Username_Recovery();
+        Account account = accountRecovery.account;
+        if (account != null) {
+            System.out.println(account.email);
+        } else {
+            System.out.println("Authentication Canceled");
+        }
+
     }
 }
