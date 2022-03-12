@@ -1,4 +1,4 @@
-public class Account {
+public class TempAccount {
     public String name;
     public String email;
     public String question1;

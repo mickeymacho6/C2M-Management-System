@@ -24,8 +24,13 @@ public class Password_Recovery extends JFrame {
     private JTextField enterUsernameHereTextField;
     private JButton confirmUsernameButton;
     private JLabel incorrectUsernameLabel;
+    final String DB_URL = "jdbc:mysql://localhost:3307/card2cartaccount";
+    final String USERNAME = "admin";
+    final String PASSWORD = "admin";
+    Connection connection = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
+    Statement statement = connection.createStatement();
 
-    public Password_Recovery() {
+    public Password_Recovery() throws SQLException {
         setContentPane(mainPanel);
         setTitle("Account Recovery");
         setSize(600, 600);
@@ -45,7 +50,10 @@ public class Password_Recovery extends JFrame {
         confirmUsernameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!enterUsernameHereTextField.getText().isEmpty()) {
+                String usernameText = enterUsernameHereTextField.getText();
+                userpass = getAuthenticatedUserpass(usernameText);
+
+                if (userpass.username.equals(usernameText)) {
                     enterUsernameHereLabel.setVisible(false);
                     enterUsernameHereTextField.setVisible(false);
                     confirmUsernameButton.setVisible(false);
@@ -63,7 +71,10 @@ public class Password_Recovery extends JFrame {
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!enterCodeHereTextField.getText().isEmpty()) {
+                String code = enterCodeHereTextField.getText();
+                passwordRecoveryCode = getAuthenticatedCode(code);
+
+                if (enterCodeHereTextField.getText().equals(passwordRecoveryCode.code)) {
                     dispose();
                 } else {
                     incorrectCodeLabel.setVisible(true);
@@ -72,7 +83,45 @@ public class Password_Recovery extends JFrame {
         });
     }
 
-    public static void main(String[] args) {
+    public Userpass userpass;
+    public Userpass getAuthenticatedUserpass(String username) {
+        Userpass userpass = null;
+        try {
+            String sql = "Select * from userpass where username=?";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, String.valueOf(username));
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            userpass = new Userpass();
+            userpass.username = resultSet.getString("username");
+            userpass.password = resultSet.getString("password");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return userpass;
+    }
+
+    public PasswordRecoveryCode passwordRecoveryCode;
+    public PasswordRecoveryCode getAuthenticatedCode(String code) {
+        PasswordRecoveryCode passwordRecoveryCode = null;
+        try {
+            String sql = "Select * from codes";
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            passwordRecoveryCode = new PasswordRecoveryCode();
+            while (resultSet.next()) {
+                passwordRecoveryCode.id = resultSet.getString("id");
+                passwordRecoveryCode.code = resultSet.getString("code");
+            }
+            statement.close();
+            connection.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return passwordRecoveryCode;
+    }
+
+    public static void main(String[] args) throws SQLException {
 //        String to = "harlan.oogie@gmail.com";
 //        String from = "harlan.oogie@gmail.com";
 //        String host = "localhost";
