@@ -2,11 +2,20 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-    public class loginclass extends JFrame implements ActionListener
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
+
+
+
+public class loginclass extends JFrame implements ActionListener
     {
 
         Container contanier=getContentPane();
-        ImageIcon icon=new ImageIcon("card2cart_logo.jpeg"); //placing the app icon
+        ImageIcon icon=new ImageIcon("logo.PNG"); //placing the app icon
         JLabel lable=new JLabel(icon);
         //Username and Password botton
         JLabel user=new JLabel("Username");
@@ -77,7 +86,8 @@ import java.awt.event.ActionListener;
         @Override
         public void actionPerformed(ActionEvent e) {
             // TODO Auto-generated method stub
-            //String user= use_text.getText();
+            String user= textuser.getText();
+            char[] password=textpassword.getPassword();
 
         }
 
