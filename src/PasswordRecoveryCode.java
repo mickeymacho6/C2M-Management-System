@@ -1,3 +1,4 @@
 public class PasswordRecoveryCode {
-    int code;
+    String id;
+    String code;
 }

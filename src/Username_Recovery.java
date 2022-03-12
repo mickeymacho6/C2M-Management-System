@@ -58,7 +58,7 @@ public class Username_Recovery extends JFrame {
                 String emailText = enterEmailHereTextField.getText();
                 tempAccount = getAuthenicatedAccount(emailText);
 
-                if (tempAccount != null) {
+                if (tempAccount.email.equals(emailText)) {
                     emailLabel.setVisible(false);
                     enterEmailHereTextField.setVisible(false);
                     emailButton.setVisible(false);
@@ -81,8 +81,8 @@ public class Username_Recovery extends JFrame {
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (enterAnswer1HereTextField.getText().equals(tempAccount.answer1) | enterAnswer2HereTextField.getText().equals(tempAccount.answer2)
-                        | enterAnswer3HereTextField.getText().equals(tempAccount.answer3)) {
+                if (enterAnswer1HereTextField.getText().equals(tempAccount.answer1) & enterAnswer2HereTextField.getText().equals(tempAccount.answer2)
+                        & enterAnswer3HereTextField.getText().equals(tempAccount.answer3)) {
                     dispose();
                 } else {
                     incorrectAnswerLabel.setVisible(true);
@@ -104,8 +104,8 @@ public class Username_Recovery extends JFrame {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
-            tempAccount = new TempAccount();
             resultSet.next();
+            tempAccount = new TempAccount();
             tempAccount.name = resultSet.getString("name");
             tempAccount.email = resultSet.getString("email");
             tempAccount.question1 = resultSet.getString("question1");
