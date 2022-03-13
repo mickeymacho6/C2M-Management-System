@@ -19,6 +19,7 @@ public class PackageSearch extends JFrame {
     private PackageOrder test1,test2,test3,test4,test5,test6,test7;
     private ArrayList<PackageOrder> master_package_list, keyword_package_list;
     private int total_packages;
+    private char[] bannedChars = {'!','#','%','^','&','*','='};
 
     /**
      * Launch the application.
@@ -68,7 +69,7 @@ public class PackageSearch extends JFrame {
         btn = new JButton("Search");
         btn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                updateTable(textField.getText());
+                updateTable(whitelist(textField.getText()));
                 tableScroll.setViewportView(table);
             }
         });
@@ -108,15 +109,35 @@ public class PackageSearch extends JFrame {
 
 
     }
+    protected String whitelist(String in){
+        String out = "";
+        boolean safe = false;
+        for(int char_pos=0; char_pos<in.length(); char_pos++){
+            for(int banned_char=0; banned_char<7; banned_char++){
+                if(!(in.charAt(char_pos)==bannedChars[banned_char])){
+                    safe=true;
+                }
+                else{
+                    safe=false;
+                    banned_char=7;
+                }
+            }
+
+            if(safe){
+                out = out + in.charAt(char_pos);
+            }
+        }
+        return out;
+    }
     public void initTable() {
         String[] columnNames = {"Package ID", "Customer ID", "Destination", "Date of Purchase", "Delivery Date", "Total Price"
                 , "Shipping Status", "Item Id", "Quantity", "Sub-Total"};
-            String[][] table_data = new String[total_packages][10];
-            int rows=0;
-            for(PackageOrder package_order : master_package_list) {
-                table_data[rows] = package_order.getPackage();
-                rows++;
-            }
+        String[][] table_data = new String[total_packages][10];
+        int rows=0;
+        for(PackageOrder package_order : master_package_list) {
+            table_data[rows] = package_order.getPackage();
+            rows++;
+        }
         table = new JTable(table_data, columnNames);
     }
     public void updateTable(String keyword){
