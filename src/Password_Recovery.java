@@ -35,6 +35,10 @@ public class Password_Recovery extends JFrame {
     private int chosenID;
     PasswordRecoveryCode selectedCode;
 
+    /**
+     * Creates the Password Recovery page and features.
+     * @throws SQLException
+     */
     public Password_Recovery() throws SQLException {
         setContentPane(mainPanel);
         setTitle("Account Recovery");
