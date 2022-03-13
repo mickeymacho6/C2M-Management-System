@@ -1,5 +1,4 @@
-import java.awt.Color;
-import java.awt.Container;
+import java.awt.*;
 
 public class login {
     public static void main(String args[] )
@@ -10,7 +9,7 @@ public class login {
         //seetting frame visibilaty
         frame.setTitle("Card2Cart");
         frame.setVisible(true);
-        frame.setSize(100,100);
+        frame.setSize(new Dimension(100,100));
         frame.setDefaultCloseOperation(loginclass.EXIT_ON_CLOSE);
         frame.setLocation(200,200);
         //Background color
@@ -20,3 +19,4 @@ public class login {
 
     }
 }
+

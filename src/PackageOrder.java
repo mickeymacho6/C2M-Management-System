@@ -19,7 +19,7 @@ public class PackageOrder {
     }
     public String[] getPackage(){
         return new String[]{"" + package_id,customer_id,destination,date_of_purchase,delivery_date
-        ,"$"+total_price, shipping_status, item_id, "" + quantity, "$"+sub_total};
+                ,"$"+total_price, shipping_status, item_id, "" + quantity, "$"+sub_total};
     }
     public String getDOP(){
         return date_of_purchase;
