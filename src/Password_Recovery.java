@@ -3,6 +3,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Random;
 //import javax.mail.*;
 //import javax.mail.internet.*;
 //import javax.activation.*;
@@ -29,6 +31,9 @@ public class Password_Recovery extends JFrame {
     final String PASSWORD = "admin";
     Connection connection = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
     Statement statement = connection.createStatement();
+    private Random random = new Random();
+    private int chosenID;
+    PasswordRecoveryCode selectedCode;
 
     public Password_Recovery() throws SQLException {
         setContentPane(mainPanel);
@@ -62,6 +67,9 @@ public class Password_Recovery extends JFrame {
                     enterCodeHereTextField.setVisible(true);
                     submitButton.setVisible(true);
                     submitButton.setVisible(true);
+                    getAuthenticatedCode();
+                    chosenID = random.nextInt(passwordRecoveryCodeArrayList.size());
+                    selectedCode = passwordRecoveryCodeArrayList.get(chosenID);
                 } else {
                     incorrectUsernameLabel.setVisible(true);
                 }
@@ -71,10 +79,7 @@ public class Password_Recovery extends JFrame {
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String code = enterCodeHereTextField.getText();
-                passwordRecoveryCode = getAuthenticatedCode(code);
-
-                if (enterCodeHereTextField.getText().equals(passwordRecoveryCode.code)) {
+                if (enterCodeHereTextField.getText().equals(selectedCode.code)) {
                     dispose();
                 } else {
                     incorrectCodeLabel.setVisible(true);
@@ -101,24 +106,26 @@ public class Password_Recovery extends JFrame {
         return userpass;
     }
 
-    public PasswordRecoveryCode passwordRecoveryCode;
-    public PasswordRecoveryCode getAuthenticatedCode(String code) {
+    //public PasswordRecoveryCode passwordRecoveryCode;
+    public ArrayList<PasswordRecoveryCode> passwordRecoveryCodeArrayList = new ArrayList<>();
+    public void getAuthenticatedCode() {
         PasswordRecoveryCode passwordRecoveryCode = null;
         try {
             String sql = "Select * from codes";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
-            passwordRecoveryCode = new PasswordRecoveryCode();
             while (resultSet.next()) {
+                passwordRecoveryCode = new PasswordRecoveryCode();
                 passwordRecoveryCode.id = resultSet.getString("id");
                 passwordRecoveryCode.code = resultSet.getString("code");
+                passwordRecoveryCodeArrayList.add(passwordRecoveryCode);
             }
             statement.close();
             connection.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return passwordRecoveryCode;
+        //return passwordRecoveryCode;
     }
 
     public static void main(String[] args) throws SQLException {
