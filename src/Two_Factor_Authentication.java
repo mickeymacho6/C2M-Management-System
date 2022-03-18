@@ -1,8 +1,12 @@
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.SpringApplication;
+
 import javax.swing.*;
 import java.awt.*;
-import java.lang.NullPointerException;
 import java.util.Random;
 
+
+@SpringBootApplication
 public class Two_Factor_Authentication {  
    
    private static JLabel title; 
@@ -18,6 +22,7 @@ public class Two_Factor_Authentication {
 
    public static Random rand = new Random();
 
+
    public Two_Factor_Authentication() {
       
        
@@ -27,11 +32,6 @@ public class Two_Factor_Authentication {
 
       verificationCode = rand.nextInt(8999) + 1000;
       return verificationCode;
-
-   }
-   public static void sendCodeByEmail() {
-
-
 
    }
    public static void main(String[] args) {  
@@ -77,6 +77,11 @@ public class Two_Factor_Authentication {
           
       frame.setSize(400,500);//400 width and 500 height  
       frame.setLayout(null);//using no layout managers  
-      frame.setVisible(true);//making the frame visible          
+      frame.setVisible(true);//making the frame visible
+
+      SpringApplication.run(Two_Factor_Authentication.class, args);
+
+
+
    }  
 }  

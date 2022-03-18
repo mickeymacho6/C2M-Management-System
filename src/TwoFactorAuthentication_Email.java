@@ -1,5 +1,7 @@
-import javax.swing.*;
+import org.springframework.stereotype.Service;
 
+import javax.swing.*;
+@Service
 public class TwoFactorAuthentication_Email extends Two_Factor_Authentication {
     private static JLabel title;
     private static JLabel verifyOptions;
@@ -10,7 +12,11 @@ public class TwoFactorAuthentication_Email extends Two_Factor_Authentication {
 
     private static JPanel contentPane;
 
-    private static String email;
+    private static String email = "vyassrinivasan@csus.edu";
+
+    private static final String username = "vyassrinivasan@csus.edu";
+    private static final String password = "*********************";
+
     public TwoFactorAuthentication_Email() {
 
 
@@ -18,9 +24,17 @@ public class TwoFactorAuthentication_Email extends Two_Factor_Authentication {
 
     }
 
+    public boolean sendEmail(String emailAddress, String twoFactorAuthenticationCode, String subject, String message) {
+        SMTP emailCode = new SMTP();
+        message = "Your Two-Factor Authentication code is" + twoFactorAuthenticationCode;
+        emailCode.send(username, password, emailAddress, subject, message);
+
+        return true;
+    }
+
     public static String getEmailAddress() {
 
-        return "";
+        return email;
 
 
     }
