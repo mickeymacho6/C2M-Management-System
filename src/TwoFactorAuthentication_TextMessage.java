@@ -19,8 +19,6 @@ public class TwoFactorAuthentication_TextMessage extends Two_Factor_Authenticati
     public TwoFactorAuthentication_TextMessage() {
 
 
-
-
     }
 
     public boolean sendTwoFactorAuthCode(String phoneNumber, String twoFactorAuthCode) {

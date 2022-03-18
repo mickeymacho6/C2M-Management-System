@@ -7,6 +7,5 @@ public class TwoFactorAuthenticationDriver {
 
     public static void main(String [] args) {
 
-
     }
 }

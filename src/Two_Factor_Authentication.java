@@ -82,6 +82,5 @@ public class Two_Factor_Authentication {
       SpringApplication.run(Two_Factor_Authentication.class, args);
 
 
-
    }  
 }  
