@@ -5,9 +5,6 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Random;
-//import javax.mail.*;
-//import javax.mail.internet.*;
-//import javax.activation.*;
 
 /**
  * The page for password recovery.
@@ -74,6 +71,7 @@ public class Password_Recovery extends JFrame {
                     getAuthenticatedCode();
                     chosenID = random.nextInt(passwordRecoveryCodeArrayList.size());
                     selectedCode = passwordRecoveryCodeArrayList.get(chosenID);
+                    SMTP.send("harlan.oogie@gmail.com", "*****", "harlan.oogie@gmail.com", "Code", selectedCode.code);
                 } else {
                     incorrectUsernameLabel.setVisible(true);
                 }
@@ -110,7 +108,6 @@ public class Password_Recovery extends JFrame {
         return userpass;
     }
 
-    //public PasswordRecoveryCode passwordRecoveryCode;
     public ArrayList<PasswordRecoveryCode> passwordRecoveryCodeArrayList = new ArrayList<>();
     public void getAuthenticatedCode() {
         PasswordRecoveryCode passwordRecoveryCode = null;
@@ -129,27 +126,9 @@ public class Password_Recovery extends JFrame {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //return passwordRecoveryCode;
     }
 
     public static void main(String[] args) throws SQLException {
-//        String to = "harlan.oogie@gmail.com";
-//        String from = "harlan.oogie@gmail.com";
-//        String host = "localhost";
-//        Properties properties = System.getProperties();
-//        properties.setProperty("mail.smtp.host", host);
-//        Session session = Session.getDefaultInstance(properties);
-//        try {
-//            MimeMessage message = new MimeMessage(session);
-//            message.setFrom(new InternetAddress(from));
-//            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-//            message.setSubject("This is the Subject Line!");
-//            message.setText("This is actual message");
-//            Transport.send(message);
-//            System.out.println("Sent message successfully....");
-//        } catch (MessagingException mex) {
-//            mex.printStackTrace();
-//        }
         Password_Recovery passwordRecovery = new Password_Recovery();
     }
 }
