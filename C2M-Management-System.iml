@@ -69,5 +69,15 @@
     <orderEntry type="library" name="Gradle: org.springframework:spring-beans:5.3.16" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework:spring-core:5.3.16" level="project" />
     <orderEntry type="library" name="Gradle: org.springframework:spring-jcl:5.3.16" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="file://C:/JSON" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+        <jarDirectory url="file://C:/JSON" recursive="false" />
+      </library>
+    </orderEntry>
   </component>
 </module>
