@@ -16,6 +16,9 @@ public class loginForm extends JDialog{
     private JButton forgotPasswordButton;
     private JButton btnCancel;
     private JPanel LoginPanel;
+    //Added by Harlan
+    private JLabel imageLabel;
+
     //Clear function
     /*
     private void clearFields() {
@@ -24,7 +27,7 @@ public class loginForm extends JDialog{
     }
     */
     //constructor
-    public loginForm(JFrame parent)
+    public loginForm(JFrame parent, String username)
     {
         super(parent);
         setTitle(" Card2Cart Login");
@@ -33,6 +36,13 @@ public class loginForm extends JDialog{
         setModal(true);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        //Added by Harlan
+        ImageIcon imageIcon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("card2cart_logo.jpg")));
+        Image image = imageIcon.getImage();
+        Image modifyImage = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        ImageIcon nuImageIcon = new ImageIcon(modifyImage);
+        imageLabel.setIcon(nuImageIcon);
+        setTextField1Text(username);
 
 
 
@@ -138,9 +148,15 @@ public class loginForm extends JDialog{
 
         return User;
     }
+
+    //Added by Harlan
+    public void setTextField1Text(String s) {
+        this.textField1.setText(s);
+    }
+
     public static void main(String[] args)
     {
-        loginForm loginForm = new loginForm(null);
+        loginForm loginForm = new loginForm(null, "");
         user User = loginForm.User;
         if (User != null)
         {

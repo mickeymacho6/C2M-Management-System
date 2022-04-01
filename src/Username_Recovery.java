@@ -10,18 +10,11 @@ import java.sql.*;
  * Date: 03/04/2022
  */
 public class Username_Recovery extends JFrame {
-    private JTextField enterAnswer1HereTextField;
-    private JTextField enterAnswer2HereTextField;
-    private JTextField enterAnswer3HereTextField;
+    private JTextField enterAnswerHereTextField;
     private JButton submitButton;
     private JPanel mainPanel;
     private JLabel titleLabel;
     private JLabel question1Label;
-
-    private JLabel question2Label;
-
-    private JLabel question3Label;
-
     private JLabel incorrectAnswerLabel;
     private JLabel imageLabel;
     private JLabel emailLabel;
@@ -40,11 +33,7 @@ public class Username_Recovery extends JFrame {
         setVisible(true);
         incorrectEmailLabel.setVisible(false);
         question1Label.setVisible(false);
-        enterAnswer1HereTextField.setVisible(false);
-        question2Label.setVisible(false);
-        enterAnswer2HereTextField.setVisible(false);
-        question3Label.setVisible(false);
-        enterAnswer3HereTextField.setVisible(false);
+        enterAnswerHereTextField.setVisible(false);
         incorrectAnswerLabel.setVisible(false);
         submitButton.setVisible(false);
         ImageIcon imageIcon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("card2cart_logo.jpg")));
@@ -57,23 +46,19 @@ public class Username_Recovery extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String emailText = enterEmailHereTextField.getText();
                 tempAccount = getAuthenicatedAccount(emailText);
-
-                if (tempAccount.email.equals(emailText)) {
-                    emailLabel.setVisible(false);
-                    enterEmailHereTextField.setVisible(false);
-                    emailButton.setVisible(false);
-                    incorrectEmailLabel.setVisible(false);
-                    question1Label.setVisible(true);
-                    question1Label.setText(tempAccount.question1);
-                    enterAnswer1HereTextField.setVisible(true);
-                    question2Label.setVisible(true);
-                    question2Label.setText(tempAccount.question2);
-                    enterAnswer2HereTextField.setVisible(true);
-                    question3Label.setVisible(true);
-                    question3Label.setText(tempAccount.question3);
-                    enterAnswer3HereTextField.setVisible(true);
-                    submitButton.setVisible(true);
-                } else {
+                try {
+                    if (tempAccount.email.equals(emailText)) {
+                        emailLabel.setVisible(false);
+                        enterEmailHereTextField.setVisible(false);
+                        emailButton.setVisible(false);
+                        incorrectEmailLabel.setVisible(false);
+                        question1Label.setVisible(true);
+                        question1Label.setText(tempAccount.question1);
+                        enterAnswerHereTextField.setVisible(true);
+                        submitButton.setVisible(true);
+                    }
+                } catch (Exception exception) {
+                    exception.printStackTrace();
                     incorrectEmailLabel.setVisible(true);
                 }
             }
@@ -81,9 +66,9 @@ public class Username_Recovery extends JFrame {
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (enterAnswer1HereTextField.getText().equals(tempAccount.answer1) & enterAnswer2HereTextField.getText().equals(tempAccount.answer2)
-                        & enterAnswer3HereTextField.getText().equals(tempAccount.answer3)) {
+                if (enterAnswerHereTextField.getText().equals(tempAccount.answer1)) {
                     dispose();
+                    loginForm loginForm = new loginForm(null, tempAccount.name);
                 } else {
                     incorrectAnswerLabel.setVisible(true);
                 }
@@ -110,10 +95,6 @@ public class Username_Recovery extends JFrame {
             tempAccount.email = resultSet.getString("email");
             tempAccount.question1 = resultSet.getString("question1");
             tempAccount.answer1 = resultSet.getString("answer1");
-            tempAccount.question2 = resultSet.getString("question2");
-            tempAccount.answer2 = resultSet.getString("answer2");
-            tempAccount.question3 = resultSet.getString("question3");
-            tempAccount.answer3 = resultSet.getString("answer3");
 
             statement.close();
             connection.close();
