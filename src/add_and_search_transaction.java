@@ -1,6 +1,8 @@
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import javax.swing.ImageIcon;
 import javax.swing.*;
+
 import java.awt.Color;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -9,8 +11,12 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+
 import java.awt.Image;
-import javax.swing.ImageIcon;
+
+import java.sql.*;
+
+
 public class add_and_search_transaction {
     private static JTextField seller_field;
     private static JTextField total_cost_field;
@@ -194,7 +200,7 @@ public class add_and_search_transaction {
         search_class_frame.getContentPane().add(search_transaction_label);
 
         JLabel enter_shipping_label = new JLabel("Tracking # (If applicable)");
-        enter_shipping_label.setBounds(224, 640, 141, 14);
+        enter_shipping_label.setBounds(213, 641, 141, 14);
         search_class_frame.getContentPane().add(enter_shipping_label);
 
         tracking_field = new JTextField();
@@ -220,10 +226,6 @@ public class add_and_search_transaction {
         lblTransactionWithSellers.setBounds(0, 0, 289, 45);
         search_class_frame.getContentPane().add(lblTransactionWithSellers);
 
-        JLabel lblNewLabel_1 = new JLabel("");
-        lblNewLabel_1.setBounds(846, 0, 100, 100);
-        search_class_frame.getContentPane().add(lblNewLabel_1);
-
         JLabel sortLabel = new JLabel("Sort by:");
         sortLabel.setBounds(10, 138, 67, 14);
         search_class_frame.getContentPane().add(sortLabel);
@@ -245,7 +247,7 @@ public class add_and_search_transaction {
         search_class_frame.getContentPane().add(sortComboBox);
 
         JLabel shippedLabel = new JLabel("Shipped?");
-        shippedLabel.setBounds(109, 641, 57, 14);
+        shippedLabel.setBounds(105, 641, 61, 14);
         search_class_frame.getContentPane().add(shippedLabel);
 
         JComboBox shippingStatusComboBox = new JComboBox();
@@ -260,7 +262,7 @@ public class add_and_search_transaction {
         search_class_frame.getContentPane().add(shippingStatusComboBox);
 
         JLabel paidLabel = new JLabel("Paid?");
-        paidLabel.setBounds(120, 560, 46, 14);
+        paidLabel.setBounds(116, 560, 37, 14);
         search_class_frame.getContentPane().add(paidLabel);
 
 
@@ -302,6 +304,22 @@ public class add_and_search_transaction {
 		 */
         //call sort function to sort data
 
+
+        JLabel lblNewLabel_1 = new JLabel("New label");
+        ImageIcon card2cartlogo = new ImageIcon("card2cartlogo.jpeg");
+        lblNewLabel_1.setIcon(new ImageIcon("C:\\Users\\micke\\eclipse-workspace\\Card2Manage\\logo\\card2cart_logo.jpeg"));
+        lblNewLabel_1.setBounds(843, 0, 103, 100);
+        search_class_frame.getContentPane().add(lblNewLabel_1);
+
+        JLabel dollarSignLabel = new JLabel("$");
+        dollarSignLabel.setBounds(186, 588, 12, 14);
+        search_class_frame.getContentPane().add(dollarSignLabel);
+
+        JButton homepageButton = new JButton("Homepage");
+        homepageButton.setForeground(new Color(218, 165, 32));
+        homepageButton.setBackground(Color.BLACK);
+        homepageButton.setBounds(833, 718, 103, 45);
+        search_class_frame.getContentPane().add(homepageButton);
 
 
 
