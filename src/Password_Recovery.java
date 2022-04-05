@@ -88,6 +88,7 @@ public class Password_Recovery extends JFrame {
                     properties.put("mail.smtp.port", "587");
                     properties.put("mail.smtp.auth", "true");
                     properties.put("mail.smtp.starttls.required", "true");
+                    properties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
                     java.security.Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
                     Session mailSession = Session.getDefaultInstance(properties, null);
                     mailSession.setDebug(sessionDebug);
@@ -97,7 +98,7 @@ public class Password_Recovery extends JFrame {
                         InternetAddress[] addresses = {new InternetAddress(userpass.email)};
                         msg.setRecipients(Message.RecipientType.TO, addresses);
                         msg.setSubject("Verification Code");
-                        msg.setText("The verification code is: " + selectedCode);
+                        msg.setText("The verification code is: " + selectedCode.code);
                         Transport transport = mailSession.getTransport("smtp");
                         transport.connect(host, email, password);
                         transport.sendMessage(msg, msg.getAllRecipients());
@@ -105,8 +106,6 @@ public class Password_Recovery extends JFrame {
                     } catch (MessagingException ex) {
                         ex.printStackTrace();
                     }
-
-                    //SMTP.send("harlan.oogie@gmail.com", "*****", "harlan.oogie@gmail.com", "Code", selectedCode.code);
                 } else {
                     incorrectUsernameLabel.setVisible(true);
                 }
@@ -118,6 +117,7 @@ public class Password_Recovery extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (enterCodeHereTextField.getText().equals(selectedCode.code)) {
                     dispose();
+                    //ChangePassword ch 
                 } else {
                     incorrectCodeLabel.setVisible(true);
                 }
