@@ -15,9 +15,10 @@ public class TwoFactorAuthentication_TextMessage extends Two_Factor_Authenticati
 
     private final static String ACCOUNT_SID = "";
     private final static String AUTH_ID = "";
+    private JButton verifyButtonSMS;
 
-    public TwoFactorAuthentication_TextMessage() {
-
+    public TwoFactorAuthentication_TextMessage(JFrame parent) {
+        super(parent);
 
     }
 

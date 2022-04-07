@@ -16,12 +16,10 @@ public class TwoFactorAuthentication_Email extends Two_Factor_Authentication {
 
     private static final String username = "vyassrinivasan@csus.edu";
     private static final String password = "*********************";
+    private JButton verifyButton;
 
-    public TwoFactorAuthentication_Email() {
-
-
-
-
+    public TwoFactorAuthentication_Email(JFrame parent) {
+        super(parent);
     }
 
     public boolean sendEmail(String emailAddress, String twoFactorAuthenticationCode, String subject, String message) {
@@ -39,14 +37,13 @@ public class TwoFactorAuthentication_Email extends Two_Factor_Authentication {
 
     }
     public static void main(String[] args) {
-        frame=new JFrame();//creating instance of JFrame
+        TwoFactorAuthentication_Email twoFA = new TwoFactorAuthentication_Email(null);
+        JButton verify = twoFA.verifyButton;
 
-        contentPane = new JPanel();
-
-
-
-        frame.setSize(400,500);//400 width and 500 height
-        frame.setLayout(null);//using no layout managers
-        frame.setVisible(true);//making the frame visible
+        if (verify != null) {
+            System.out.println("Verified");
+        }  else {
+            System.out.println("Error");
+        }
     }
 }
