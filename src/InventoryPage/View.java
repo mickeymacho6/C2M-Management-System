@@ -1,6 +1,7 @@
 package InventoryPage;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import javax.swing.*;
@@ -13,6 +14,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Scanner;
 
 public class View extends JFrame {
@@ -37,7 +39,7 @@ public class View extends JFrame {
 
 
 
-    View(String title) {
+    View(String title) throws JSONException {
         super(title);
         people = new ArrayList<Person>();
         this.setContentPane(this.panelMain);
@@ -209,7 +211,7 @@ public class View extends JFrame {
         // Convert the ArrayList of Person objects into a JSONArray of JSONObjects
         JSONArray ja = new JSONArray();
         for (Person p : people) {
-            JSONObject jo = new JSONObject(p);
+            JSONObject jo = new JSONObject((Map) p);
             ja.put(jo);
         }
         // Save the JSONArray to a text file
@@ -232,7 +234,7 @@ public class View extends JFrame {
         }
     }
 
-    private void loadPeopleFile() {
+    private void loadPeopleFile() throws JSONException {
         String filename = "inventory.json";
         String fileData = loadFileToString(filename);
         if (fileData != null) {
@@ -261,7 +263,7 @@ public class View extends JFrame {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws JSONException {
         printLookAndFeels();
         View view = new View("Inventory Page 2.0");
         try {
