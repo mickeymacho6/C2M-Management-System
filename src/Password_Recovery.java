@@ -1,9 +1,16 @@
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Properties;
 import java.util.Random;
 
 /**
@@ -71,7 +78,34 @@ public class Password_Recovery extends JFrame {
                     getAuthenticatedCode();
                     chosenID = random.nextInt(passwordRecoveryCodeArrayList.size());
                     selectedCode = passwordRecoveryCodeArrayList.get(chosenID);
-                    SMTP.send("harlan.oogie@gmail.com", "*****", "harlan.oogie@gmail.com", "Code", selectedCode.code);
+                    String host = "smtp.gmail.com";
+                    String email = "harlan.oogie@gmail.com";
+                    String password = "N0rthcarolin@";
+                    boolean sessionDebug = false;
+                    Properties properties = System.getProperties();
+                    properties.put("mail.smtp.starttls.enable", "true");
+                    properties.put("mail.smtp.host", "host");
+                    properties.put("mail.smtp.port", "587");
+                    properties.put("mail.smtp.auth", "true");
+                    properties.put("mail.smtp.starttls.required", "true");
+                    properties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+                    java.security.Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
+                    Session mailSession = Session.getDefaultInstance(properties, null);
+                    mailSession.setDebug(sessionDebug);
+                    Message msg = new MimeMessage(mailSession);
+                    try {
+                        msg.setFrom(new InternetAddress(email));
+                        InternetAddress[] addresses = {new InternetAddress(userpass.email)};
+                        msg.setRecipients(Message.RecipientType.TO, addresses);
+                        msg.setSubject("Verification Code");
+                        msg.setText("The verification code is: " + selectedCode.code);
+                        Transport transport = mailSession.getTransport("smtp");
+                        transport.connect(host, email, password);
+                        transport.sendMessage(msg, msg.getAllRecipients());
+                        transport.close();
+                    } catch (MessagingException ex) {
+                        ex.printStackTrace();
+                    }
                 } else {
                     incorrectUsernameLabel.setVisible(true);
                 }
@@ -83,6 +117,7 @@ public class Password_Recovery extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (enterCodeHereTextField.getText().equals(selectedCode.code)) {
                     dispose();
+                    //ChangePassword ch 
                 } else {
                     incorrectCodeLabel.setVisible(true);
                 }
@@ -102,6 +137,7 @@ public class Password_Recovery extends JFrame {
             userpass = new Userpass();
             userpass.username = resultSet.getString("username");
             userpass.password = resultSet.getString("password");
+            userpass.email = resultSet.getString("email");
         } catch (Exception e) {
             e.printStackTrace();
         }
