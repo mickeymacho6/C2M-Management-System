@@ -8,6 +8,7 @@ class SMTP {
     public static void send(String from,String password,String to,String sub,String msg){
         //Get properties object
         Properties props = new Properties();
+        props.put("mail.smtp.ssl.trust", "smtp.gmail.com");
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.socketFactory.port", "465");
         props.put("mail.smtp.socketFactory.class",

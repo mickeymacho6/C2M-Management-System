@@ -79,5 +79,6 @@
         <jarDirectory url="file://C:/JSON" recursive="false" />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="Gradle: com.vaadin.external.google:android-json:0.0.20131108.vaadin1" level="project" />
   </component>
 </module>
