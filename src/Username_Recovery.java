@@ -28,7 +28,7 @@ public class Username_Recovery extends JFrame {
     public Username_Recovery() {
         setContentPane(mainPanel);
         setTitle("Account Recovery");
-        setSize(700, 700);
+        setSize(800, 500);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
         incorrectEmailLabel.setVisible(false);
