@@ -1,7 +1,4 @@
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.core.env.Environment;
-import org.apache.commons.logging.LogFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,7 +6,7 @@ import java.util.Random;
 
 
 @SpringBootApplication
-public class Two_Factor_Authentication {  
+public class Two_Factor_Authentication extends JDialog {
    
    private static JLabel title; 
    private static JLabel verifyOptions; 
@@ -18,17 +15,26 @@ public class Two_Factor_Authentication {
    private static JButton sendCodeByText;
    private static JButton verifyCode;
 
-   private static JButton settingsButton;
+   public JButton settingsButton;
    
    private static JPanel contentPane;
 
    private static int verificationCode;
 
    public static Random rand = new Random();
+   private JButton emailButton;
+   private JButton textMessageButton;
+   public JButton verifyButton;
 
 
-   public Two_Factor_Authentication() {
-      
+   public Two_Factor_Authentication(JFrame parent) {
+      super(parent);
+      setTitle(" Card2Cart Login");
+      setContentPane(contentPane);
+      setMinimumSize(new Dimension(400,475));
+      setModal(true);
+      setLocationRelativeTo(parent);
+      setDefaultCloseOperation(DISPOSE_ON_CLOSE);
        
    
    }
@@ -40,12 +46,21 @@ public class Two_Factor_Authentication {
    }
 
    public static void main(String[] args) {
-      twoFAMenu();
+      //twoFAMenu();
+      Two_Factor_Authentication twoFA = new Two_Factor_Authentication(null);
+      JButton verify = twoFA.verifyButton;
+
+      if (verify != null) {
+         System.out.println("Verified");
+      }  else {
+         System.out.println("Error");
+      }
       //twoFASettings();
 
    }
 
    public static void twoFAMenu() {
+
       frame=new JFrame();//creating instance of JFrame
 
       contentPane = new JPanel();
@@ -76,6 +91,7 @@ public class Two_Factor_Authentication {
 
 
       //SettingsButton
+      /*
       Icon settingsIcon = new ImageIcon("settingsicon.png");
       settingsButton=new JButton("Settings");//creating instance of JButton
       settingsButton.setBounds(155,430,50, 40);//x axis, y axis, width, height
@@ -83,7 +99,7 @@ public class Two_Factor_Authentication {
 
       settingsButton.setIcon(settingsIcon);
       //settingsButton.setBackground(Color.ORANGE);
-
+      */
       //Verify Button to Verify Code
       verifyCode=new JButton("VERIFY");//creating instance of JButton
       verifyCode.setBounds(120,360,130, 40);//x axis, y axis, width, height
@@ -98,7 +114,7 @@ public class Two_Factor_Authentication {
       frame.add(menuText);
 
       frame.add(verifyOptions);
-      frame.add(settingsButton);
+      //frame.add(settingsButton);
       frame.add(sendCodeByEmail);//adding button in JFrame
       frame.add(sendCodeByText);//adding button in JFrame
       frame.add(verifyCode);//adding button in JFrame
@@ -138,4 +154,8 @@ public class Two_Factor_Authentication {
 
 
    }
-}  
+
+   private void createUIComponents() {
+      // TODO: place custom component creation code here
+   }
+}
