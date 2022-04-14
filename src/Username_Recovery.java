@@ -45,7 +45,7 @@ public class Username_Recovery extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String emailText = enterEmailHereTextField.getText();
-                tempAccount = getAuthenicatedAccount(emailText);
+                user = getAuthenicatedAccount(emailText);
                 try {
                     if (tempAccount.email.equals(emailText)) {
                         emailLabel.setVisible(false);
@@ -77,12 +77,17 @@ public class Username_Recovery extends JFrame {
     }
 
     public TempAccount tempAccount;
-    private TempAccount getAuthenicatedAccount(String email) {
-        TempAccount tempAccount = null;
-        final String DB_URL = "jdbc:mysql://localhost:3307/card2cartaccount";
-        final String USERNAME = "admin";
-        final String PASSWORD = "admin";
+    public user user;
+    private user getAuthenicatedAccount(String email) {
+        user user = null;
+//        final String DB_URL = "jdbc:sqlserver:greenhornetscard2manage.database.windows.net";
+//        final String DB_URL = "jdbc:mysql://localhost:3307/greenhornetscard2manage.database.windows.net";
+        final String DB_URL = "jdbc:sqlserver://SERVER.database.windows.net:1433;database=DATABASE;encrypt=true;trustServerCertificate=true;";
+        final String USERNAME = "greenhornetsadmin";
+        final String PASSWORD = "GreenHornetsUp!";
+
         try {
+            Class.forName("jdbc:sqlserver:greenhornetscard2manage.database.windows.net");
             Connection connection = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             Statement statement = connection.createStatement();
             String sql = "Select * from accounts where email=?";
@@ -90,24 +95,28 @@ public class Username_Recovery extends JFrame {
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
-            tempAccount = new TempAccount();
-            tempAccount.name = resultSet.getString("name");
-            tempAccount.email = resultSet.getString("email");
-            tempAccount.question1 = resultSet.getString("question1");
-            tempAccount.answer1 = resultSet.getString("answer1");
+            user = new user();
+            user.name = resultSet.getString("name");
+            user.email = resultSet.getString("email");
+            user.confirmEmail = resultSet.getString("confirmEmail");
+            user.username = resultSet.getString("username");
+            user.password = resultSet.getString("password");
+            user.confirm_password = resultSet.getString("confirm_password");
+            user.securityQuestion = resultSet.getString("securityQuestion");
+            user.securityAnswer = resultSet.getString("securityAnswer");
 
             statement.close();
             connection.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return tempAccount;
+        return user;
     }
     public static void main(String[] args) {
         Username_Recovery accountRecovery = new Username_Recovery();
-        TempAccount tempAccount = accountRecovery.tempAccount;
-        if (tempAccount != null) {
-            System.out.println(tempAccount.email);
+        user user = accountRecovery.user;
+        if (user != null) {
+            System.out.println(user.email);
         } else {
             System.out.println("Authentication Canceled");
         }
