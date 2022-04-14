@@ -125,7 +125,7 @@
           <background color="-15590343"/>
           <font name="Arial Rounded MT Bold" size="14" style="0"/>
           <foreground color="-15590343"/>
-          <text value="Confirm Passwoerd"/>
+          <text value="Confirm Password"/>
         </properties>
       </component>
       <component id="c261a" class="javax.swing.JPasswordField" binding="passwordConfirm">
