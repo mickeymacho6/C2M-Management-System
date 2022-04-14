@@ -118,6 +118,7 @@ public class Password_Recovery extends JFrame {
                 if (enterCodeHereTextField.getText().equals(selectedCode.code)) {
                     dispose();
                     //ChangePassword ch
+                    NewPassword newPassword = new NewPassword(null);
                 } else {
                     incorrectCodeLabel.setVisible(true);
                 }
