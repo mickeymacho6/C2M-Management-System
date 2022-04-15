@@ -45,8 +45,8 @@ public class Username_Recovery extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String emailText = enterEmailHereTextField.getText();
-//                tempAccount = getAuthenicatedAccount(emailText);
-                user = getAuthenicatedAccount(emailText);
+//                tempAccount = getAuthenticatedAccount(emailText);
+                user = getAuthenticatedAccount(emailText);
                 try {
                     if (tempAccount.email.equals(emailText)) {
                         emailLabel.setVisible(false);
@@ -54,7 +54,7 @@ public class Username_Recovery extends JFrame {
                         emailButton.setVisible(false);
                         incorrectEmailLabel.setVisible(false);
                         question1Label.setVisible(true);
-                        question1Label.setText(user.securityQuestion);
+              //          question1Label.setText(user.securityQuestion);
 //                        question1Label.setText(tempAccount.question1);
                         enterAnswerHereTextField.setVisible(true);
                         submitButton.setVisible(true);
@@ -71,7 +71,7 @@ public class Username_Recovery extends JFrame {
                 if (enterAnswerHereTextField.getText().equals(tempAccount.answer1)) {
                     dispose();
 //                    loginForm loginForm = new loginForm(null, tempAccount.name);
-                    loginForm loginForm = new loginForm(null, user.username);
+                    loginForm loginForm = new loginForm( null);
                 } else {
                     incorrectAnswerLabel.setVisible(true);
                 }
@@ -82,7 +82,7 @@ public class Username_Recovery extends JFrame {
     public TempAccount tempAccount;
     public user user;
 //        private TempAccount getAuthenicatedAccount(String email) {
-        private user getAuthenicatedAccount(String email) {
+        private user getAuthenticatedAccount(String email) {
 //        TempAccount tempAccount = null;
         user user = null;
 //        final String DB_URL = "jdbc:sqlserver:greenhornetscard2manage.database.windows.net";
