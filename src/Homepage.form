@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="Homepage">
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="C2M.Homepage">
   <grid id="27dc6" binding="HomepageForm" layout-manager="GridLayoutManager" row-count="4" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
@@ -22,52 +22,52 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="5d722" class="javax.swing.JLabel">
+          <component id="5d722" class="javax.swing.JLabel" binding="Zone1">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <foreground color="-4811509"/>
-              <text value="Zone one"/>
+              <text value="PHT"/>
             </properties>
           </component>
-          <component id="f74eb" class="javax.swing.JLabel">
+          <component id="f74eb" class="javax.swing.JLabel" binding="Zone2">
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <foreground color="-4811509"/>
-              <text value="Zone two"/>
+              <text value="PST"/>
             </properties>
           </component>
-          <component id="c8721" class="javax.swing.JLabel">
+          <component id="c8721" class="javax.swing.JLabel" binding="zone3">
             <constraints>
               <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <foreground color="-4811509"/>
-              <text value="Zone three"/>
+              <text value="MST"/>
             </properties>
           </component>
-          <component id="4bce9" class="javax.swing.JLabel">
+          <component id="4bce9" class="javax.swing.JLabel" binding="zone4">
             <constraints>
               <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <foreground color="-4811509"/>
-              <text value="Zone four"/>
+              <text value="CST"/>
             </properties>
           </component>
-          <component id="a1cf0" class="javax.swing.JLabel">
+          <component id="a1cf0" class="javax.swing.JLabel" binding="zone5">
             <constraints>
               <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
               <foreground color="-4811509"/>
-              <text value="Zone five"/>
+              <text value="EST"/>
             </properties>
           </component>
-          <component id="549b1" class="javax.swing.JLabel">
+          <component id="549b1" class="javax.swing.JLabel" binding="time1">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -76,7 +76,7 @@
               <text value="Time one"/>
             </properties>
           </component>
-          <component id="3b0a5" class="javax.swing.JLabel">
+          <component id="3b0a5" class="javax.swing.JLabel" binding="time2">
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -85,7 +85,7 @@
               <text value="Time two"/>
             </properties>
           </component>
-          <component id="b778a" class="javax.swing.JLabel">
+          <component id="b778a" class="javax.swing.JLabel" binding="time3">
             <constraints>
               <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -94,7 +94,7 @@
               <text value="Time three"/>
             </properties>
           </component>
-          <component id="25e84" class="javax.swing.JLabel">
+          <component id="25e84" class="javax.swing.JLabel" binding="time4">
             <constraints>
               <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -103,7 +103,7 @@
               <text value="Time four"/>
             </properties>
           </component>
-          <component id="386c9" class="javax.swing.JLabel">
+          <component id="386c9" class="javax.swing.JLabel" binding="time5">
             <constraints>
               <grid row="1" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -170,7 +170,7 @@
             </properties>
             <border type="none"/>
             <children>
-              <component id="5b501" class="javax.swing.JLabel">
+              <component id="5b501" class="javax.swing.JLabel" binding="displayCurrency">
                 <constraints/>
                 <properties>
                   <foreground color="-4811509"/>
@@ -197,17 +197,6 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="bc9e7" class="javax.swing.JButton" binding="accountOptions">
-            <constraints/>
-            <properties>
-              <background color="-4811509"/>
-              <borderPainted value="false"/>
-              <contentAreaFilled value="true"/>
-              <foreground color="-4811509"/>
-              <hideActionText value="false"/>
-              <text value=""/>
-            </properties>
-          </component>
           <component id="cc95c" class="javax.swing.JButton" binding="inventoryManagementButton" default-binding="true">
             <constraints/>
             <properties>
