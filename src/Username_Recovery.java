@@ -45,6 +45,7 @@ public class Username_Recovery extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String emailText = enterEmailHereTextField.getText();
+//                tempAccount = getAuthenicatedAccount(emailText);
                 user = getAuthenicatedAccount(emailText);
                 try {
                     if (tempAccount.email.equals(emailText)) {
@@ -53,7 +54,8 @@ public class Username_Recovery extends JFrame {
                         emailButton.setVisible(false);
                         incorrectEmailLabel.setVisible(false);
                         question1Label.setVisible(true);
-                        question1Label.setText(tempAccount.question1);
+                        question1Label.setText(user.securityQuestion);
+//                        question1Label.setText(tempAccount.question1);
                         enterAnswerHereTextField.setVisible(true);
                         submitButton.setVisible(true);
                     }
@@ -68,7 +70,8 @@ public class Username_Recovery extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (enterAnswerHereTextField.getText().equals(tempAccount.answer1)) {
                     dispose();
-                    loginForm loginForm = new loginForm(null, tempAccount.name);
+//                    loginForm loginForm = new loginForm(null, tempAccount.name);
+                    loginForm loginForm = new loginForm(null, user.username);
                 } else {
                     incorrectAnswerLabel.setVisible(true);
                 }
@@ -78,7 +81,9 @@ public class Username_Recovery extends JFrame {
 
     public TempAccount tempAccount;
     public user user;
-    private user getAuthenicatedAccount(String email) {
+//        private TempAccount getAuthenicatedAccount(String email) {
+        private user getAuthenicatedAccount(String email) {
+//        TempAccount tempAccount = null;
         user user = null;
 //        final String DB_URL = "jdbc:sqlserver:greenhornetscard2manage.database.windows.net";
 //        final String DB_URL = "jdbc:mysql://localhost:3307/greenhornetscard2manage.database.windows.net";
@@ -90,7 +95,8 @@ public class Username_Recovery extends JFrame {
             Class.forName("jdbc:sqlserver:greenhornetscard2manage.database.windows.net");
             Connection connection = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             Statement statement = connection.createStatement();
-            String sql = "Select * from accounts where email=?";
+//            String sql = "Select * from accounts where email=?";
+            String sql = "Select * from users where email=?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -104,17 +110,25 @@ public class Username_Recovery extends JFrame {
             user.confirm_password = resultSet.getString("confirm_password");
             user.securityQuestion = resultSet.getString("securityQuestion");
             user.securityAnswer = resultSet.getString("securityAnswer");
+//            tempAccount = new TempAccount();
+//            tempAccount.name = resultSet.getString("name");
+//            tempAccount.email = resultSet.getString("email");
+//            tempAccount.question1 = resultSet.getString("question1");
+//            tempAccount.answer1 = resultSet.getString("answer1");
 
             statement.close();
             connection.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
+//        return tempAccount;
         return user;
     }
     public static void main(String[] args) {
         Username_Recovery accountRecovery = new Username_Recovery();
+//        TempAccount tempAccount = accountRecovery.tempAccount;
         user user = accountRecovery.user;
+//        if (tempAccount != null) {
         if (user != null) {
             System.out.println(user.email);
         } else {
