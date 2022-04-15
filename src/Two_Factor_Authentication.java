@@ -137,7 +137,7 @@ public class Two_Factor_Authentication extends JDialog {
       frame.add(sendCodeByEmail);//adding button in JFrame
 
       //frame.add(sendCodeByText);//adding button in JFrame
-      frame.add(verifyCode);//adding button in JFrame
+      //frame.add(verifyCode);//adding button in JFrame
 
       frame.setSize(400,500);//400 width and 500 height
       frame.setLayout(null);//using no layout managers
