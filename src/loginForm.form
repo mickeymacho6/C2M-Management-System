@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="LoginPanel" layout-manager="GridLayoutManager" row-count="7" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="10" vgap="10">
     <margin top="15" left="15" bottom="15" right="15"/>
     <constraints>
-      <xy x="20" y="93" width="538" height="811"/>
+      <xy x="20" y="93" width="377" height="628"/>
     </constraints>
     <properties>
       <background color="-70584"/>
@@ -45,7 +45,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="90842" class="javax.swing.JLabel" binding="imageLabel">
+          <component id="90842" class="javax.swing.JLabel">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -54,7 +54,7 @@
               <focusable value="true"/>
               <font size="20"/>
               <foreground color="-4466463"/>
-              <horizontalAlignment value="2"/>
+              <icon value="com/company/card2cart_logo.png"/>
               <text value=""/>
             </properties>
           </component>
@@ -108,7 +108,7 @@
           <font name="Arial Rounded MT Bold" size="12" style="0"/>
         </properties>
       </component>
-      <component id="39d8d" class="javax.swing.JButton" binding="btnlogin">
+      <component id="39d8d" class="javax.swing.JButton" binding="btnLogin">
         <constraints>
           <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -136,23 +136,13 @@
           <text value="Cancel"/>
         </properties>
       </component>
-      <component id="99fb5" class="javax.swing.JButton" binding="btClear">
+      <component id="40c00" class="javax.swing.JButton" binding="btnCreateAccount">
         <constraints>
-          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <font name="Arial Rounded MT Bold" size="12" style="0"/>
-          <label value="Clear"/>
-          <text value="Clear"/>
-        </properties>
-      </component>
-      <component id="12ba0" class="javax.swing.JButton" binding="createAccountButton" default-binding="true">
-        <constraints>
-          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <font name="Arial Rounded MT Bold" size="12" style="0"/>
-          <text value="Creat Acount"/>
+          <text value="Create account"/>
         </properties>
       </component>
     </children>
