@@ -15,7 +15,7 @@ public class RegistrationForm extends JDialog{
     private JButton confirmButton;
     private JPanel RegisterPanel;
     //contracture
-    public RegistrationForm(loginForm parent)
+    public RegistrationForm(JDialog parent)
     {
         super(parent);
         setTitle("Create a new account");
@@ -53,7 +53,7 @@ public class RegistrationForm extends JDialog{
         //If filed is empty display the Error message
         if (name.isEmpty() || email.isEmpty() || confirmEmail.isEmpty() ||  username.isEmpty()
                 || password.isEmpty()) {
-            JOptionPane.showInternalMessageDialog( this,
+            JOptionPane.showInternalMessageDialog( RegistrationForm.this,
                     "Please fill all the blank field","Try again",
                     JOptionPane.ERROR_MESSAGE);
             return;

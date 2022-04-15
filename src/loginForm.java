@@ -10,24 +10,14 @@ public class loginForm extends JDialog{
     private JLabel passwordLabel;
     private JTextField textField1;
     private JPasswordField passwordField1;
-    private JButton btnlogin;
-    private JButton btClear;
-    private JButton createAccountButton;
+    private JButton btnLogin;
+    private JButton btnCreateAccount;
     private JButton forgotPasswordButton;
     private JButton btnCancel;
     private JPanel LoginPanel;
-    //Added by Harlan
-    private JLabel imageLabel;
 
-    //Clear function
-    /*
-    private void clearFields() {
-        textField1.setText(null);
-        passwordField1.setText(null);
-    }
-    */
     //constructor
-    public loginForm(JFrame parent, String username)
+    public loginForm(JFrame parent)
     {
         super(parent);
         setTitle(" Card2Cart Login");
@@ -36,27 +26,41 @@ public class loginForm extends JDialog{
         setModal(true);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        //Added by Harlan
-        ImageIcon imageIcon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("card2cart_logo.jpg")));
-        Image image = imageIcon.getImage();
-        Image modifyImage = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-        ImageIcon nuImageIcon = new ImageIcon(modifyImage);
-        imageLabel.setIcon(nuImageIcon);
-        setTextField1Text(username);
+
+        // return true if the user has been registered otherwise will go to registration form
+        boolean has_Registre_User = connectToDatabase();
+        final user[] User = {loginForm.User};
+        if(User[0] != null)
+        {
+            setLocationRelativeTo(null);
+            setVisible(true);
+        }
+
+        else{
+            btnCreateAccount.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e)
+                {
+                    RegistrationForm registrationForm = new RegistrationForm( loginForm.this);
+                    user User = registrationForm.User;
+                }
+            });
+            dispose();
+        }
 
 
 
 
-        btnlogin.addActionListener(new ActionListener() {
+        btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String username = textField1.getText();
                 String password = String.valueOf(passwordField1.getPassword());
 
-                User = getAuthenticatedUser(username, password);
-                if (User != null)
+                User[0] = getAuthenticatedUser(username, password);
+                if (User[0] != null)
                 {
-                    JOptionPane.showMessageDialog( loginForm.this, "You successfully logedin ");
+                    JOptionPane.showMessageDialog( loginForm.this, "You are successfully logged in ");
                             dispose();
                 }
                 else{
@@ -84,33 +88,19 @@ public class loginForm extends JDialog{
             }
         });
 
+
+
         //Clear the username and password field if do not want to log_in
-        btClear.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                textField1.setText(null);
-                passwordField1.setText(null);
 
+    }
+    private boolean connectToDatabase()
+    {
+        boolean has_Registre_User = false;
+        return has_Registre_User;
 
-            }
-
-
-        });
-
-        createAccountButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            RegistrationForm rg = new RegistrationForm(loginForm.this);
-            setVisible(false);
-
-            JOptionPane.showMessageDialog(loginForm.this, "Welcome to Card2cart registration form");
-            rg.setVisible(true);
-            }
-
-        });
     }
 
-    public user User;
+    public static user User;
     private user getAuthenticatedUser(String username, String password)
     {
         user User =null;
@@ -148,15 +138,9 @@ public class loginForm extends JDialog{
 
         return User;
     }
-
-    //Added by Harlan
-    public void setTextField1Text(String s) {
-        this.textField1.setText(s);
-    }
-
     public static void main(String[] args)
     {
-        loginForm loginForm = new loginForm(null, "");
+        loginForm loginForm = new loginForm(null);
         user User = loginForm.User;
         if (User != null)
         {
@@ -171,5 +155,11 @@ public class loginForm extends JDialog{
             System.out.println(" Not Authorized ");
 
         }
+    }
+
+    private void actionPerformed(ActionEvent e) {
+        textField1.setText(null);
+        passwordField1.setText(null);
+
     }
 }

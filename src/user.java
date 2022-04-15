@@ -5,8 +5,8 @@ public class user {
     public String username;
     public String password;
     public String confirm_password;
-
-
-
-
+    public String NewPassword;
+    public String Confirm;
+    public String txtpassword;
+    public String txtpassword1;
 }

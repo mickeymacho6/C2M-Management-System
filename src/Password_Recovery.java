@@ -22,7 +22,6 @@ public class Password_Recovery extends JFrame {
     private JTextField enterCodeHereTextField;
     private JButton submitButton;
     private JPanel mainPanel;
-    private JLabel titleLabel;
     private JLabel codeSentLabel;
     private JLabel incorrectCodeLabel;
     private JLabel imageLabel;
@@ -30,6 +29,7 @@ public class Password_Recovery extends JFrame {
     private JTextField enterUsernameHereTextField;
     private JButton confirmUsernameButton;
     private JLabel incorrectUsernameLabel;
+    private JLabel titleLabel;
     final String DB_URL = "jdbc:mysql://localhost:3307/card2cartaccount";
     final String USERNAME = "admin";
     final String PASSWORD = "admin";
@@ -78,9 +78,9 @@ public class Password_Recovery extends JFrame {
                     getAuthenticatedCode();
                     chosenID = random.nextInt(passwordRecoveryCodeArrayList.size());
                     selectedCode = passwordRecoveryCodeArrayList.get(chosenID);
-                    String host = "smtp.gmail.com";
-                    String email = "harlan.oogie@gmail.com";
-                    String password = "N0rthcarolin@";
+                    String host = "smtp.mail.yahoo.com";
+                    String email = "greenhornetscard2manage@yahoo.com";
+                    String password = "gsultfeqjngamtjr";
                     boolean sessionDebug = false;
                     Properties properties = System.getProperties();
                     properties.put("mail.smtp.starttls.enable", "true");
@@ -88,7 +88,7 @@ public class Password_Recovery extends JFrame {
                     properties.put("mail.smtp.port", "587");
                     properties.put("mail.smtp.auth", "true");
                     properties.put("mail.smtp.starttls.required", "true");
-                    properties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
+                    properties.put("mail.smtp.ssl.trust", "smtp.mail.yahoo.com");
                     java.security.Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
                     Session mailSession = Session.getDefaultInstance(properties, null);
                     mailSession.setDebug(sessionDebug);
@@ -117,7 +117,8 @@ public class Password_Recovery extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (enterCodeHereTextField.getText().equals(selectedCode.code)) {
                     dispose();
-                    //ChangePassword ch 
+                    //ChangePassword ch
+                    NewPassword newPassword = new NewPassword(null);
                 } else {
                     incorrectCodeLabel.setVisible(true);
                 }
