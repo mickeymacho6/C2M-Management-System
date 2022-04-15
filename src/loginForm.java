@@ -62,6 +62,9 @@ public class loginForm extends JDialog{
                 {
                     JOptionPane.showMessageDialog( loginForm.this, "You are successfully logged in ");
                             dispose();
+                    Homepage homepage = new Homepage();
+                    homepage.setVisible(true);
+                    setVisible(false);
                 }
                 else{
                     JOptionPane.showMessageDialog( loginForm.this, "Username or password is invalid",
