@@ -33,6 +33,9 @@ public class Password_Recovery extends JFrame {
     final String DB_URL = "jdbc:mysql://localhost:3307/card2cartaccount";
     final String USERNAME = "admin";
     final String PASSWORD = "admin";
+//    final String DB_URL = "jdbc:mysql://localhost/card2cart?serverTimezone=UTC";
+//    final String USERNAME = "root";
+//    final String PASSWORD = "";
     Connection connection = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
     Statement statement = connection.createStatement();
     private Random random = new Random();

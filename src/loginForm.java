@@ -17,7 +17,7 @@ public class loginForm extends JDialog{
     private JPanel LoginPanel;
 
     //constructor
-    public loginForm(JFrame parent)
+    public loginForm(JFrame parent, String username)
     {
         super(parent);
         setTitle(" Card2Cart Login");
@@ -26,6 +26,7 @@ public class loginForm extends JDialog{
         setModal(true);
         setLocationRelativeTo(parent);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        textField1.setText(username);
 
         // return true if the user has been registered otherwise will go to registration form
         boolean has_Registre_User = connectToDatabase();
@@ -140,7 +141,7 @@ public class loginForm extends JDialog{
     }
     public static void main(String[] args)
     {
-        loginForm loginForm = new loginForm(null);
+        loginForm loginForm = new loginForm(null, null);
         user User = loginForm.User;
         if (User != null)
         {
