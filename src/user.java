@@ -11,6 +11,4 @@ public class user {
     public String Confirm;
     public String txtpassword;
     public String txtpassword1;
-    public String securityQuestion;
-    public String securityAnswer;
 }

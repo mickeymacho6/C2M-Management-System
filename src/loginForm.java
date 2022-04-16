@@ -63,7 +63,12 @@ public class loginForm extends JDialog{
                 {
                     JOptionPane.showMessageDialog( loginForm.this, "You are successfully logged in ");
                             dispose();
-                    Homepage homepage = new Homepage();
+                    Homepage homepage = null;
+                    try {
+                        homepage = new Homepage();
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
                     homepage.setVisible(true);
                     setVisible(false);
                 }

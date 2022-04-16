@@ -45,13 +45,8 @@ public class Username_Recovery extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String emailText = enterEmailHereTextField.getText();
-<<<<<<< HEAD
                 tempAccount = getAuthenicatedAccount(emailText);
 //                user = getAuthenicatedAccount(emailText);
-=======
-//                tempAccount = getAuthenticatedAccount(emailText);
-                user = getAuthenticatedAccount(emailText);
->>>>>>> 3ebba916d7e066ae610d76eb314d73e76c7a2836
                 try {
                     if (tempAccount.email.equals(emailText)) {
                         emailLabel.setVisible(false);
@@ -59,13 +54,10 @@ public class Username_Recovery extends JFrame {
                         emailButton.setVisible(false);
                         incorrectEmailLabel.setVisible(false);
                         question1Label.setVisible(true);
-<<<<<<< HEAD
 //                        question1Label.setText(user.securityQuestion);
                         question1Label.setText(tempAccount.question1);
-=======
               //          question1Label.setText(user.securityQuestion);
 //                        question1Label.setText(tempAccount.question1);
->>>>>>> 3ebba916d7e066ae610d76eb314d73e76c7a2836
                         enterAnswerHereTextField.setVisible(true);
                         submitButton.setVisible(true);
                     }
@@ -80,13 +72,8 @@ public class Username_Recovery extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (enterAnswerHereTextField.getText().equals(tempAccount.answer1)) {
                     dispose();
-<<<<<<< HEAD
                     loginForm loginForm = new loginForm(null, tempAccount.name);
 //                    loginForm loginForm = new loginForm(null, user.username);
-=======
-//                    loginForm loginForm = new loginForm(null, tempAccount.name);
-                    loginForm loginForm = new loginForm( null);
->>>>>>> 3ebba916d7e066ae610d76eb314d73e76c7a2836
                 } else {
                     incorrectAnswerLabel.setVisible(true);
                 }
@@ -96,7 +83,6 @@ public class Username_Recovery extends JFrame {
 
     public TempAccount tempAccount;
     public user user;
-<<<<<<< HEAD
         private TempAccount getAuthenicatedAccount(String email) {
 //        private user getAuthenicatedAccount(String email) {
             TempAccount tempAccount = null;
@@ -107,17 +93,6 @@ public class Username_Recovery extends JFrame {
         final String DB_URL = "jdbc:mysql://localhost:3307/card2cartaccount";
         final String USERNAME = "admin";
         final String PASSWORD = "admin";
-=======
-//        private TempAccount getAuthenicatedAccount(String email) {
-        private user getAuthenticatedAccount(String email) {
-//        TempAccount tempAccount = null;
-        user user = null;
-//        final String DB_URL = "jdbc:sqlserver:greenhornetscard2manage.database.windows.net";
-//        final String DB_URL = "jdbc:mysql://localhost:3307/greenhornetscard2manage.database.windows.net";
-        final String DB_URL = "jdbc:sqlserver://SERVER.database.windows.net:1433;database=DATABASE;encrypt=true;trustServerCertificate=true;";
-        final String USERNAME = "greenhornetsadmin";
-        final String PASSWORD = "GreenHornetsUp!";
->>>>>>> 3ebba916d7e066ae610d76eb314d73e76c7a2836
 
         try {
             Connection connection = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
