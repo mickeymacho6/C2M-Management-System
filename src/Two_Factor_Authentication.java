@@ -2,10 +2,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Random;
 
+import static javax.swing.JOptionPane.showMessageDialog;
 
-@SpringBootApplication
+
+//@SpringBootApplication
 public class Two_Factor_Authentication extends JDialog {
    
    private static JLabel title; 
@@ -14,6 +18,8 @@ public class Two_Factor_Authentication extends JDialog {
    private static JButton sendCodeByEmail;
    private static JButton sendCodeByText;
    private static JButton verifyCode;
+
+   private static JButton backButton;
 
    public JButton settingsButton;
    
@@ -46,14 +52,16 @@ public class Two_Factor_Authentication extends JDialog {
    }
 
    public static void main(String[] args) {
-      //twoFAMenu();
+      twoFAMenu();
       Two_Factor_Authentication twoFA = new Two_Factor_Authentication(null);
+
+
       JButton verify = twoFA.verifyButton;
 
       if (verify != null) {
-         System.out.println("Verified");
+         System.out.println("Verified!!!");
       }  else {
-         System.out.println("Error");
+         System.out.println("Error!");
       }
       //twoFASettings();
 
@@ -83,12 +91,23 @@ public class Two_Factor_Authentication extends JDialog {
       sendCodeByEmail=new JButton("Email");//creating instance of JButton
       sendCodeByEmail.setBounds(130,140,100, 40);//x axis, y axis, width, height
       sendCodeByEmail.setForeground(Color.BLUE);
+      //setting the cancel button
+      sendCodeByEmail.addActionListener(new ActionListener() {
+         @Override
+         public void actionPerformed(ActionEvent e) {
+            twoFAEmail();
 
+         }
+
+      });
+      //setVisible(true);
+
+      /*
       //Option: Via Text Message
       sendCodeByText=new JButton("Text");//creating instance of JButton
       sendCodeByText.setBounds(130,190,100, 40);//x axis, y axis, width, height
       sendCodeByText.setForeground(Color.BLUE);
-
+      */
 
       //SettingsButton
       /*
@@ -116,7 +135,104 @@ public class Two_Factor_Authentication extends JDialog {
       frame.add(verifyOptions);
       //frame.add(settingsButton);
       frame.add(sendCodeByEmail);//adding button in JFrame
-      frame.add(sendCodeByText);//adding button in JFrame
+
+      //frame.add(sendCodeByText);//adding button in JFrame
+      //frame.add(verifyCode);//adding button in JFrame
+
+      frame.setSize(400,500);//400 width and 500 height
+      frame.setLayout(null);//using no layout managers
+      frame.setVisible(true);//making the frame visible
+
+      frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+   }
+
+   public static void twoFAEmail() {
+
+      frame = new JFrame();//creating instance of JFrame
+
+      contentPane = new JPanel();
+      frame.getContentPane().setBackground(new Color(255, 215, 0));//Making Background Color GOLD.
+
+      //Title: Two-Factor Authentication
+      title = new JLabel("Two-Factor Verification");
+      title.setBounds(70,60,280, 40);//x axis, y axis, width, height
+      title.setFont(new Font("Serif", Font.BOLD, 22));
+
+      JLabel emailText = new JLabel("Email");
+      emailText.setBounds(150,80,100, 40);//x axis, y axis, width, height
+      emailText.setFont(new Font("Serif", Font.ITALIC, 18));
+
+      //Prompts users on how they would like to get verification code.
+      verifyOptions = new JLabel("Send Code By: ");
+      verifyOptions.setBounds(130,100,100, 40);
+
+      //Option: Via Email
+      sendCodeByEmail=new JButton("Email");//creating instance of JButton
+      sendCodeByEmail.setBounds(130,140,100, 40);//x axis, y axis, width, height
+      sendCodeByEmail.setForeground(Color.BLUE);
+
+      backButton = new JButton("BACK");
+      backButton.setBounds(20,20,70,30);
+
+
+      backButton.addActionListener(new ActionListener() {
+         @Override
+         public void actionPerformed(ActionEvent e) {
+            twoFAMenu();
+
+         }
+
+      });
+
+      verifyCode.addActionListener(new ActionListener() {
+         @Override
+         public void actionPerformed(ActionEvent e) {
+            JDialog popup = new JDialog();
+            popup.setTitle("Authentication");
+            popup.show();
+         }
+
+      });
+
+      JTextField authCode = new JTextField();
+      authCode.setBounds(130,140,100, 40);//x axis, y axis, width, height
+      /*
+      //Option: Via Text Message
+      sendCodeByText=new JButton("Text");//creating instance of JButton
+      sendCodeByText.setBounds(130,190,100, 40);//x axis, y axis, width, height
+      sendCodeByText.setForeground(Color.BLUE);
+      */
+
+      //SettingsButton
+      /*
+      Icon settingsIcon = new ImageIcon("settingsicon.png");
+      settingsButton=new JButton("Settings");//creating instance of JButton
+      settingsButton.setBounds(155,430,50, 40);//x axis, y axis, width, height
+      settingsButton.setForeground(Color.BLUE);
+
+      settingsButton.setIcon(settingsIcon);
+      //settingsButton.setBackground(Color.ORANGE);
+      */
+      //Verify Button to Verify Code
+      verifyCode=new JButton("VERIFY");//creating instance of JButton
+      verifyCode.setBounds(120,360,130, 40);//x axis, y axis, width, height
+      verifyCode.setForeground(Color.BLACK);
+      verifyCode.setBackground(Color.GREEN);
+      verifyCode.setFocusable(true);
+      verifyCode.setContentAreaFilled(false);
+      verifyCode.setOpaque(true);
+
+      frame.add(new JLabel(new ImageIcon("logo.PNG")));
+      frame.add(title);
+      frame.add(emailText);
+
+     // frame.add(verifyOptions);
+      frame.add(backButton);
+      frame.add(authCode);
+      //frame.add(settingsButton);
+      //frame.add(sendCodeByEmail);//adding button in JFrame
+      //frame.add(sendCodeByText);//adding button in JFrame
       frame.add(verifyCode);//adding button in JFrame
 
       frame.setSize(400,500);//400 width and 500 height

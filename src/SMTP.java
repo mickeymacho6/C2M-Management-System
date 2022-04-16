@@ -39,6 +39,7 @@ class SendMailSSL{
     public static void main(String[] args) {
         //from,password,to,subject,message
         SMTP.send("from@gmail.com","xxxxxxxx","to@gmail.com","hello javatpoint","How r u?");
+        //SMTP.send("greenhornetscard2manage@gmail.com","HornetsUp!","vyas0320@gmail.com","hello javatpoint","How r u?");
         //change from, password and to
     }
 }

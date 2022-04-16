@@ -1,7 +1,7 @@
 import org.springframework.stereotype.Service;
 
 import javax.swing.*;
-@Service
+//@Service
 public class TwoFactorAuthentication_Email extends Two_Factor_Authentication {
     private static JLabel title;
     private static JLabel verifyOptions;
