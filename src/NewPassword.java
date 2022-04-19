@@ -64,11 +64,11 @@ public class NewPassword extends JDialog {
 
 
     //global variable
-    public user User;
+    public User User;
     //returning valid user object
-    private user addUserToDatabase( String txtpassword,String txtpassword1)
+    private User addUserToDatabase(String txtpassword, String txtpassword1)
     {
-        user User = null;
+        User User = null;
         final String DB_URL;
         DB_URL = "jdbc:mysql://localhost/card2cart?serverTimezone=UTC";
         final String USERNAME = "root";
@@ -88,7 +88,7 @@ public class NewPassword extends JDialog {
             int addRows = preparedStatement.executeUpdate();
             if (addRows > 0)
             {
-                User = new user();
+                User = new User();
                 User.txtpassword= txtpassword;
                 User.txtpassword1 = txtpassword1;
 
@@ -107,7 +107,7 @@ public class NewPassword extends JDialog {
     public static void main(String[] args)
     {   //object of registration form
         NewPassword new_form = new NewPassword(null);
-        user User = new_form.User;
+        User User = new_form.User;
         if (User != null)
         {
             System.out.println("successfully registered new password : " + User.txtpassword);

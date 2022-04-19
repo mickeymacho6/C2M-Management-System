@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="LoginPanel" layout-manager="GridLayoutManager" row-count="7" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="10" vgap="10">
     <margin top="15" left="15" bottom="15" right="15"/>
     <constraints>
-      <xy x="20" y="93" width="377" height="628"/>
+      <xy x="20" y="93" width="538" height="811"/>
     </constraints>
     <properties>
       <background color="-70584"/>
@@ -54,7 +54,7 @@
               <focusable value="true"/>
               <font size="20"/>
               <foreground color="-4466463"/>
-              <icon value="com/company/card2cart_logo.png"/>
+              <icon value="card2cart_logo.jpeg"/>
               <text value=""/>
             </properties>
           </component>

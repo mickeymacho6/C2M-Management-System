@@ -15,10 +15,12 @@ import java.util.Random;
 
 /**
  * The page for password recovery.
+ *
  * @author Harlan Nguyen
- * Date: 03/04/2022
+ * Last Modified: 04/18/2022
  */
 public class Password_Recovery extends JFrame {
+    //Java Swing components
     private JTextField enterCodeHereTextField;
     private JButton submitButton;
     private JPanel mainPanel;
@@ -30,20 +32,27 @@ public class Password_Recovery extends JFrame {
     private JButton confirmUsernameButton;
     private JLabel incorrectUsernameLabel;
     private JLabel titleLabel;
-    final String DB_URL = "jdbc:mysql://localhost:3307/card2cartaccount";
-    final String USERNAME = "admin";
-    final String PASSWORD = "admin";
-//    final String DB_URL = "jdbc:mysql://localhost/card2cart?serverTimezone=UTC";
-//    final String USERNAME = "root";
-//    final String PASSWORD = "";
+
+    //Allows access to the database
+    final String DB_URL = "jdbc:sqlserver://greenhornetscard2manage.database.windows.net:1433;database=Green Hornets Card 2 Manage;encrypt=true;trustServerCertificate=true;";
+    final String USERNAME = "greenhornetsadmin";
+    final String PASSWORD = "GreenHornetsUp!";
     Connection connection = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
     Statement statement = connection.createStatement();
+
+    //Classes to store the info from the database
+    public User user;
+    PasswordRecoveryCode selectedCode;
+
+    //Used for the password recovery codes
     private Random random = new Random();
     private int chosenID;
-    PasswordRecoveryCode selectedCode;
+    public ArrayList<PasswordRecoveryCode> passwordRecoveryCodeArrayList = new ArrayList<>();
+
 
     /**
      * Creates the Password Recovery page and features.
+     *
      * @throws SQLException
      */
     public Password_Recovery() throws SQLException {
@@ -58,18 +67,22 @@ public class Password_Recovery extends JFrame {
         submitButton.setVisible(false);
         incorrectCodeLabel.setVisible(false);
         submitButton.setVisible(false);
+
+        //Resizes the card2cart logo
         ImageIcon imageIcon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("card2cart_logo.jpg")));
         Image image = imageIcon.getImage();
         Image modifyImage = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         ImageIcon nuImageIcon = new ImageIcon(modifyImage);
         imageLabel.setIcon(nuImageIcon);
+
+        //If the username matches the one from the database, then a code is sent via email
         confirmUsernameButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String usernameText = enterUsernameHereTextField.getText();
-                userpass = getAuthenticatedUserpass(usernameText);
+                user = getAuthenticatedUserpass(usernameText);
 
-                if (userpass.username.equals(usernameText)) {
+                if (user.username.equals(usernameText)) {
                     enterUsernameHereLabel.setVisible(false);
                     enterUsernameHereTextField.setVisible(false);
                     confirmUsernameButton.setVisible(false);
@@ -81,6 +94,8 @@ public class Password_Recovery extends JFrame {
                     getAuthenticatedCode();
                     chosenID = random.nextInt(passwordRecoveryCodeArrayList.size());
                     selectedCode = passwordRecoveryCodeArrayList.get(chosenID);
+
+                    //SMTP mailing process
                     String host = "smtp.mail.yahoo.com";
                     String email = "greenhornetscard2manage@yahoo.com";
                     String password = "gsultfeqjngamtjr";
@@ -98,10 +113,10 @@ public class Password_Recovery extends JFrame {
                     Message msg = new MimeMessage(mailSession);
                     try {
                         msg.setFrom(new InternetAddress(email));
-                        InternetAddress[] addresses = {new InternetAddress(userpass.email)};
+                        InternetAddress[] addresses = {new InternetAddress(user.email)};
                         msg.setRecipients(Message.RecipientType.TO, addresses);
                         msg.setSubject("Verification Code");
-                        msg.setText("The verification code is: " + selectedCode.code);
+                        msg.setText("The verification code is: " + selectedCode.passwordcode);
                         Transport transport = mailSession.getTransport("smtp");
                         transport.connect(host, email, password);
                         transport.sendMessage(msg, msg.getAllRecipients());
@@ -115,12 +130,13 @@ public class Password_Recovery extends JFrame {
 
             }
         });
+
+        //If the correct code is used, then the user is taken to the NewPassword page
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (enterCodeHereTextField.getText().equals(selectedCode.code)) {
+                if (enterCodeHereTextField.getText().equals(selectedCode.passwordcode)) {
                     dispose();
-                    //ChangePassword ch
                     NewPassword newPassword = new NewPassword(null);
                 } else {
                     incorrectCodeLabel.setVisible(true);
@@ -129,36 +145,50 @@ public class Password_Recovery extends JFrame {
         });
     }
 
-    public Userpass userpass;
-    public Userpass getAuthenticatedUserpass(String username) {
-        Userpass userpass = null;
+    /**
+     * This method makes a SQL query to grab the matching username from the users table. Afterwards, it uses the values from the query to fill out
+     * a User class's variables. If no matching usernames are found, an Exception is thrown.
+     *
+     * @param username Takes the string from the "enterUsernameHereTextField".
+     * @return a User with many of its fields filled out.
+     */
+    public User getAuthenticatedUserpass(String username) {
+        User user = null;
         try {
-            String sql = "Select * from userpass where username=?";
+            String sql = "Select * from dbo.users where username=?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, String.valueOf(username));
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
-            userpass = new Userpass();
-            userpass.username = resultSet.getString("username");
-            userpass.password = resultSet.getString("password");
-            userpass.email = resultSet.getString("email");
+            user = new User();
+            user.name = resultSet.getString("name");
+            user.email = resultSet.getString("email");
+            user.confirmEmail = resultSet.getString("confirmEmail");
+            user.username = resultSet.getString("username");
+            user.password = resultSet.getString("password");
+            user.confirm_password = resultSet.getString("confirm_password");
+            user.securityQuestion = resultSet.getString("securityQuestion");
+            user.securityAnswer = resultSet.getString("securityAnswer");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return userpass;
+        return user;
     }
 
-    public ArrayList<PasswordRecoveryCode> passwordRecoveryCodeArrayList = new ArrayList<>();
+    /**
+     * This method makes a SQL query to take all the codes from the passwordrecoverycodes table and stores them into an ArrayList.
+     * An Exception is thrown if no codes are found.
+     */
     public void getAuthenticatedCode() {
         PasswordRecoveryCode passwordRecoveryCode = null;
         try {
-            String sql = "Select * from codes";
+            String sql = "Select * from dbo.passwordrecoverycodes";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 passwordRecoveryCode = new PasswordRecoveryCode();
-                passwordRecoveryCode.id = resultSet.getString("id");
-                passwordRecoveryCode.code = resultSet.getString("code");
+                passwordRecoveryCode.codeid = resultSet.getString("codeid");
+                passwordRecoveryCode.passwordcode = resultSet.getString("passwordcode");
                 passwordRecoveryCodeArrayList.add(passwordRecoveryCode);
             }
             statement.close();

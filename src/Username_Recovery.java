@@ -7,9 +7,10 @@ import java.sql.*;
 /**
  * The page for username recovery.
  * @author Harlan Nguyen
- * Date: 03/04/2022
+ * Last Modified: 04/18/2022
  */
 public class Username_Recovery extends JFrame {
+    //Java Swing components
     private JTextField enterAnswerHereTextField;
     private JButton submitButton;
     private JPanel mainPanel;
@@ -21,6 +22,7 @@ public class Username_Recovery extends JFrame {
     private JTextField enterEmailHereTextField;
     private JButton emailButton;
     private JLabel incorrectEmailLabel;
+    public User user;
 
     /**
      * Creates the username recovery page.
@@ -36,16 +38,19 @@ public class Username_Recovery extends JFrame {
         enterAnswerHereTextField.setVisible(false);
         incorrectAnswerLabel.setVisible(false);
         submitButton.setVisible(false);
+
+        //Resizes the card2cart logo
         ImageIcon imageIcon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("card2cart_logo.jpg")));
         Image image = imageIcon.getImage();
         Image modifyImage = image.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         ImageIcon nuImageIcon = new ImageIcon(modifyImage);
         imageLabel.setIcon(nuImageIcon);
+
+        //If the email matches the one from the database, then a security question is displayed
         emailButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String emailText = enterEmailHereTextField.getText();
-//                tempAccount = getAuthenicatedAccount(emailText);
                 user = getAuthenicatedAccount(emailText);
                 try {
                     if (user.email.equals(emailText)) {
@@ -55,7 +60,6 @@ public class Username_Recovery extends JFrame {
                         incorrectEmailLabel.setVisible(false);
                         question1Label.setVisible(true);
                         question1Label.setText(user.securityQuestion);
-//                        question1Label.setText(tempAccount.question1);
                         enterAnswerHereTextField.setVisible(true);
                         submitButton.setVisible(true);
                     }
@@ -65,12 +69,13 @@ public class Username_Recovery extends JFrame {
                 }
             }
         });
+
+        //If the security answer is correct, then the user is taken back to the Login page with the username field already filled out
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (enterAnswerHereTextField.getText().equals(user.securityAnswer)) {
                     dispose();
-//                    loginForm loginForm = new loginForm(null, tempAccount.name);
                     loginForm loginForm = new loginForm(null, user.username);
                 } else {
                     incorrectAnswerLabel.setVisible(true);
@@ -79,29 +84,28 @@ public class Username_Recovery extends JFrame {
         });
     }
 
-    public TempAccount tempAccount;
-    public user user;
-//        private TempAccount getAuthenicatedAccount(String email) {
-        private user getAuthenicatedAccount(String email) {
-//            TempAccount tempAccount = null;
-            user user = null;
+    /**
+     * This method makes a SQL query to grab the matching username from the users table. Afterwards, it uses the values from the query to fill out
+     * a User class's variables. If no matching usernames are found, an Exception is thrown.
+     *
+     * @param email Takes the string from the "enterEmailHereTextField".
+     * @return a User with many of its fields filled out.
+     */
+        private User getAuthenicatedAccount(String email) {
+            User user = null;
             final String DB_URL = "jdbc:sqlserver://greenhornetscard2manage.database.windows.net:1433;database=Green Hornets Card 2 Manage;encrypt=true;trustServerCertificate=true;";
             final String USERNAME = "greenhornetsadmin";
             final String PASSWORD = "GreenHornetsUp!";
-//        final String DB_URL = "jdbc:mysql://localhost:3307/card2cartaccount";
-//        final String USERNAME = "admin";
-//        final String PASSWORD = "admin";
 
         try {
             Connection connection = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             Statement statement = connection.createStatement();
-//            String sql = "Select * from accounts where email=?";
             String sql = "Select * from dbo.users where email=?";
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
-            user = new user();
+            user = new User();
             user.name = resultSet.getString("name");
             user.email = resultSet.getString("email");
             user.confirmEmail = resultSet.getString("confirmEmail");
@@ -110,31 +114,15 @@ public class Username_Recovery extends JFrame {
             user.confirm_password = resultSet.getString("confirm_password");
             user.securityQuestion = resultSet.getString("securityQuestion");
             user.securityAnswer = resultSet.getString("securityAnswer");
-//            tempAccount = new TempAccount();
-//            tempAccount.name = resultSet.getString("name");
-//            tempAccount.email = resultSet.getString("email");
-//            tempAccount.question1 = resultSet.getString("question1");
-//            tempAccount.answer1 = resultSet.getString("answer1");
 
             statement.close();
             connection.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-//        return tempAccount;
         return user;
     }
     public static void main(String[] args) {
         Username_Recovery accountRecovery = new Username_Recovery();
-//        TempAccount tempAccount = accountRecovery.tempAccount;
-        user user = accountRecovery.user;
-//        if (tempAccount != null) {
-        if (user != null) {
-//            System.out.println(tempAccount.email);
-            System.out.println(user.email);
-        } else {
-            System.out.println("Authentication Canceled");
-        }
-
     }
 }

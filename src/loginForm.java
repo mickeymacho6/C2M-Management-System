@@ -30,7 +30,7 @@ public class loginForm extends JDialog{
 
         // return true if the user has been registered otherwise will go to registration form
         boolean has_Registre_User = connectToDatabase();
-        final user[] User = {loginForm.User};
+        final User[] User = {loginForm.User};
         if(User[0] != null)
         {
             setLocationRelativeTo(null);
@@ -43,7 +43,7 @@ public class loginForm extends JDialog{
                 public void actionPerformed(ActionEvent e)
                 {
                     RegistrationForm registrationForm = new RegistrationForm( loginForm.this);
-                    user User = registrationForm.User;
+                    User User = registrationForm.User;
                 }
             });
             dispose();
@@ -109,10 +109,10 @@ public class loginForm extends JDialog{
 
     }
 
-    public static user User;
-    private user getAuthenticatedUser(String username, String password)
+    public static User User;
+    private User getAuthenticatedUser(String username, String password)
     {
-        user User =null;
+        User User =null;
         //return User;
         final String DB_URL = "jdbc:mysql://localhost/card2cart?serverTimezone=UTC";
         final String USERNAME = "root";
@@ -129,7 +129,7 @@ public class loginForm extends JDialog{
             ResultSet resultSet = preparedStatement.executeQuery();
             if(resultSet.next())
             {
-                User= new user();
+                User= new User();
                 User.name = resultSet.getString("name");
                 User.email = resultSet.getString("email");
                 User.confirmEmail = resultSet.getString("confirmEmail");
@@ -150,7 +150,7 @@ public class loginForm extends JDialog{
     public static void main(String[] args)
     {
         loginForm loginForm = new loginForm(null, null);
-        user User = loginForm.User;
+        User User = loginForm.User;
         if (User != null)
         {
             System.out.println("Successful Authentication of " + User.name);
