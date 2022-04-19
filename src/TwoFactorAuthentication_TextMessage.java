@@ -1,8 +1,8 @@
-import org.springframework.stereotype.Service;
+//import org.springframework.stereotype.Service;
 
 import javax.swing.*;
 
-@Service
+//@Service
 public class TwoFactorAuthentication_TextMessage extends Two_Factor_Authentication {
     private static JLabel title;
     private static JLabel verifyOptions;
