@@ -1,6 +1,7 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -21,7 +22,7 @@ public class TransactionUI {
     private JButton enterButton;
     private JLabel latestTransaction;
     private Object[][] data;
-    private Object[] header = {"Order#", "Date Ordered", "Date Delivered", "Product Name", "Seller", "Price"};
+    private Object[] header = {"Order#", "Tracking#", "Date Ordered", "Date Delivered", "Product Name", "Seller", "Price"};
 
     public TransactionUI() {
         createTable();
@@ -36,11 +37,11 @@ public class TransactionUI {
         table.setFillsViewportHeight(true);
 
         data = new Object[][]{
-                {"1", "10/10/20", "11/11/20", "Babe Ruth", "Myles Eastman", "100.00"},
-                {"2", "10/11/20", "11/09/20", "Jackie Robinson", "Yuji Naka", "200.00"},
-                {"3", "10/14/20", "11/11/20", "Mike Trout", "John Kirby", "300.00"},
-                {"4", "10/16/20", "11/12/20", "Hank Aaron", "Lyn Cell", "400.00"},
-                {"5", "10/20/20", "11/30/20", "Ty Cobb", "Chris Rock", "500.00"}
+                {"1", "54378", "10/10/20", "11/11/20", "Babe Ruth", "Myles Eastman", "100.00"},
+                {"2", "37809", "10/11/20", "11/09/20", "Jackie Robinson", "Yuji Naka", "200.00"},
+                {"3", "54290", "10/14/20", "11/11/20", "Mike Trout", "John Kirby", "300.00"},
+                {"4", "54324", "10/16/20", "11/12/20", "Hank Aaron", "Lyn Cell", "400.00"},
+                {"5", "65306", "10/20/20", "11/30/20", "Ty Cobb", "Chris Rock", "500.00"}
         };
 
         //table.setModel(new DefaultTableModel(data, header));
@@ -50,19 +51,20 @@ public class TransactionUI {
 
         table.setModel(model = new DefaultTableModel(data, header) {
             Class[] columnTypes = new Class[]{
-                    String.class, String.class, String.class, String.class, String.class, String.class
+                    String.class, String.class, String.class, String.class, String.class, String.class, String.class
             };
             public Class getColumnClass(int columnIndex) {
                 return columnTypes[columnIndex];
             }
         });
 
-        table.getColumnModel().getColumn(0).setPreferredWidth(63);
-        table.getColumnModel().getColumn(1).setPreferredWidth(86);
-        table.getColumnModel().getColumn(2).setPreferredWidth(98);
-        table.getColumnModel().getColumn(3).setPreferredWidth(89);
-        table.getColumnModel().getColumn(4).setPreferredWidth(54);
-        table.getColumnModel().getColumn(5).setPreferredWidth(52);
+        table.getColumnModel().getColumn(0).setPreferredWidth(45);
+        table.getColumnModel().getColumn(1).setPreferredWidth(45);
+        table.getColumnModel().getColumn(2).setPreferredWidth(70);
+        table.getColumnModel().getColumn(3).setPreferredWidth(70);
+        table.getColumnModel().getColumn(4).setPreferredWidth(70);
+        table.getColumnModel().getColumn(5).setPreferredWidth(60);
+        table.getColumnModel().getColumn(6).setPreferredWidth(35);
 
         // search results appear after hitting the enter key
         /*textField1.addActionListener(new ActionListener() {
@@ -108,9 +110,6 @@ public class TransactionUI {
             }
         });
 
-
-
-
     }// end of createTable
 
     private String dataToString(Object[] d)
@@ -124,9 +123,6 @@ public class TransactionUI {
         }
         return s;
     }
-
-
-
 }
 
 

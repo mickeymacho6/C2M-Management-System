@@ -21,7 +21,7 @@ public class TransactionMain {
         TransactionUI ui = new TransactionUI();
         JPanel root = ui.getRootPanel();
         JFrame frame = new JFrame();
-        frame.setSize(750,625);
+        frame.setSize(840,625);
         //frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setContentPane(root);
