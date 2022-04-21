@@ -1,5 +1,3 @@
-package C2M;
-
 import InventoryPage.View;
 //import com.google.gson.Gson;
 

@@ -74,12 +74,12 @@ public class RegistrationForm extends JDialog{
         }
     }
     //global variable
-    public user User;
+    public User User;
     //returning valid user object
-    private user addUserToDatabase(String name,String email, String confirmEmail,String username,
-                                   String password,String confirm_password)
+    private User addUserToDatabase(String name, String email, String confirmEmail, String username,
+                                   String password, String confirm_password)
     {
-        user User = null;
+        User User = null;
         final String DB_URL;
         DB_URL = "jdbc:mysql://localhost/card2cart?serverTimezone=UTC";
         final String USERNAME = "root";
@@ -102,7 +102,7 @@ public class RegistrationForm extends JDialog{
             int addRows = preparedStatement.executeUpdate();
             if (addRows > 0)
             {
-                User = new user();
+                User = new User();
                 User.name = name;
                 User.email = email;
                 User.confirmEmail = confirmEmail;
@@ -125,7 +125,7 @@ public class RegistrationForm extends JDialog{
     public static void main(String[] args)
     {   //object of registration form
         RegistrationForm my_form = new RegistrationForm(null);
-        user User = my_form.User;
+        User User = my_form.User;
         if (User != null)
         {
             System.out.println("successfully registered : " + User.name);
