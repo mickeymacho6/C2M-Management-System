@@ -1,5 +1,6 @@
+package C2M;
+
 import InventoryPage.View;
-//import com.google.gson.Gson;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,11 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.io.Reader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
-import java.net.http.HttpClient;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
@@ -74,21 +73,30 @@ public class Homepage extends JFrame {
         TimeZone CST = TimeZone.getTimeZone("CST6CDT");
         TimeZone EST = TimeZone.getTimeZone("EST5EDT");
 
-        //to do: connect to an API and display current USD to PHP exchange rate
-        /*URL url = new URL("http://data.fixer.io/api/latest?access_key={fixer_apikey}&base=USD");
-        HttpURLConnection http = (HttpURLConnection)url.openConnection();
-        http.setRequestProperty("Accept", "application/json");
-        http.disconnect();*/
-        /*URL googleCurrency = new URL("http://www.google.com/ig/calculator?hl=en&q=1USD%3D%3FPHP");
-        URLConnection openGoogle = googleCurrency.openConnection();
-        BufferedReader googleInput = new BufferedReader( new InputStreamReader(openGoogle.getInputStream()));
-        String input = "", l;
-        while ((l = googleInput.readLine()) != null)
-            input += l;
-        googleInput.close();
-        System.out.println(GInput);*/
-
-
+        URL url = new URL("http://data.fixer.io/api/latest?access_key=cad2cf17e01c03d9f3226162e57e569d");
+        StringBuilder result = new StringBuilder();
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("GET");
+        try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(conn.getInputStream()))) {
+            for (String line; (line = reader.readLine()) != null; ) {
+                result.append(line);
+            }
+        }
+        result.toString();
+        String accessVal = result.substring(result.indexOf("\"success\":")+10);
+        accessVal = accessVal.substring(0, 4);
+        if(accessVal.equals("true")){
+            String USDValue = result.substring(result.indexOf("\"USD\":") + 6), PHPValue = result.substring(result.indexOf("\"PHP\":") + 6);
+            USDValue = USDValue.substring(0, 5);
+            PHPValue = PHPValue.substring(0, 5);
+            float exchangeValue = Float.parseFloat(PHPValue) / Float.parseFloat(USDValue);
+            DecimalFormat decimal2nd = new DecimalFormat("0.00");
+            displayCurrency.setText("1 USD = " + decimal2nd.format(exchangeValue) + " PHP");
+        }
+        else{
+            displayCurrency.setText("Cannot display current USD to PHP exchange rate at this time");
+        }
 
         inventoryManagementButton.addActionListener(new ActionListener() {
             @Override
@@ -138,15 +146,5 @@ public class Homepage extends JFrame {
             timeFormat.setTimeZone(EST);
             time5.setText(timeFormat.format(currentTime));
         }while(true);
-
-
     }
-
-    /*public class Exchange{
-        private boolean success;
-        private int timestamp;
-        private String base;
-        private String date;
-        private List rates;
-    }*/
 }
