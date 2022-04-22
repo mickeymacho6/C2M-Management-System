@@ -32,6 +32,14 @@ public class Two_Factor_Authentication extends JDialog {
    private JButton textMessageButton;
    public JButton verifyButton;
 
+   private static String email = "vyassrinivasan@csus.edu";
+
+   private static final String username = "vyassrinivasan@csus.edu";
+   private static final String password = "*********************";
+
+   private static String verificationCodeStr;
+
+
 
    public Two_Factor_Authentication(JFrame parent) {
       super(parent);
@@ -44,9 +52,22 @@ public class Two_Factor_Authentication extends JDialog {
        
    
    }
+
+   public static boolean sendEmail(String emailAddress, String twoFactorAuthenticationCode, String subject, String message) {
+      SMTP emailCode = new SMTP();
+      message = "Your Two-Factor Authentication code is" + twoFactorAuthenticationCode;
+      emailCode.send(username, password, emailAddress, subject, message);
+
+      return true;
+   }
+
+
    public static int generateCode() {
 
-      verificationCode = rand.nextInt(8999) + 1000;
+      verificationCode = rand.nextInt(900000) +100000;
+      verificationCodeStr = Integer.toString(verificationCode);
+      System.out.println(verificationCodeStr);
+      //sendEmail(username, verificationCodeStr, "Two Factor Authentication Code", "The Two-factor Authentication Code is " + verificationCodeStr );
       return verificationCode;
 
    }
@@ -96,6 +117,7 @@ public class Two_Factor_Authentication extends JDialog {
          @Override
          public void actionPerformed(ActionEvent e) {
             twoFAEmail();
+            System.out.println(generateCode());
 
          }
 
@@ -164,8 +186,8 @@ public class Two_Factor_Authentication extends JDialog {
       emailText.setFont(new Font("Serif", Font.ITALIC, 18));
 
       //Prompts users on how they would like to get verification code.
-      verifyOptions = new JLabel("Send Code By: ");
-      verifyOptions.setBounds(130,100,100, 40);
+      JLabel enterSixDigitCode = new JLabel("Enter the 6-digit code: ");
+      enterSixDigitCode.setBounds(110,100,200, 40);
 
       //Option: Via Email
       sendCodeByEmail=new JButton("Email");//creating instance of JButton
@@ -185,18 +207,25 @@ public class Two_Factor_Authentication extends JDialog {
 
       });
 
+      JTextField authCode = new JTextField();
+      authCode.setBounds(130,140,100, 40);//x axis, y axis, width, height
+
       verifyCode.addActionListener(new ActionListener() {
          @Override
          public void actionPerformed(ActionEvent e) {
-            JDialog popup = new JDialog();
-            popup.setTitle("Authentication");
-            popup.show();
+            System.out.println("Success");
+            if (verificationCodeStr.equals(authCode.toString())) {
+               System.out.println("Success");
+
+            } else {
+               JOptionPane.showMessageDialog(null, "Username or password is invalid",
+                       "Try again", JOptionPane.ERROR_MESSAGE);
+            }
          }
 
       });
 
-      JTextField authCode = new JTextField();
-      authCode.setBounds(130,140,100, 40);//x axis, y axis, width, height
+
       /*
       //Option: Via Text Message
       sendCodeByText=new JButton("Text");//creating instance of JButton
@@ -204,16 +233,24 @@ public class Two_Factor_Authentication extends JDialog {
       sendCodeByText.setForeground(Color.BLUE);
       */
 
-      //SettingsButton
-      /*
-      Icon settingsIcon = new ImageIcon("settingsicon.png");
-      settingsButton=new JButton("Settings");//creating instance of JButton
-      settingsButton.setBounds(155,430,50, 40);//x axis, y axis, width, height
-      settingsButton.setForeground(Color.BLUE);
+      //Resend Button
 
-      settingsButton.setIcon(settingsIcon);
+
+     JButton resendCodeButton=new JButton("Resend Code");//creating instance of JButton
+      resendCodeButton.setBounds(120,430,130, 40);//x axis, y axis, width, height
+      resendCodeButton.setForeground(Color.BLUE);
+
+      resendCodeButton.addActionListener(new ActionListener() {
+         @Override
+         public void actionPerformed(ActionEvent e) {
+            System.out.println(generateCode());
+
+         }
+
+      });
+
       //settingsButton.setBackground(Color.ORANGE);
-      */
+
       //Verify Button to Verify Code
       verifyCode=new JButton("VERIFY");//creating instance of JButton
       verifyCode.setBounds(120,360,130, 40);//x axis, y axis, width, height
@@ -227,10 +264,10 @@ public class Two_Factor_Authentication extends JDialog {
       frame.add(title);
       frame.add(emailText);
 
-     // frame.add(verifyOptions);
+      frame.add(enterSixDigitCode);
       frame.add(backButton);
       frame.add(authCode);
-      //frame.add(settingsButton);
+      frame.add(resendCodeButton);
       //frame.add(sendCodeByEmail);//adding button in JFrame
       //frame.add(sendCodeByText);//adding button in JFrame
       frame.add(verifyCode);//adding button in JFrame
@@ -270,6 +307,7 @@ public class Two_Factor_Authentication extends JDialog {
 
 
    }
+
 
    private void createUIComponents() {
       // TODO: place custom component creation code here

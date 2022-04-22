@@ -166,6 +166,8 @@ public class loginForm extends JDialog{
         }
     }
 
+
+
     private void actionPerformed(ActionEvent e) {
         textField1.setText(null);
         passwordField1.setText(null);

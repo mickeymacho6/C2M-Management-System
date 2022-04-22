@@ -2,7 +2,7 @@
 
 import javax.swing.*;
 //@Service
-public class TwoFactorAuthentication_Email extends Two_Factor_Authentication {
+public class TwoFactorAuthentication_Email {
     private static JLabel title;
     private static JLabel verifyOptions;
     private static JFrame frame;
@@ -19,10 +19,10 @@ public class TwoFactorAuthentication_Email extends Two_Factor_Authentication {
     private JButton verifyButton;
 
     public TwoFactorAuthentication_Email(JFrame parent) {
-        super(parent);
+        //super(parent);
     }
 
-    public boolean sendEmail(String emailAddress, String twoFactorAuthenticationCode, String subject, String message) {
+    public static boolean sendEmail(String emailAddress, String twoFactorAuthenticationCode, String subject, String message) {
         SMTP emailCode = new SMTP();
         message = "Your Two-Factor Authentication code is" + twoFactorAuthenticationCode;
         emailCode.send(username, password, emailAddress, subject, message);
@@ -37,7 +37,7 @@ public class TwoFactorAuthentication_Email extends Two_Factor_Authentication {
 
     }
     public static void main(String[] args) {
-        TwoFactorAuthentication_Email twoFA = new TwoFactorAuthentication_Email(null);
+        Two_Factor_Authentication twoFA = new Two_Factor_Authentication(null);
         JButton verify = twoFA.verifyButton;
 
         if (verify != null) {
