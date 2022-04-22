@@ -29,21 +29,24 @@ public class add_and_search_transaction {
     private static JTextField searchTrackingField;
 
     public static void main(String[] args) {
-		
-		/*
-		DriverManager.registerDriver (new com.mysql.jdbc.Driver());
+
+
+        //database connection
 		final String DB_URL = "jdbc:sqlserver://greenhornetscard2manage.database.windows.net:1433;database=Green Hornets Card 2 Manage;encrypt=true;trustServerCertificate=true;";
 	    final String USERNAME = "greenhornetsadmin";
 	    final String PASSWORD = "GreenHornetsUp!";
-	    try {
+
+        try {
             Connection connection = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
+            //Statement statement = connection.createStatement();
+
             System.out.println("Connected to SQL Server");
-	    }
-	    catch(Exception e) {
+        }catch(SQLException e) {
+            e.printStackTrace();
 	    	System.out.println("Not connected yet");
 	    }
-		 
-		 */
+
+
         JTable search_class_table = new JTable();
         Object[] columns = {"Seller Name", "Card Name", "Total Cost", "Payment Status", "Shipping Status", "Tracking #"};
         DefaultTableModel model = new DefaultTableModel();
