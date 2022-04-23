@@ -1,5 +1,3 @@
-package C2M;
-
 import InventoryPage.View;
 
 import javax.swing.*;
