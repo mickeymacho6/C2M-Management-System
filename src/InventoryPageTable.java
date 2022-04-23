@@ -3,6 +3,9 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
 public class InventoryPageTable {
     private static JTextField card_name_field;
@@ -17,6 +20,22 @@ public class InventoryPageTable {
     private JTable search_class_table;
 
     public static void main(String[] args) {
+
+        //database connection
+        final String DB_URL = "jdbc:sqlserver://greenhornetscard2manage.database.windows.net:1433;database=Green Hornets Card 2 Manage;encrypt=true;trustServerCertificate=true;";
+        final String USERNAME = "greenhornetsadmin";
+        final String PASSWORD = "GreenHornetsUp!";
+
+        try {
+            Connection connection = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
+            //Statement statement = connection.createStatement();
+
+            System.out.println("Connected to SQL Server");
+        }catch(SQLException e) {
+            e.printStackTrace();
+            System.out.println("Not connected yet");
+        }
+
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ JTable Setup ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
