@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+import java.sql.*;
+
 /**
  * @author Myles Eastman
  * @version 3-13-2022
@@ -25,6 +27,21 @@ public class TransactionUI {
     private Object[] header = {"Order#", "Tracking#", "Date Ordered", "Date Delivered", "Product Name", "Seller", "Price"};
 
     public TransactionUI() {
+
+        //database connection
+        final String DB_URL = "jdbc:sqlserver://greenhornetscard2manage.database.windows.net:1433;database=Green Hornets Card 2 Manage;encrypt=true;trustServerCertificate=true;";
+        final String USERNAME = "greenhornetsadmin";
+        final String PASSWORD = "GreenHornetsUp!";
+        try {
+            Connection connection = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
+            System.out.println("Connected to SQL Server");
+        }catch(SQLException e) {
+            e.printStackTrace();
+            System.out.println("Not connected yet");
+        }
+
+
+
         createTable();
     }
 
