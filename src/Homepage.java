@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -108,10 +109,18 @@ public class Homepage extends JFrame {
         packageInformationButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               PackageSearch packageInfo = new PackageSearch();
-               packageInfo.setVisible(true);
-               dispose();
+                PackageSearch packageInfo = null;
+                try {
+                    packageInfo = new PackageSearch();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                } catch (ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                }
+                packageInfo.setVisible(true);
+                dispose();
             }
+
         });
 
         transactionLogButton.addActionListener(new ActionListener() {
