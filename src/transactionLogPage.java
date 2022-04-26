@@ -63,6 +63,11 @@ public class transactionLogPage extends JFrame {
         btnNewButton_1.setForeground(new Color(218, 165, 32));
         btnNewButton_1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                //Open transaction with sellers page
+                add_and_search_transaction transactionWithSellers = new add_and_search_transaction();
+                String[] runTransactionWithSellers = {};
+                transactionWithSellers.main(runTransactionWithSellers);
+                dispose();
             }
         });
         btnNewButton_1.setBounds(42, 192, 337, 75);
