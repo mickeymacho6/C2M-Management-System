@@ -126,7 +126,7 @@ public class Homepage extends JFrame {
         transactionLogButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TransactionMain transactionLog = new TransactionMain();
+                transactionLogPage transactionLog = new transactionLogPage();
                 String[] runTransactionLog = {};
                 transactionLog.main(runTransactionLog);
                 dispose();
