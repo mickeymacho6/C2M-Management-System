@@ -1,7 +1,6 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
@@ -13,7 +12,7 @@ import java.sql.*;
  * @author Myles Eastman
  * @version 3-13-2022
  */
-public class TransactionUI {
+public class TransactionUI extends JFrame{
     private JPanel rootPanel;
     private JTextField textField1;
     private JTable table;
@@ -23,6 +22,7 @@ public class TransactionUI {
     private JPanel headerPanel;
     private JButton enterButton;
     private JLabel latestTransaction;
+    private JButton transactionLogButton;
     private Object[][] data;
     private Object[] header = {"Order#", "Tracking#", "Date Ordered", "Date Delivered", "Product Name", "Seller", "Price"};
 
@@ -123,6 +123,20 @@ public class TransactionUI {
                 DefaultTableModel temp = (DefaultTableModel) table.getModel();
                 temp.addRow(data[4]);
                 latestTransaction.setText(dataToString(data[4]));
+
+            }
+        });
+
+        transactionLogButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Open transaction with sellers page
+
+                transactionLogPage transactionLog = new transactionLogPage();
+                transactionLog.setVisible(true);
+                dispose();
+
+
 
             }
         });
