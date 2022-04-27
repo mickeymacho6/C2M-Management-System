@@ -1,11 +1,11 @@
 import javax.swing.*;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class InventoryPageTable {
     private static JTextField card_name_field;
@@ -28,13 +28,9 @@ public class InventoryPageTable {
 
         try {
             Connection connection = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
-            //Statement statement = connection.createStatement();
+            Statement stmt = connection.createStatement();
 
             System.out.println("Connected to SQL Server");
-        }catch(SQLException e) {
-            e.printStackTrace();
-            System.out.println("Not connected yet");
-        }
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ JTable Setup ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -53,6 +49,61 @@ public class InventoryPageTable {
 
         model.setColumnIdentifiers(columns);
         search_class_table.setModel(model);
+
+
+/*
+                search_class_table.getModel().addTableModelListener(new TableModelListener(){
+                    @Override
+                    public void tableChanged(TableModelEvent evt){
+                        System.out.println("Changed!");
+
+
+                        int rows = search_class_table.getRowCount();
+
+                        for(int row = 0; row<=rows ; row++) {
+
+                            String CardName = (String) search_class_table.getValueAt(row, 0);
+                            String TeamName = (String) search_class_table.getValueAt(row, 1);
+                            String CardCost = (String) search_class_table.getValueAt(row, 2);
+                            String CardNumber = (String) search_class_table.getValueAt(row, 3);
+                            String CardCondition = (String) search_class_table.getValueAt(row, 4);
+                            String InStock = (String) search_class_table.getValueAt(row, 5);
+
+                            System.out.println(CardName);
+                            System.out.println(TeamName);
+                            System.out.println(CardCost);
+                            System.out.println(CardNumber);
+                            System.out.println(CardCondition);
+                            System.out.println(InStock);
+
+                            String query = "INSERT INTO INVENTORY(CARD_NAME, CARD_TEAM, CARD_COST, CARD_NUMBER, CARD_CONDITON, IN_STOCK) "
+                                    + " VALUES(?, ?, ?, ?, ?, ?) " ;
+
+
+                            stmt = connection.prepareStatement(query);
+
+                            stmt.setString(1, CardName); //Invoice No
+                            stmt.setString(2, TeamName); //Code
+                            stmt.setString(3, CardCost); //Description
+                            stmt.setString(4, CardNumber); //Bonusable
+                            stmt.setString(5, CardCondition); //Taxable
+                            stmt.setString(6, InStock); //Category
+
+
+                            stmt.addBatch(); stmt.executeBatch();
+
+
+                            try {
+                                connection.commit();
+                            } catch (SQLException ex) {
+                                throw new RuntimeException(ex);
+                            }
+                        }
+                    }
+                }
+
+                );*/
+
 
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Table Setup ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -310,7 +361,10 @@ public class InventoryPageTable {
         search_class_frame.revalidate();
         search_class_frame.setVisible(true);
 
-
+        }catch(SQLException e) {
+            e.printStackTrace();
+            System.out.println("Not connected yet");
+        }
 
     }
 }
