@@ -17,6 +17,8 @@ import java.awt.image.BufferedImage;
 
 import java.sql.*;
 
+import static java.awt.SystemColor.window;
+
 
 public class add_and_search_transaction{
     private static JTextField seller_field;
@@ -344,6 +346,24 @@ public class add_and_search_transaction{
         JButton transactionLogButton = new JButton("Transaction Log");
         transactionLogButton.setForeground(new Color(218, 165, 32));
         transactionLogButton.setBackground(Color.BLACK);
+
+        transactionLogButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //Open transaction with sellers page
+
+                transactionLogPage transactionLog = new transactionLogPage();
+
+                transactionLog.setVisible(true);
+                //dispose();
+
+
+                /*
+				String[] runTransactionLog = {};
+				transactionLog.main(runTransactionLog);
+                //dispose();
+                */
+            }
+        });
         transactionLogButton.setBounds(675, 718, 136, 45);
         search_class_frame.getContentPane().add(transactionLogButton);
 		
