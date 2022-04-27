@@ -74,6 +74,17 @@ public class Homepage extends JDialog {
         TimeZone MST = TimeZone.getTimeZone("MST7MDT");
         TimeZone CST = TimeZone.getTimeZone("CST6CDT");
         TimeZone EST = TimeZone.getTimeZone("EST5EDT");
+        Date currentTime = new Date ( );
+            timeFormat.setTimeZone (PHT);
+            time1.setText (timeFormat.format (currentTime));
+            timeFormat.setTimeZone (PST);
+            time2.setText (timeFormat.format (currentTime));
+            timeFormat.setTimeZone (MST);
+            time3.setText (timeFormat.format (currentTime));
+            timeFormat.setTimeZone (CST);
+            time4.setText (timeFormat.format (currentTime));
+            timeFormat.setTimeZone (EST);
+            time5.setText (timeFormat.format (currentTime));
 
         URL url = new URL("http://data.fixer.io/api/latest?access_key=cad2cf17e01c03d9f3226162e57e569d");
         StringBuilder result = new StringBuilder();
@@ -121,7 +132,7 @@ public class Homepage extends JDialog {
         transactionLogButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                TransactionMain transactionLog = new TransactionMain();
+                transactionLogPage transactionLog = new transactionLogPage();
                 String[] runTransactionLog = {};
                 transactionLog.main(runTransactionLog);
                 dispose();
@@ -134,20 +145,7 @@ public class Homepage extends JDialog {
                 dispose();
             }
         });setVisible(true);
-
-        while (true) {
-            Date currentTime = new Date ( );
-            timeFormat.setTimeZone (PHT);
-            time1.setText (timeFormat.format (currentTime));
-            timeFormat.setTimeZone (PST);
-            time2.setText (timeFormat.format (currentTime));
-            timeFormat.setTimeZone (MST);
-            time3.setText (timeFormat.format (currentTime));
-            timeFormat.setTimeZone (CST);
-            time4.setText (timeFormat.format (currentTime));
-            timeFormat.setTimeZone (EST);
-            time5.setText (timeFormat.format (currentTime));
-        }
+        
     }
 
     public static void main(String[] args) throws Exception {
