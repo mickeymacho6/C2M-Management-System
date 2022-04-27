@@ -8,14 +8,14 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Objects;
 import java.util.TimeZone;
 
 
-public class Homepage extends JFrame {
+public class Homepage extends JDialog {
     private JPanel HomepageForm;
     private JPanel Banner;
     private JPanel LastTransaction;
@@ -40,19 +40,22 @@ public class Homepage extends JFrame {
     private JLabel time5;
     private JLabel displayCurrency;
 
-    public Homepage() throws Exception
+    public  Homepage(JFrame parent) throws Exception
     {
+        super(parent);
         setContentPane(HomepageForm);
         setTitle("C2M");
-        setSize(1525, 900);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setVisible(true);
+        setMinimumSize(new Dimension(1525,900));
+        setModal(true);
+        setLocationRelativeTo(parent);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        Image logo = new ImageIcon(this.getClass().getResource("/logo.png")).getImage();
-        Image button1 = new ImageIcon(this.getClass().getResource("/inventory.png")).getImage();
-        Image button2 = new ImageIcon(this.getClass().getResource("/package.png")).getImage();
-        Image button3 = new ImageIcon(this.getClass().getResource("/translog.png")).getImage();
-        Image button5 = new ImageIcon(this.getClass().getResource("/logOut.png")).getImage();
+
+        Image logo = new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/logo.png"))).getImage();
+        Image button1 = new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/inventory.png"))).getImage();
+        Image button2 = new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/package.png"))).getImage();
+        Image button3 = new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/translog.png"))).getImage();
+        Image button5 = new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/logOut.png"))).getImage();
 
         logoLabel.setIcon(new ImageIcon(logo));
         inventoryManagementButton.setIcon(new ImageIcon(button1));
@@ -109,24 +112,16 @@ public class Homepage extends JFrame {
         packageInformationButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                PackageSearch packageInfo = null;
-                try {
-                    packageInfo = new PackageSearch();
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                } catch (ClassNotFoundException ex) {
-                    ex.printStackTrace();
-                }
-                packageInfo.setVisible(true);
-                dispose();
+               PackageSearch packageInfo = new PackageSearch();
+               packageInfo.setVisible(true);
+               dispose();
             }
-
         });
 
         transactionLogButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                transactionLogPage transactionLog = new transactionLogPage();
+                TransactionMain transactionLog = new TransactionMain();
                 String[] runTransactionLog = {};
                 transactionLog.main(runTransactionLog);
                 dispose();
@@ -138,20 +133,28 @@ public class Homepage extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 dispose();
             }
-        });
+        });setVisible(true);
 
-        do {
-            Date currentTime = new Date();
-            timeFormat.setTimeZone(PHT);
-            time1.setText(timeFormat.format(currentTime));
-            timeFormat.setTimeZone(PST);
-            time2.setText(timeFormat.format(currentTime));
-            timeFormat.setTimeZone(MST);
-            time3.setText(timeFormat.format(currentTime));
-            timeFormat.setTimeZone(CST);
-            time4.setText(timeFormat.format(currentTime));
-            timeFormat.setTimeZone(EST);
-            time5.setText(timeFormat.format(currentTime));
-        }while(true);
+        while (true) {
+            Date currentTime = new Date ( );
+            timeFormat.setTimeZone (PHT);
+            time1.setText (timeFormat.format (currentTime));
+            timeFormat.setTimeZone (PST);
+            time2.setText (timeFormat.format (currentTime));
+            timeFormat.setTimeZone (MST);
+            time3.setText (timeFormat.format (currentTime));
+            timeFormat.setTimeZone (CST);
+            time4.setText (timeFormat.format (currentTime));
+            timeFormat.setTimeZone (EST);
+            time5.setText (timeFormat.format (currentTime));
+        }
     }
+
+    public static void main(String[] args) throws Exception {
+        Homepage homepage = new Homepage(null);
+    }
+
+
 }
+
+

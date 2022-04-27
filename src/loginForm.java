@@ -1,8 +1,13 @@
+
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
+
+
+
 
 public class loginForm extends JDialog{
     private JPanel icon;
@@ -12,9 +17,9 @@ public class loginForm extends JDialog{
     private JPasswordField passwordField1;
     private JButton btnLogin;
     private JButton btnCreateAccount;
-    private JButton forgotPasswordButton;
     private JButton btnCancel;
     private JPanel LoginPanel;
+    private JButton btnForgotPassword;
 
     //constructor
     public loginForm(JFrame parent, String username)
@@ -29,7 +34,6 @@ public class loginForm extends JDialog{
         textField1.setText(username);
 
         // return true if the user has been registered otherwise will go to registration form
-        boolean has_Registre_User = connectToDatabase();
         final User[] User = {loginForm.User};
         if(User[0] != null)
         {
@@ -49,79 +53,85 @@ public class loginForm extends JDialog{
             dispose();
         }
 
-
-
-
         btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String username = textField1.getText();
                 String password = String.valueOf(passwordField1.getPassword());
 
-                User[0] = getAuthenticatedUser(username, password);
+                try {
+                    User[0] = getAuthenticatedUser(username, password);
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
                 if (User[0] != null)
                 {
                     JOptionPane.showMessageDialog( loginForm.this, "You are successfully logged in ");
-                            dispose();
+                    dispose ();
                     Homepage homepage = null;
                     try {
-                        homepage = new Homepage();
+                        homepage = new Homepage(null);
                     } catch (Exception ex) {
-                        ex.printStackTrace();
+                        ex.printStackTrace ( );
                     }
                     homepage.setVisible(true);
-                    setVisible(false);
+
                 }
+
                 else{
                     JOptionPane.showMessageDialog( loginForm.this, "Username or password is invalid",
                             "Try again",JOptionPane.ERROR_MESSAGE);
                 }
 
             }
+
         });
+
         //setting the cancel button
         btnCancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                dispose();
+                dispose ( );
 
             }
-
+        });
+        btnForgotPassword.addActionListener (new ActionListener ( ) {
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e the event to be processed
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    Password_Recovery recovery = new Password_Recovery ();
+                } catch (SQLException ex) {
+                    ex.printStackTrace ( );
+                }
+                dispose ();
+            }
         });
         setVisible(true);
 
-        forgotPasswordButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
-            }
-        });
-
-
-
-        //Clear the username and password field if do not want to log_in
 
     }
-    private boolean connectToDatabase()
-    {
-        boolean has_Registre_User = false;
-        return has_Registre_User;
 
-    }
 
     public static User User;
-    private User getAuthenticatedUser(String username, String password)
-    {
+    private User getAuthenticatedUser(String username, String password) throws SQLException {
         User User =null;
         //return User;
-        final String DB_URL = "jdbc:mysql://localhost/card2cart?serverTimezone=UTC";
-        final String USERNAME = "root";
-        final String PASSWORD = "";
+        final String DB_URL = "jdbc:sqlserver://greenhornetscard2manage.database.windows.net:1433;database=Green Hornets Card 2 Manage;encrypt=true;trustServerCertificate=true;";
+        final String USERNAME = "greenhornetsadmin";
+        final String PASSWORD = "GreenHornetsUp!";
+
 
         try{
             Connection conn = DriverManager.getConnection(DB_URL,USERNAME,PASSWORD);
+            System.out.println("Connected to SQL Server");
             Statement stmt = conn.createStatement();
-            String sql = "SELECT * FROM users WHERE username=? AND password=?";
+            String sql = "SELECT * FROM dbo.users WHERE username=? AND password=?";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1,username);
             preparedStatement.setString(2,password);
