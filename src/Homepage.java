@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -114,8 +115,9 @@ public class Homepage extends JDialog {
         inventoryManagementButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                View inventory = new View("Inventory");
-                inventory.setVisible(true);
+                InventoryPageTable inventory = new InventoryPageTable();
+                String[] runInventory = {};
+                inventory.main(runInventory);
                 dispose();
             }
         });
@@ -123,9 +125,16 @@ public class Homepage extends JDialog {
         packageInformationButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               PackageSearch packageInfo = new PackageSearch();
-               packageInfo.setVisible(true);
-               dispose();
+                PackageSearch packageInfo = null;
+                try {
+                    packageInfo = new PackageSearch();
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                } catch (ClassNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                }
+                packageInfo.setVisible(true);
+                dispose();
             }
         });
 

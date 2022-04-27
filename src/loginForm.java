@@ -19,7 +19,7 @@ public class loginForm extends JDialog{
     private JButton btnCreateAccount;
     private JButton btnCancel;
     private JPanel LoginPanel;
-    private JButton btnForgotPassword;
+    private JButton forgotPasswordButton;
 
     //constructor
     public loginForm(JFrame parent, String username)
@@ -95,7 +95,7 @@ public class loginForm extends JDialog{
 
             }
         });
-        btnForgotPassword.addActionListener (new ActionListener ( ) {
+        forgotPasswordButton.addActionListener (new ActionListener ( ) {
             /**
              * Invoked when an action occurs.
              *

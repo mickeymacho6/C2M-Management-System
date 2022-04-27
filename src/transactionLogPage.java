@@ -91,6 +91,8 @@ public class transactionLogPage extends JFrame {
         backToHomepageButton.setForeground(new Color(218, 165, 32));
         backToHomepageButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
         backToHomepageButton.setBackground(Color.BLACK);
+
+
         backToHomepageButton.setBounds(677, 386, 229, 75);
         contentPane.add(backToHomepageButton);
     }
