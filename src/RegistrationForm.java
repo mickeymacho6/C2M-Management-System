@@ -4,6 +4,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 
+import static javax.swing.JOptionPane.showInternalMessageDialog;
+
 public class RegistrationForm extends JDialog{
     private JTextField textName;
     private JTextField textEmail;
@@ -14,6 +16,9 @@ public class RegistrationForm extends JDialog{
     private JButton cancelButton;
     private JButton confirmButton;
     private JPanel RegisterPanel;
+    private JTextField txtSecurityQuestion;
+    private JTextField txtSecurityAnswer;
+
     //contracture
     public RegistrationForm(JDialog parent)
     {
@@ -29,7 +34,11 @@ public class RegistrationForm extends JDialog{
         confirmButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                registerUser();
+                try {
+                    registerUser();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
         //Closing the application
@@ -39,21 +48,24 @@ public class RegistrationForm extends JDialog{
                 dispose();
             }
         });
-        setVisible(true);
+        setVisible(true );
+
     }
     //implement the register user
-    private void registerUser() {
+    private void registerUser() throws SQLException {
         String name = textName.getText();
         String email = textEmail.getText();
         String confirmEmail = textConfirmEmail.getText();
         String username = textUsername.getText();
         String password = String.valueOf(passwordField1.getPassword());
         String confirm_password = String.valueOf(passwordConfirm.getPassword());
+        String securityQuestion = txtSecurityQuestion.getText();
+        String securityAnswer = txtSecurityAnswer.getText();
 
         //If filed is empty display the Error message
         if (name.isEmpty() || email.isEmpty() || confirmEmail.isEmpty() ||  username.isEmpty()
-                || password.isEmpty()) {
-            JOptionPane.showInternalMessageDialog( RegistrationForm.this,
+                || password.isEmpty() || securityQuestion.isEmpty() || securityAnswer.isEmpty()) {
+            showInternalMessageDialog( RegistrationForm.this,
                     "Please fill all the blank field","Try again",
                     JOptionPane.ERROR_MESSAGE);
             return;
@@ -65,31 +77,29 @@ public class RegistrationForm extends JDialog{
             return;
         }
         //Adding new user to database
-        User = addUserToDatabase(name,email,confirmEmail,username,password,confirm_password );
-        if (User != null)
+        User = addUserToDatabase(name,email,confirmEmail,username,password,confirm_password,securityQuestion , securityAnswer );
+        if (User != null) {
             dispose();
-        else{
-            JOptionPane.showInternalMessageDialog( this,"Please fill all the blank","Try again",
-                    JOptionPane.ERROR_MESSAGE);
-        }
+        } else JOptionPane.showInternalMessageDialog(this, "Please fill all the blank", "Try again",
+                JOptionPane.ERROR_MESSAGE);
     }
     //global variable
     public User User;
     //returning valid user object
     private User addUserToDatabase(String name, String email, String confirmEmail, String username,
-                                   String password, String confirm_password)
-    {
+                                   String password, String confirm_password , String securityQuestion , String securityAnswer ) throws SQLException {
         User User = null;
         final String DB_URL;
-        DB_URL = "jdbc:mysql://localhost/card2cart?serverTimezone=UTC";
-        final String USERNAME = "root";
-        final String PASSWORD = "";
+        DB_URL = "jdbc:sqlserver://greenhornetscard2manage.database.windows.net:1433;database=Green Hornets Card 2 Manage;encrypt=true;trustServerCertificate=true;";
+        final String USERNAME = "greenhornetsadmin";
+        final String PASSWORD = "GreenHornetsUp!";
+        Connection conn = DriverManager.getConnection(DB_URL,USERNAME,PASSWORD);
+        System.out.println("Connected to SQL Server");
+        Statement stmt = conn.createStatement();
 
         try{
-            Connection conn = DriverManager.getConnection(DB_URL,USERNAME,PASSWORD);
-            //concreting to database successfully
-            Statement st = conn.createStatement();
-            String sql = "INSERT INTO users (name, email, confirmEmail,username, password,confirm_password) VALUES (?,?,?,?,?,?)";
+
+            String sql = "INSERT INTO dbo.users (name, email, confirmEmail,username, password,confirm_password ,securityQuestion,securityAnswer ) VALUES (?,?,?,?,?,?,?,?)";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1,name);
             preparedStatement.setString(2,email);
@@ -97,6 +107,10 @@ public class RegistrationForm extends JDialog{
             preparedStatement.setString(4,username);
             preparedStatement.setString(5,password);
             preparedStatement.setString(6,confirm_password);
+            preparedStatement.setString(7,securityQuestion);
+            preparedStatement.setString(8,securityAnswer);
+
+
 
             //Insert row into the table and execute the quarry
             int addRows = preparedStatement.executeUpdate();
@@ -109,10 +123,12 @@ public class RegistrationForm extends JDialog{
                 User.username = username;
                 User.password = password;
                 User.confirm_password = confirm_password;
+                User.securityQuestion = securityQuestion;
+                User.securityAnswer = securityAnswer;
 
             }
             //closing connection
-            st.close();
+            stmt.close();
             conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -128,7 +144,10 @@ public class RegistrationForm extends JDialog{
         User User = my_form.User;
         if (User != null)
         {
-            System.out.println("successfully registered : " + User.name);
+            System.out.println("successfully registered :            " + User.name);
+            System.out.println("                    email:          " + User.email);
+            System.out.println(" your security question: " + User.securityQuestion);
+            System.out.println("    your security answer : " + User.securityAnswer);
         }
         else{
             System.out.println("Registration canceled");
