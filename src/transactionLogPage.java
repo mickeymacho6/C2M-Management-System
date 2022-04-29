@@ -55,6 +55,15 @@ public class transactionLogPage extends JFrame {
         btnNewButton.setForeground(new Color(218, 165, 32));
         btnNewButton.setBackground(new Color(0, 0, 0));
         btnNewButton.setBounds(509, 192, 337, 75);
+          btnNewButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                //Open transaction with customers page
+                TransactionMain transactionWithCustomers = new TransactionMain();
+                String[] runtransactionWithCustomers = {};
+                transactionWithCustomers.main(runtransactionWithCustomers);
+                dispose();
+            }
+        });
         contentPane.add(btnNewButton);
 
         JButton btnNewButton_1 = new JButton("Transaction with Sellers");
@@ -91,6 +100,8 @@ public class transactionLogPage extends JFrame {
         backToHomepageButton.setForeground(new Color(218, 165, 32));
         backToHomepageButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
         backToHomepageButton.setBackground(Color.BLACK);
+
+
         backToHomepageButton.setBounds(677, 386, 229, 75);
         contentPane.add(backToHomepageButton);
     }

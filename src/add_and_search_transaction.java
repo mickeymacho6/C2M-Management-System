@@ -3,16 +3,14 @@ import javax.swing.table.TableRowSorter;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import java.awt.Color;
+import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.Font;
 
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 
 import java.sql.*;
@@ -20,7 +18,7 @@ import java.sql.*;
 import static java.awt.SystemColor.window;
 
 
-public class add_and_search_transaction{
+public class add_and_search_transaction extends JDialog{
     private static JTextField seller_field;
     private static JTextField total_cost_field;
     private static JTextField card_field;
@@ -30,13 +28,15 @@ public class add_and_search_transaction{
     private static JTextField tracking_field;
     private static JTextField searchTrackingField;
 
-    public static void main(String[] args) {
+
+
+    public add_and_search_transaction() {
 
 
         //database connection
-		final String DB_URL = "jdbc:sqlserver://greenhornetscard2manage.database.windows.net:1433;database=Green Hornets Card 2 Manage;encrypt=true;trustServerCertificate=true;";
-	    final String USERNAME = "greenhornetsadmin";
-	    final String PASSWORD = "GreenHornetsUp!";
+        final String DB_URL = "jdbc:sqlserver://greenhornetscard2manage.database.windows.net:1433;database=Green Hornets Card 2 Manage;encrypt=true;trustServerCertificate=true;";
+        final String USERNAME = "greenhornetsadmin";
+        final String PASSWORD = "GreenHornetsUp!";
 
         try {
             Connection connection = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
@@ -45,8 +45,8 @@ public class add_and_search_transaction{
             System.out.println("Connected to SQL Server");
         }catch(SQLException e) {
             e.printStackTrace();
-	    	System.out.println("Not connected yet");
-	    }
+            System.out.println("Not connected yet");
+        }
 
 
         JTable search_class_table = new JTable();
@@ -239,9 +239,12 @@ public class add_and_search_transaction{
         lblTransactionWithSellers.setBounds(0, 0, 294, 45);
         search_class_frame.getContentPane().add(lblTransactionWithSellers);
 
+        /*
         JLabel sortLabel = new JLabel("Sort by:");
         sortLabel.setBounds(10, 138, 67, 14);
         search_class_frame.getContentPane().add(sortLabel);
+
+
 
         //combo box selection change
         JComboBox sortComboBox = new JComboBox();
@@ -255,10 +258,12 @@ public class add_and_search_transaction{
             }
 
         });
+
+
         sortComboBox.setModel(new DefaultComboBoxModel(new String[] {"None", "Name (A-Z)", "Name (Z-A)", "Price (low-high)", "Price (high-low)", "Paid orders", "Shipped orders"}));
         sortComboBox.setBounds(10, 163, 103, 22);
         search_class_frame.getContentPane().add(sortComboBox);
-
+        */
         JLabel shippedLabel = new JLabel("Shipped?");
         shippedLabel.setBounds(105, 641, 61, 14);
         search_class_frame.getContentPane().add(shippedLabel);
@@ -297,13 +302,13 @@ public class add_and_search_transaction{
 
         search_class_frame.revalidate();
         search_class_frame.setVisible(true);
-		
-		
+
+
 		/*
 		 Sort function
 		 Arrays.sort(myArray); // sort in ascending order
 		 Arrays.sort(myArray, Comparator.reverseOrder()); // sort in descending order
-		  
+
 		 */
         //call sort function to sort data
 
@@ -324,6 +329,23 @@ public class add_and_search_transaction{
         JButton homepageButton = new JButton("Homepage");
         homepageButton.setForeground(new Color(218, 165, 32));
         homepageButton.setBackground(Color.BLACK);
+
+        homepageButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+
+                /*
+                Homepage homepage = null;
+                try {
+                    homepage = new Homepage(null);
+                } catch (Exception ex) {
+                    ex.printStackTrace ( );
+                }
+                homepage.setVisible(true);
+               dispose();
+                */
+            }
+        });
         homepageButton.setBounds(833, 718, 103, 45);
         search_class_frame.getContentPane().add(homepageButton);
 
@@ -354,7 +376,7 @@ public class add_and_search_transaction{
                 transactionLogPage transactionLog = new transactionLogPage();
 
                 transactionLog.setVisible(true);
-                //dispose();
+                dispose();
 
 
                 /*
@@ -366,13 +388,13 @@ public class add_and_search_transaction{
         });
         transactionLogButton.setBounds(675, 718, 136, 45);
         search_class_frame.getContentPane().add(transactionLogButton);
-		
+
 		/*
 		 search_cost_field = new JTextField();
 		search_cost_field.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(java.awt.event.KeyEvent e) {
-				
+
 				DefaultTableModel model = (DefaultTableModel)search_class_table.getModel();
 				TableRowSorter<DefaultTableModel> table_row_two = new TableRowSorter<DefaultTableModel>(model);
 				search_class_table.setRowSorter(table_row_two);
@@ -404,15 +426,19 @@ public class add_and_search_transaction{
             search_table.setRowSorter(sorter);
             //sorter.setRowFilter(RowFilter.regexFilter(theQuery));
         }
-					
+
 					/*
 					else if( (theQuery == "Name (A-Z)") || (theQuery == "Price (high-low)") ){
-										
+
 						//search_table.setRowSorter(sorter);
-							
+
 					}
 					*/
 
 
     }//sortData
+    public static void main(String[] args) {
+        add_and_search_transaction transactionWithSellers = new add_and_search_transaction();
+    }
 }//add_and_search_function
+
