@@ -107,7 +107,6 @@ public class Password_Recovery extends JFrame {
                     properties.put("mail.smtp.auth", "true");
                     properties.put("mail.smtp.starttls.required", "true");
                     properties.put("mail.smtp.ssl.trust", "smtp.mail.yahoo.com");
-                    java.security.Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider());
                     Session mailSession = Session.getDefaultInstance(properties, null);
                     mailSession.setDebug(sessionDebug);
                     Message msg = new MimeMessage(mailSession);
