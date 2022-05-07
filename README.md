@@ -1,4 +1,4 @@
-#Green Hornets:
+# Green Hornets:
 Michael Mateo
 Harlan Nguyen
 Myles Eastman
@@ -14,7 +14,7 @@ support for users, including Username Recovery, Password Recovery, and an option
 features: Inventory Management to monitor their inventory, Transaction Log to keep track of their transactions, and Package Information to retrieve information from
 their packages. The team Green Hornets are pushing/uploading their codes here to fulfill the requirements in Card2Manage System.
 
-#Downloading the repository:
+# Downloading the repository:
 
 1. From the <>Code page, click the "Code" dropdown box next to "Add file." 
 2. Click "Download ZIP." This should download all the folders and source code of the application.
