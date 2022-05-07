@@ -109,7 +109,7 @@ public class Homepage extends JDialog {
             displayCurrency.setText("1 USD = " + decimal2nd.format(exchangeValue) + " PHP");
         }
         else{
-            displayCurrency.setText("Cannot display current USD to PHP exchange rate at this time");
+            displayCurrency.setText("Cannot display current USD to PHP exchange rate at this time. API request limit reached.");
         }
 
         inventoryManagementButton.addActionListener(new ActionListener() {
