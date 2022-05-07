@@ -127,15 +127,16 @@ public class Homepage extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 PackageSearch packageInfo = null;
                 try {
-                    packageInfo = new PackageSearch();
+                    packageInfo = new PackageSearch(getHomepage());
                 } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
+                    ex.printStackTrace();
                 } catch (ClassNotFoundException ex) {
-                    throw new RuntimeException(ex);
+                    ex.printStackTrace();
                 }
                 packageInfo.setVisible(true);
                 dispose();
             }
+
         });
 
         transactionLogButton.addActionListener(new ActionListener() {
@@ -160,7 +161,9 @@ public class Homepage extends JDialog {
     public static void main(String[] args) throws Exception {
         Homepage homepage = new Homepage(null);
     }
-
+    public Homepage getHomepage(){
+        return this;
+    }
 
 }
 
