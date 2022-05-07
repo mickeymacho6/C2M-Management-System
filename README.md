@@ -1,12 +1,5 @@
 # Green Hornets:
-Michael Mateo
-Harlan Nguyen
-Myles Eastman
-Ethan Wyant
-Robert DeYoung Jr.
-Reza Salmanian
-Vyas Srinivasan
-Trisdon Zepada
+Michael Mateo, Harlan Nguyen, Myles Eastman, Ethan Wyant, Robert DeYoung Jr., Reza Salmanian, Vyas Srinivasan, Trisdon Zepada
 
 # Application: C2M-Management-System
 Welcome to Card2Manage System! This application aims to assist Card2Cart owners in their inventory, transaction, and package monitoring. The application offers additional
