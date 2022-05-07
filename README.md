@@ -21,5 +21,6 @@ This application is made with Java. Once the repository is installed:
 1. Open the "C2M-Management-System-main" folder in your desired IDE.
 2. Under the main folder, expand "src" folder.
 3. Different ".java" files can be seen from the folder that compose the application, but if you want the full experience of the app, begin at "loginForm.java" and run it.
+4. Enjoy the application!
 
 
