@@ -16,4 +16,10 @@ their packages. The team Green Hornets are pushing/uploading their codes here to
 5. Run the command "git clone https://github.com/mickeymacho6/C2M-Management-System.git" to clone the project back into repository.
 6. Enjoy!
 
+# Running the application
+This application is made with Java. Once the repository is installed:
+1. Open the "C2M-Management-System-main" folder in your desired IDE.
+2. Under the main folder, expand "src" folder.
+3. Different ".java" files can be seen from the folder that compose the application, but if you want the full experience of the app, begin at "loginForm.java" and run it.
+
 
