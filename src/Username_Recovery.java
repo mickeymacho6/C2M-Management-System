@@ -22,6 +22,7 @@ public class Username_Recovery extends JFrame {
     private JTextField enterEmailHereTextField;
     private JButton emailButton;
     private JLabel incorrectEmailLabel;
+    private JButton backButton;
     public User user;
 
     /**
@@ -80,6 +81,13 @@ public class Username_Recovery extends JFrame {
                 } else {
                     incorrectAnswerLabel.setVisible(true);
                 }
+            }
+        });
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                loginForm loginForm = new loginForm(null, null);
             }
         });
     }

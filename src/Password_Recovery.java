@@ -32,6 +32,7 @@ public class Password_Recovery extends JFrame {
     private JButton confirmUsernameButton;
     private JLabel incorrectUsernameLabel;
     private JLabel titleLabel;
+    private JButton backButton;
 
     //Allows access to the database
     final String DB_URL = "jdbc:sqlserver://greenhornetscard2manage.database.windows.net:1433;database=Green Hornets Card 2 Manage;encrypt=true;trustServerCertificate=true;";
@@ -140,6 +141,13 @@ public class Password_Recovery extends JFrame {
                 } else {
                     incorrectCodeLabel.setVisible(true);
                 }
+            }
+        });
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dispose();
+                loginForm loginForm = new loginForm(null, null);
             }
         });
     }
