@@ -9,7 +9,7 @@ import java.sql.*;
  * @author Harlan Nguyen
  * Last Modified: 04/18/2022
  */
-public class Username_Recovery extends JFrame {
+public class ForgotUsername extends JFrame {
     //Java Swing components
     private JTextField enterAnswerHereTextField;
     private JButton submitButton;
@@ -28,7 +28,7 @@ public class Username_Recovery extends JFrame {
     /**
      * Creates the username recovery page.
      */
-    public Username_Recovery() {
+    public ForgotUsername() {
         setContentPane(mainPanel);
         setTitle("Account Recovery");
         setSize(800, 500);
@@ -131,6 +131,6 @@ public class Username_Recovery extends JFrame {
         return user;
     }
     public static void main(String[] args) {
-        Username_Recovery accountRecovery = new Username_Recovery();
+        ForgotUsername accountRecovery = new ForgotUsername();
     }
 }

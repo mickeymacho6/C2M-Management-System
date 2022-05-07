@@ -19,7 +19,7 @@ import java.util.Random;
  * @author Harlan Nguyen
  * Last Modified: 04/18/2022
  */
-public class Password_Recovery extends JFrame {
+public class ForgotPassword extends JFrame {
     //Java Swing components
     private JTextField enterCodeHereTextField;
     private JButton submitButton;
@@ -56,7 +56,7 @@ public class Password_Recovery extends JFrame {
      *
      * @throws SQLException
      */
-    public Password_Recovery() throws SQLException {
+    public ForgotPassword() throws SQLException {
         setContentPane(mainPanel);
         setTitle("Account Recovery");
         setSize(600, 600);
@@ -206,6 +206,6 @@ public class Password_Recovery extends JFrame {
     }
 
     public static void main(String[] args) throws SQLException {
-        Password_Recovery passwordRecovery = new Password_Recovery();
+        ForgotPassword passwordRecovery = new ForgotPassword();
     }
 }
