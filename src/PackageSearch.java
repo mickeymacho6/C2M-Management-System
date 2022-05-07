@@ -14,13 +14,13 @@ import java.sql.*;
 
 public class PackageSearch extends JFrame {
 
-
+    private Homepage homepage;
     private JPanel contentPane;
     private JTextField searchString, trackID, keywords;
     private JLabel keywordIn, keywordOut, trackingIn;
     private JComboBox comboBox;
     private JTable table;
-    private JButton search_btn, reset_btn, reverse_btn, track_btn;
+    private JButton search_btn, reset_btn, reverse_btn, track_btn, back_btn;
     private JScrollPane tableScroll;
     private PackageOrder pbuilder;
     private ArrayList<PackageOrder> master_package_list, keyword_package_list;
@@ -39,7 +39,7 @@ public class PackageSearch extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    PackageSearch frame = new PackageSearch();
+                    PackageSearch frame = new PackageSearch(null);
                     frame.setVisible(true);
 
                 } catch (Exception e) {
@@ -52,7 +52,8 @@ public class PackageSearch extends JFrame {
     /**
      * Create the frame.
      */
-    public PackageSearch() throws SQLException, ClassNotFoundException {
+    public PackageSearch(Homepage hp) throws SQLException, ClassNotFoundException {
+        homepage=hp;
         master_package_list = new ArrayList<>();
         total_packages=0;
         try {
@@ -107,14 +108,6 @@ public class PackageSearch extends JFrame {
 
             }
 
-/*
-            while(resultSet.next()) {
-                System.out.println(resultSet.getString("CustomerID"));
-                System.out.println(resultSet.getString("FirstName"));
-                System.out.println(resultSet.getString("MiddleName"));
-                System.out.println(resultSet.getString("LastName"));
-
-            }*/
             connection.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -143,6 +136,7 @@ public class PackageSearch extends JFrame {
         reset_btn = new JButton("Reset Results");
         track_btn = new JButton("Track Package");
         reverse_btn = new JButton("Reverse Results");
+        back_btn = new JButton("Homepage");
         tableScroll = new JScrollPane();
         keywordIn = new JLabel("Keyword Search");
         keywordOut = new JLabel("Current Search Terms:");
@@ -192,6 +186,13 @@ public class PackageSearch extends JFrame {
             }
         });
 
+        back_btn.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                getPS().setVisible(false);
+                homepage.setVisible(true);
+            }
+        });
+
         //container sizing
         searchString.setBounds(wBorder, hBorder*2, wBorder*8, hBorder);
         trackID.setBounds(wBorder*24, hBorder*2, wBorder*8, hBorder);
@@ -201,10 +202,12 @@ public class PackageSearch extends JFrame {
         reset_btn.setBounds(wBorder*17, hBorder*2, wBorder*6, hBorder);
         track_btn.setBounds(wBorder*33, hBorder*2, wBorder*6, hBorder);
         reverse_btn.setBounds(wBorder*10, hBorder*4, wBorder*6, hBorder);
+        back_btn.setBounds(wBorder*50, hBorder*2, wBorder*6, hBorder);
         tableScroll.setBounds(wBorder, hBorder*8, screenWidth-(wBorder*2), screenHeight-(hBorder*11));
         keywordIn.setBounds(wBorder, hBorder, wBorder*8, hBorder);
         trackingIn.setBounds(wBorder*24, hBorder, wBorder*8, hBorder);
         keywordOut.setBounds(wBorder, hBorder*6, wBorder*6, hBorder);
+
 
         //add containers and extra
         contentPane.add(searchString);
@@ -228,6 +231,8 @@ public class PackageSearch extends JFrame {
 
         contentPane.add(reverse_btn);
 
+        contentPane.add(back_btn);
+
         current_packages=total_packages;
         keyword_package_list = master_package_list;
 
@@ -243,6 +248,9 @@ public class PackageSearch extends JFrame {
 
 
 
+    }
+    public PackageSearch getPS(){
+        return this;
     }
     protected String whitelist(String in){
         String out = "";
