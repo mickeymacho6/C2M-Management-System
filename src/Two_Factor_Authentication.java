@@ -66,7 +66,7 @@ public class Two_Factor_Authentication extends JDialog {
 
       verificationCode = rand.nextInt(900000) +100000;
       verificationCodeStr = Integer.toString(verificationCode);
-      System.out.println(verificationCodeStr);
+      //System.out.println(verificationCodeStr);
       //sendEmail(username, verificationCodeStr, "Two Factor Authentication Code", "The Two-factor Authentication Code is " + verificationCodeStr );
       return verificationCode;
 
@@ -76,14 +76,14 @@ public class Two_Factor_Authentication extends JDialog {
       twoFAMenu();
       Two_Factor_Authentication twoFA = new Two_Factor_Authentication(null);
 
-
+      /*
       JButton verify = twoFA.verifyButton;
 
       if (verify != null) {
          System.out.println("Verified!!!");
       }  else {
          System.out.println("Error!");
-      }
+      }*/
       //twoFASettings();
 
    }
@@ -141,8 +141,9 @@ public class Two_Factor_Authentication extends JDialog {
       settingsButton.setIcon(settingsIcon);
       //settingsButton.setBackground(Color.ORANGE);
       */
+
       //Verify Button to Verify Code
-      verifyCode=new JButton("VERIFY");//creating instance of JButton
+      verifyCode = new JButton("VERIFY");//creating instance of JButton
       verifyCode.setBounds(120,360,130, 40);//x axis, y axis, width, height
       verifyCode.setForeground(Color.BLACK);
       verifyCode.setBackground(Color.GREEN);
@@ -210,33 +211,12 @@ public class Two_Factor_Authentication extends JDialog {
       JTextField authCode = new JTextField();
       authCode.setBounds(130,140,100, 40);//x axis, y axis, width, height
 
-      verifyCode.addActionListener(new ActionListener() {
-         @Override
-         public void actionPerformed(ActionEvent e) {
-            System.out.println("Success");
-            if (verificationCodeStr.equals(authCode.toString())) {
-               System.out.println("Success");
-
-            } else {
-               JOptionPane.showMessageDialog(null, "Username or password is invalid",
-                       "Try again", JOptionPane.ERROR_MESSAGE);
-            }
-         }
-
-      });
 
 
-      /*
-      //Option: Via Text Message
-      sendCodeByText=new JButton("Text");//creating instance of JButton
-      sendCodeByText.setBounds(130,190,100, 40);//x axis, y axis, width, height
-      sendCodeByText.setForeground(Color.BLUE);
-      */
+
 
       //Resend Button
-
-
-     JButton resendCodeButton=new JButton("Resend Code");//creating instance of JButton
+      JButton resendCodeButton=new JButton("Resend Code");//creating instance of JButton
       resendCodeButton.setBounds(120,430,130, 40);//x axis, y axis, width, height
       resendCodeButton.setForeground(Color.BLUE);
 
@@ -244,6 +224,7 @@ public class Two_Factor_Authentication extends JDialog {
          @Override
          public void actionPerformed(ActionEvent e) {
             System.out.println(generateCode());
+
 
          }
 
@@ -259,6 +240,24 @@ public class Two_Factor_Authentication extends JDialog {
       verifyCode.setFocusable(true);
       verifyCode.setContentAreaFilled(false);
       verifyCode.setOpaque(true);
+
+      verifyCode.addActionListener(new ActionListener() {
+         @Override
+         public void actionPerformed(ActionEvent e) {
+
+
+            if (verificationCodeStr.equals(authCode.getText().toString())) {
+               System.out.println("Success");
+
+
+
+            } else {
+               JOptionPane.showMessageDialog(null, "Username or password is invalid",
+                       "Try again", JOptionPane.ERROR_MESSAGE);
+            }
+         }
+
+      });
 
       frame.add(new JLabel(new ImageIcon("logo.PNG")));
       frame.add(title);
