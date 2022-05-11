@@ -82,49 +82,51 @@ public class ForgotPassword extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String usernameText = enterUsernameHereTextField.getText();
                 user = getAuthenticatedUserpass(usernameText);
+                try {
+                    if (user.username.equals(usernameText)) {
+                        enterUsernameHereLabel.setVisible(false);
+                        enterUsernameHereTextField.setVisible(false);
+                        confirmUsernameButton.setVisible(false);
+                        incorrectUsernameLabel.setVisible(false);
+                        codeSentLabel.setVisible(true);
+                        enterCodeHereTextField.setVisible(true);
+                        submitButton.setVisible(true);
+                        submitButton.setVisible(true);
+                        getAuthenticatedCode();
+                        chosenID = random.nextInt(passwordRecoveryCodeArrayList.size());
+                        selectedCode = passwordRecoveryCodeArrayList.get(chosenID);
 
-                if (user.username.equals(usernameText)) {
-                    enterUsernameHereLabel.setVisible(false);
-                    enterUsernameHereTextField.setVisible(false);
-                    confirmUsernameButton.setVisible(false);
-                    incorrectUsernameLabel.setVisible(false);
-                    codeSentLabel.setVisible(true);
-                    enterCodeHereTextField.setVisible(true);
-                    submitButton.setVisible(true);
-                    submitButton.setVisible(true);
-                    getAuthenticatedCode();
-                    chosenID = random.nextInt(passwordRecoveryCodeArrayList.size());
-                    selectedCode = passwordRecoveryCodeArrayList.get(chosenID);
-
-                    //SMTP mailing process
-                    String host = "smtp.mail.yahoo.com";
-                    String email = "greenhornetscard2manage@yahoo.com";
-                    String password = "gsultfeqjngamtjr";
-                    boolean sessionDebug = false;
-                    Properties properties = System.getProperties();
-                    properties.put("mail.smtp.starttls.enable", "true");
-                    properties.put("mail.smtp.host", "host");
-                    properties.put("mail.smtp.port", "587");
-                    properties.put("mail.smtp.auth", "true");
-                    properties.put("mail.smtp.starttls.required", "true");
-                    properties.put("mail.smtp.ssl.trust", "smtp.mail.yahoo.com");
-                    Session mailSession = Session.getDefaultInstance(properties, null);
-                    mailSession.setDebug(sessionDebug);
-                    Message msg = new MimeMessage(mailSession);
-                    try {
-                        msg.setFrom(new InternetAddress(email));
-                        InternetAddress[] addresses = {new InternetAddress(user.email)};
-                        msg.setRecipients(Message.RecipientType.TO, addresses);
-                        msg.setSubject("Verification Code");
-                        msg.setText("The verification code is: " + selectedCode.passwordcode);
-                        Transport transport = mailSession.getTransport("smtp");
-                        transport.connect(host, email, password);
-                        transport.sendMessage(msg, msg.getAllRecipients());
-                        transport.close();
-                    } catch (MessagingException ex) {
-                        ex.printStackTrace();
+                        //SMTP mailing process
+                        String host = "smtp.mail.yahoo.com";
+                        String email = "greenhornetscard2manage@yahoo.com";
+                        String password = "gsultfeqjngamtjr";
+                        boolean sessionDebug = false;
+                        Properties properties = System.getProperties();
+                        properties.put("mail.smtp.starttls.enable", "true");
+                        properties.put("mail.smtp.host", "host");
+                        properties.put("mail.smtp.port", "587");
+                        properties.put("mail.smtp.auth", "true");
+                        properties.put("mail.smtp.starttls.required", "true");
+                        properties.put("mail.smtp.ssl.trust", "smtp.mail.yahoo.com");
+                        Session mailSession = Session.getDefaultInstance(properties, null);
+                        mailSession.setDebug(sessionDebug);
+                        Message msg = new MimeMessage(mailSession);
+                        try {
+                            msg.setFrom(new InternetAddress(email));
+                            InternetAddress[] addresses = {new InternetAddress(user.email)};
+                            msg.setRecipients(Message.RecipientType.TO, addresses);
+                            msg.setSubject("Verification Code");
+                            msg.setText("The verification code is: " + selectedCode.passwordcode);
+                            Transport transport = mailSession.getTransport("smtp");
+                            transport.connect(host, email, password);
+                            transport.sendMessage(msg, msg.getAllRecipients());
+                            transport.close();
+                        } catch (MessagingException ex) {
+                            ex.printStackTrace();
+                        }
                     }
-                } else {
+                } catch (Exception exception) {
+                    exception.printStackTrace();
                     incorrectUsernameLabel.setVisible(true);
                 }
 
