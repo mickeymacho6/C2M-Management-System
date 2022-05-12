@@ -92,9 +92,7 @@ public class ForgotPassword extends JFrame {
                         enterCodeHereTextField.setVisible(true);
                         submitButton.setVisible(true);
                         submitButton.setVisible(true);
-                        getAuthenticatedCode();
-                        chosenID = random.nextInt(passwordRecoveryCodeArrayList.size());
-                        selectedCode = passwordRecoveryCodeArrayList.get(chosenID);
+                        chosenID = random.nextInt(899999) + 100000;
 
                         //SMTP mailing process
                         String host = "smtp.mail.yahoo.com";
@@ -116,7 +114,7 @@ public class ForgotPassword extends JFrame {
                             InternetAddress[] addresses = {new InternetAddress(user.email)};
                             msg.setRecipients(Message.RecipientType.TO, addresses);
                             msg.setSubject("Verification Code");
-                            msg.setText("The verification code is: " + selectedCode.passwordcode);
+                            msg.setText("The verification code is: " + chosenID);
                             Transport transport = mailSession.getTransport("smtp");
                             transport.connect(host, email, password);
                             transport.sendMessage(msg, msg.getAllRecipients());
@@ -137,7 +135,7 @@ public class ForgotPassword extends JFrame {
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (enterCodeHereTextField.getText().equals(selectedCode.passwordcode)) {
+                if (enterCodeHereTextField.getText().equals(String.valueOf(chosenID))) {
                     dispose();
                     NewPassword newPassword = new NewPassword(null);
                 } else {
@@ -182,29 +180,6 @@ public class ForgotPassword extends JFrame {
             e.printStackTrace();
         }
         return user;
-    }
-
-    /**
-     * This method makes a SQL query to take all the codes from the passwordrecoverycodes table and stores them into an ArrayList.
-     * An Exception is thrown if no codes are found.
-     */
-    public void getAuthenticatedCode() {
-        PasswordRecoveryCode passwordRecoveryCode = null;
-        try {
-            String sql = "Select * from dbo.passwordrecoverycodes";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                passwordRecoveryCode = new PasswordRecoveryCode();
-                passwordRecoveryCode.codeid = resultSet.getString("codeid");
-                passwordRecoveryCode.passwordcode = resultSet.getString("passwordcode");
-                passwordRecoveryCodeArrayList.add(passwordRecoveryCode);
-            }
-            statement.close();
-            connection.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public static void main(String[] args) throws SQLException {
