@@ -98,8 +98,8 @@ public class ForgotPassword extends JFrame {
 
                         //SMTP mailing process
                         String host = "smtp.mail.yahoo.com";
-                        String email = "greenhornetscard2manage@yahoo.com";
-                        String password = "gsultfeqjngamtjr";
+                        String email = "card2manage@yahoo.com";
+                        String password = "cdrrovokxbgbbxwj";
                         boolean sessionDebug = false;
                         Properties properties = System.getProperties();
                         properties.put("mail.smtp.starttls.enable", "true");
