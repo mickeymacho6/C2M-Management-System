@@ -63,7 +63,7 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="cbab4" class="javax.swing.JButton" binding="addButton">
+          <component id="cbab4" class="javax.swing.JButton" binding="updateButton">
             <constraints>
               <grid row="0" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -72,7 +72,7 @@
               <enabled value="true"/>
               <foreground color="-14336"/>
               <horizontalTextPosition value="0"/>
-              <text value="Add"/>
+              <text value="Update"/>
             </properties>
           </component>
           <hspacer id="73d67">
@@ -87,15 +87,10 @@
           </hspacer>
           <hspacer id="c988f">
             <constraints>
-              <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-          </hspacer>
-          <hspacer id="5c82f">
-            <constraints>
               <grid row="0" column="3" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
           </hspacer>
-          <hspacer id="45526">
+          <hspacer id="5c82f">
             <constraints>
               <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -105,16 +100,32 @@
               <grid row="0" column="6" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
           </hspacer>
-          <hspacer id="425f9">
-            <constraints>
-              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-          </hspacer>
           <hspacer id="b9431">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
           </hspacer>
+          <component id="8c062" class="javax.swing.JButton" binding="transactionLogButton">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-16777216"/>
+              <enabled value="true"/>
+              <foreground color="-14336"/>
+              <text value="Transaction Log"/>
+            </properties>
+          </component>
+          <component id="7677e" class="javax.swing.JButton" binding="homepageButton" default-binding="true">
+            <constraints>
+              <grid row="0" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-16777216"/>
+              <foreground color="-14336"/>
+              <text value="Homepage"/>
+            </properties>
+          </component>
         </children>
       </grid>
       <grid id="4c459" binding="tablePanel" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
@@ -254,7 +265,7 @@
               <background color="-16777216"/>
               <font size="20"/>
               <foreground color="-14336"/>
-              <text value="  Transaction History  "/>
+              <text value="  Transaction with Customers  "/>
             </properties>
           </component>
         </children>

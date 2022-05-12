@@ -2,7 +2,7 @@ import javax.swing.*;
 
 
 /**
- * Transaction with buyers
+ * Transaction with customers
  * @author Myles Eastman
  * @version 3-13-2022
  */
@@ -28,6 +28,5 @@ public class TransactionMain {
         //frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-
     }
 }
