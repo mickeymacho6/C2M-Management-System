@@ -153,6 +153,7 @@ public class Homepage extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
+                loginForm login = new loginForm(null, null);
             }
         });setVisible(true);
         
