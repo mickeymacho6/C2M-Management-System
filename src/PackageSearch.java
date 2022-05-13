@@ -32,6 +32,8 @@ public class PackageSearch extends JFrame {
     final String USERNAME = "greenhornetsadmin";
     final String PASSWORD = "GreenHornetsUp!";
 
+    final String[] infoForHomepage = {"", "" , ""};
+
     /**
      * Launch the application.
      */
@@ -56,6 +58,7 @@ public class PackageSearch extends JFrame {
         homepage=hp;
         master_package_list = new ArrayList<>();
         total_packages=0;
+
         try {
             Connection connection = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
             System.out.println("Connected to SQL Server");
@@ -100,6 +103,10 @@ public class PackageSearch extends JFrame {
                     String pname = productSet.getString("Name");
                     pbuilder = new PackageOrder(SID,CID,total,pname,q,up,
                             AID,OrderDate, DueDate, ShipDate, trackID);
+                    infoForHomepage[0] = Integer.toString(SID);
+                    infoForHomepage[1] = trackID;
+                    infoForHomepage[2] = ShipDate;
+
                     master_package_list.add(pbuilder);
                     total_packages++;
                 }
@@ -406,6 +413,11 @@ public class PackageSearch extends JFrame {
         }
         return tempList;
 
+    }
+
+    public String[]GetLastInfoForHomepage()
+    {
+        return infoForHomepage;
     }
 
 }
