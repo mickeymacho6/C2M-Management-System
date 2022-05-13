@@ -252,8 +252,10 @@ public class Two_Factor_Authentication extends JDialog {
 
 
             } else {
-               JOptionPane.showMessageDialog(null, "Username or password is invalid",
+               JOptionPane.showMessageDialog(null, "Authentication code is invalid",
                        "Try again", JOptionPane.ERROR_MESSAGE);
+               System.out.println(generateCode());
+
             }
          }
 
