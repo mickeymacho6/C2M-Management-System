@@ -84,7 +84,7 @@ public class add_and_search_transaction extends JDialog{
         DefaultTableModel model = new DefaultTableModel();
 
         JFrame search_class_frame = new JFrame("Search class");
-        search_class_frame.getContentPane().setBackground(new Color(255, 236, 72));
+        search_class_frame.getContentPane().setBackground(new Color(218, 165, 32));
         search_class_frame.getContentPane().setForeground(Color.WHITE);
         search_class_frame.setBounds(100, 100, 962, 813);
         search_class_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -367,12 +367,13 @@ public class add_and_search_transaction extends JDialog{
 
 
                 try {
+                    dispose();
                     Homepage goBackHomepage = new Homepage(null);
 
                 } catch (Exception ex) {
                     throw new RuntimeException(ex);
                 }
-                dispose();
+
             }
         });
         homepageButton.setBounds(833, 718, 103, 45);
@@ -402,10 +403,14 @@ public class add_and_search_transaction extends JDialog{
             public void actionPerformed(ActionEvent e) {
                 //Open transaction with sellers page
 
+                dispose();
+
                 transactionLogPage transactionLog = new transactionLogPage();
 
                 transactionLog.setVisible(true);
-                dispose();
+
+
+
 
 
                 /*

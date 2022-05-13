@@ -45,7 +45,7 @@ public class transactionLogPage extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 922, 500);
         contentPane = new JPanel();
-        contentPane.setBackground(new Color(255, 236, 72));
+        contentPane.setBackground(new Color(218, 165, 32));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
@@ -58,7 +58,7 @@ public class transactionLogPage extends JFrame {
 
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //Open transaction with sellers page
+                //Open transaction with customers page
                 TransactionMain transactionWithCustomers = new TransactionMain();
 
 
@@ -75,6 +75,7 @@ public class transactionLogPage extends JFrame {
         btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
         btnNewButton_1.setBackground(new Color(0, 0, 0));
         btnNewButton_1.setForeground(new Color(218, 165, 32));
+        btnNewButton_1.setBounds(42, 192, 337, 75);
         btnNewButton_1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //Open transaction with sellers page
@@ -84,7 +85,7 @@ public class transactionLogPage extends JFrame {
                 dispose();
             }
         });
-        btnNewButton_1.setBounds(42, 192, 337, 75);
+
         contentPane.add(btnNewButton_1);
 
         JLabel lblNewLabel_1 = new JLabel("Card2Cart label");
@@ -108,14 +109,15 @@ public class transactionLogPage extends JFrame {
 
         backToHomepageButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                //Open transaction with sellers page
+                //Open homepage
                 try {
+                    dispose();
                     Homepage goBackHomepage = new Homepage(null);
 
                 } catch (Exception ex) {
                     throw new RuntimeException(ex);
                 }
-                dispose();
+               // dispose();
 
             }
         });

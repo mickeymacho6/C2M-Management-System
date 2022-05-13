@@ -355,6 +355,29 @@ public class InventoryPageTable {
         search_card_number_field.setBounds(715, 634, 160, 20);
         search_class_frame.getContentPane().add(search_card_number_field);
 
+        JButton homepageButton = new JButton("Homepage");
+        homepageButton.setForeground(new Color(218, 165, 32));
+        homepageButton.setBackground(Color.BLACK);
+
+            homepageButton.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+
+
+                    try {
+                        //dispose();
+                        Homepage goBackHomepage = new Homepage(null);
+
+                    } catch (Exception ex) {
+                        throw new RuntimeException(ex);
+                    }
+
+                }
+            });
+        homepageButton.setBounds(877, 705, 103, 45);
+        search_class_frame.getContentPane().add(homepageButton);
+
+
+
 
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ Refresh Page ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

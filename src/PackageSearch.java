@@ -14,7 +14,7 @@ import java.sql.*;
 
 public class PackageSearch extends JFrame {
 
-    private Homepage homepage;
+    //private Homepage homepage;
     private JPanel contentPane;
     private JTextField searchString, trackID, keywords;
     private JLabel keywordIn, keywordOut, trackingIn;
@@ -55,7 +55,7 @@ public class PackageSearch extends JFrame {
      * Create the frame.
      */
     public PackageSearch(Homepage hp) throws SQLException, ClassNotFoundException {
-        homepage=hp;
+      //  homepage=hp;
         master_package_list = new ArrayList<>();
         total_packages=0;
 
@@ -195,8 +195,13 @@ public class PackageSearch extends JFrame {
 
         back_btn.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                getPS().setVisible(false);
-                homepage.setVisible(true);
+                try {
+                    Homepage goBackHomepage = new Homepage(null);
+
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+                dispose();
             }
         });
 
