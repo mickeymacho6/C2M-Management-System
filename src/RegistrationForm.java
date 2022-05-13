@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
+import java.util.regex.Pattern;
 
 import static javax.swing.JOptionPane.showInternalMessageDialog;
 
@@ -72,19 +73,26 @@ public class RegistrationForm extends JDialog{
             showInternalMessageDialog( RegistrationForm.this,
                     "Please fill all the blank field","Try again",
                     JOptionPane.ERROR_MESSAGE);
+            isValid (email);
             return;
         }
         if (!password.equals(confirm_password))
         {
-            JOptionPane.showMessageDialog(this,
+            JOptionPane.showMessageDialog(RegistrationForm.this,
                     "Confirmed password does not match","Try again",JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (!email.equals(confirmEmail))
+        {
+            JOptionPane.showMessageDialog(RegistrationForm.this,
+                    "Confirmed email does not match","Try again",JOptionPane.ERROR_MESSAGE);
             return;
         }
         //Adding new user to database
         User = addUserToDatabase(name,email,confirmEmail,username,password,confirm_password,securityQuestion , securityAnswer );
         if (User != null) {
             dispose();
-        } else JOptionPane.showInternalMessageDialog(this, "Please fill all the blank", "Try again",
+        } else JOptionPane.showInternalMessageDialog(RegistrationForm.this, "Please fill all the blank", "Try again",
                 JOptionPane.ERROR_MESSAGE);
     }
     //global variable
@@ -140,6 +148,18 @@ public class RegistrationForm extends JDialog{
 
         return User;
     }
+
+        public boolean isValid(String email) {
+            String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
+                    "[a-zA-Z0-9_+&*-]+)*@" +
+                    "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                    "A-Z]{2,7}$";
+            Pattern pat = Pattern.compile (emailRegex);
+            if (email == null)
+                return false;
+            return pat.matcher (email).matches ( );
+        }
+
 
     //Main method
     public static void main(String[] args)
