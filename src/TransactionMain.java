@@ -22,7 +22,7 @@ public class TransactionMain {
         JPanel root = ui.getRootPanel();
         JFrame frame = new JFrame();
         frame.setSize(840,625);
-        //frame.setResizable(false);
+        frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setContentPane(root);
         //frame.pack();

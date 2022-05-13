@@ -27,6 +27,7 @@ public class TransactionUI extends JFrame{
     private JLabel latestTransaction;
     private JButton transactionLogButton;
     private JButton homepageButton;
+    private JButton clearButton;
     //private List<Object> row;
     private ArrayList<Object[]> rows = new ArrayList<>();
     private Object[][] data;
@@ -164,9 +165,17 @@ public class TransactionUI extends JFrame{
                 dispose();
             }
         });
+        clearButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DefaultTableModel temp = (DefaultTableModel) table.getModel();
+                clearTable(temp);
+            }
+        });
 
 
     }// end of createTable
+
 
     private void updateTable(DefaultTableModel t)
     {
@@ -246,7 +255,20 @@ public class TransactionUI extends JFrame{
         return out;
     }
 
+    private void clearTable(DefaultTableModel t)
+    {
+        t.setColumnIdentifiers(header);
+        t.getDataVector().toArray();
+        table.setModel(t = new DefaultTableModel(null, header) {
+            Class[] columnTypes = new Class[]{
+                    String.class, String.class, String.class, String.class, String.class, String.class, String.class
+            };
 
+            public Class getColumnClass(int columnIndex) {
+                return columnTypes[columnIndex];
+            }
+        });
+    }
 
     private String dataToString(Object[] d)
     {
