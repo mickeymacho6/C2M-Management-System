@@ -105,7 +105,7 @@ public class loginForm extends JDialog{
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    Password_Recovery recovery = new Password_Recovery ();
+                    ForgotPassword recovery = new ForgotPassword();
                 } catch (SQLException ex) {
                     ex.printStackTrace ( );
                 }
@@ -123,7 +123,7 @@ public class loginForm extends JDialog{
              */
             @Override
             public void actionPerformed(ActionEvent e) {
-                Username_Recovery Username_recovery = new Username_Recovery ();
+                ForgotUsername forgotUsername = new ForgotUsername();
                 dispose ();
             }
                // Username_Recovery Username_recovery = new Username_Recovery ();

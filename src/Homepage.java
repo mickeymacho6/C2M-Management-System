@@ -132,7 +132,7 @@ public class Homepage extends JDialog {
                 dispose();
                 PackageSearch packageInfo = null;
                 try {
-                    packageInfo = new PackageSearch();
+                    packageInfo = new PackageSearch(null);
                 } catch (SQLException | ClassNotFoundException ex) {
                     throw new RuntimeException(ex);
                 }

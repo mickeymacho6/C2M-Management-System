@@ -24,16 +24,37 @@ public class NewPassword extends JDialog {
         setLocationRelativeTo(parent);
         //setVisible(true);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-
+        User = user;
 
         goButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e)
             {
-                    dispose ();
-                    loginForm login = new loginForm (parent,null);
+                String password = String.valueOf(passwordField1.getPassword());
+                String confirm_password= String.valueOf(passwordField2.getPassword());
 
+                //If filed is empty display the Error message
+                if (confirm_password.isEmpty()) {
+                    JOptionPane.showMessageDialog( NewPassword.this, "Please fill the blank field(s)","Try again",
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                if (!password.equals( confirm_password))
+                {
+                    JOptionPane.showMessageDialog(NewPassword.this,
+                            "Confirmed password does not match","Try again",JOptionPane.ERROR_MESSAGE);
+                    return;
+                }else{
+                    JOptionPane.showMessageDialog (NewPassword.this,"Confirmed password is a match");
+                    addUserToDatabase(password, confirm_password);
 
+                }
+                //Updating the user's password
+
+                if (User != null) {
+                    dispose();
+                    loginForm login = new loginForm(parent, null);
+                }
             }
         });setVisible (true);
 
@@ -41,32 +62,7 @@ public class NewPassword extends JDialog {
     }
     private void Password_User() {
 
-        String password = String.valueOf(passwordField1.getPassword());
-        String confirm_password= String.valueOf(passwordField2.getPassword());
 
-        //If filed is empty display the Error message
-        if (  confirm_password.isEmpty()) {
-            JOptionPane.showInternalMessageDialog( NewPassword.this,
-                    "Please fill all the blank field","Try again",
-                    JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        if (!password.equals( confirm_password))
-        {
-            JOptionPane.showMessageDialog(this,
-                    "Confirmed password does not match","Try again",JOptionPane.ERROR_MESSAGE);
-            return;
-        }else{
-            JOptionPane.showMessageDialog (NewPassword.this,"Confirmed password is match");
-        }
-        //Adding new user to database
-        User = addUserToDatabase(password, confirm_password);
-        if (User != null)
-            dispose();
-        else{
-            JOptionPane.showInternalMessageDialog( this,"Please fill all the blank","Try again",
-                    JOptionPane.ERROR_MESSAGE);
-        }
     }
 
 
@@ -74,9 +70,9 @@ public class NewPassword extends JDialog {
     //global variable
     public User User;
     //returning valid user
-    private User addUserToDatabase(String password, String  confirm_password)
+    private void addUserToDatabase(String password, String  confirm_password)
     {
-        User User = null;
+        //User User = null;
         final String DB_URL;
         DB_URL = "jdbc:sqlserver://greenhornetscard2manage.database.windows.net:1433;database=Green Hornets Card 2 Manage;encrypt=true;trustServerCertificate=true;";
         final String USERNAME = "greenhornetsadmin";
@@ -87,20 +83,21 @@ public class NewPassword extends JDialog {
             System.out.println("Connected to SQL Server");
             //concreting to database successfully
             Statement st = conn.createStatement();
-            String sql = "Update users set password=?,confirm_password=? WHERE username=?" + User + "";
+            String sql = "Update users set password=?,confirm_password=? WHERE username=?";
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1,String.valueOf (password));
             preparedStatement.setString(2,String.valueOf (confirm_password));
+            preparedStatement.setString(3,String.valueOf (User.username));
 
             //Insert row into the table and execute the quarry
             int addRows = preparedStatement.executeUpdate();
-            if (addRows > 0)
-            {
-                User = new User();
+//            if (addRows > 0)
+//            {
+//                User = new User();
                 User.password= password;
                 User.confirm_password = confirm_password;
 
-            }
+//            }
             //closing connection
             st.close();
             conn.close();
@@ -108,7 +105,7 @@ public class NewPassword extends JDialog {
             e.printStackTrace();
         }
 
-        return User;
+//        return User;
 
     }
 
