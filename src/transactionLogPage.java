@@ -1,21 +1,8 @@
-import java.awt.BorderLayout;
-import java.awt.Image;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
-import java.awt.Color;
-import java.awt.Font;
-import javax.swing.JCheckBox;
-import javax.swing.ImageIcon;
-
-import java.sql.*;
+import java.awt.event.ActionListener;
 
 public class transactionLogPage extends JFrame {
 
@@ -45,17 +32,17 @@ public class transactionLogPage extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 922, 500);
         contentPane = new JPanel();
-        contentPane.setBackground(new Color(218, 165, 32));
+        contentPane.setBackground(new Color(254, 236, 72));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
         JButton btnNewButton = new JButton("Transaction with Customers");
         btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        btnNewButton.setForeground(new Color(218, 165, 32));
+        btnNewButton.setForeground(new Color(254, 236, 72));
         btnNewButton.setBackground(new Color(0, 0, 0));
         btnNewButton.setBounds(509, 192, 337, 75);
-          btnNewButton.addActionListener(new ActionListener() {
+        btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //Open transaction with customers page
                 TransactionMain transactionWithCustomers = new TransactionMain();
@@ -69,7 +56,7 @@ public class transactionLogPage extends JFrame {
         JButton btnNewButton_1 = new JButton("Transaction with Sellers");
         btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
         btnNewButton_1.setBackground(new Color(0, 0, 0));
-        btnNewButton_1.setForeground(new Color(218, 165, 32));
+        btnNewButton_1.setForeground(new Color(254, 236, 72));
         btnNewButton_1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 //Open transaction with sellers page
@@ -90,14 +77,14 @@ public class transactionLogPage extends JFrame {
 
         JLabel transactionLogLabel = new JLabel("TRANSACTION LOG");
         transactionLogLabel.setFont(new Font("Dialog", Font.PLAIN, 20));
-        transactionLogLabel.setForeground(new Color(218, 165, 32));
+        transactionLogLabel.setForeground(new Color(254, 236, 72));
         transactionLogLabel.setBackground(new Color(0, 0, 0));
         transactionLogLabel.setBounds(0, 0, 197, 45);
         contentPane.add(transactionLogLabel);
         transactionLogLabel.setOpaque(true);
 
         JButton backToHomepageButton = new JButton("Homepage");
-        backToHomepageButton.setForeground(new Color(218, 165, 32));
+        backToHomepageButton.setForeground(new Color(254, 236, 72));
         backToHomepageButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
         backToHomepageButton.setBackground(Color.BLACK);
 

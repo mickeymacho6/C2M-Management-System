@@ -54,7 +54,7 @@ public class add_and_search_transaction extends JDialog{
         DefaultTableModel model = new DefaultTableModel();
 
         JFrame search_class_frame = new JFrame("Search class");
-        search_class_frame.getContentPane().setBackground(new Color(218, 165, 32));
+        search_class_frame.getContentPane().setBackground(new Color(255,236 , 72));
         search_class_frame.getContentPane().setForeground(Color.WHITE);
         search_class_frame.setBounds(100, 100, 962, 813);
         search_class_frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -88,7 +88,7 @@ public class add_and_search_transaction extends JDialog{
         Object[] row = new Object[6];
 
         JButton add_transaction_button = new JButton("Add");
-        add_transaction_button.setForeground(new Color(218, 165, 32));
+        add_transaction_button.setForeground(new Color(255,236 , 72));
         add_transaction_button.setBackground(new Color(0, 0, 0));
         add_transaction_button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -107,7 +107,7 @@ public class add_and_search_transaction extends JDialog{
         search_class_frame.getContentPane().add(add_transaction_button);
 
         JButton delete_button = new JButton("Delete");
-        delete_button.setForeground(new Color(218, 165, 32));
+        delete_button.setForeground(new Color(255,236 , 72));
         delete_button.setBackground(new Color(0, 0, 0));
         delete_button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -204,7 +204,7 @@ public class add_and_search_transaction extends JDialog{
 
         JLabel lblAddTransaction = new JLabel("ADD TRANSACTION");
         lblAddTransaction.setOpaque(true);
-        lblAddTransaction.setForeground(new Color(218, 165, 32));
+        lblAddTransaction.setForeground(new Color(255,236 , 72));
         lblAddTransaction.setFont(new Font("Dialog", Font.PLAIN, 20));
         lblAddTransaction.setBackground(Color.BLACK);
         lblAddTransaction.setBounds(143, 392, 191, 45);
@@ -212,7 +212,7 @@ public class add_and_search_transaction extends JDialog{
 
         JLabel search_transaction_label = new JLabel("SEARCH TRANSACTION");
         search_transaction_label.setOpaque(true);
-        search_transaction_label.setForeground(new Color(218, 165, 32));
+        search_transaction_label.setForeground(new Color(255,236 , 72));
         search_transaction_label.setFont(new Font("Dialog", Font.PLAIN, 20));
         search_transaction_label.setBackground(Color.BLACK);
         search_transaction_label.setBounds(579, 392, 232, 45);
@@ -233,7 +233,7 @@ public class add_and_search_transaction extends JDialog{
 
         JLabel lblTransactionWithSellers = new JLabel("TRANSACTION WITH SELLERS");
         lblTransactionWithSellers.setOpaque(true);
-        lblTransactionWithSellers.setForeground(new Color(218, 165, 32));
+        lblTransactionWithSellers.setForeground(new Color(255,236 , 72));
         lblTransactionWithSellers.setFont(new Font("Dialog", Font.PLAIN, 20));
         lblTransactionWithSellers.setBackground(Color.BLACK);
         lblTransactionWithSellers.setBounds(0, 0, 294, 45);
@@ -243,23 +243,14 @@ public class add_and_search_transaction extends JDialog{
         JLabel sortLabel = new JLabel("Sort by:");
         sortLabel.setBounds(10, 138, 67, 14);
         search_class_frame.getContentPane().add(sortLabel);
-
-
-
         //combo box selection change
         JComboBox sortComboBox = new JComboBox();
         sortComboBox.addItemListener(new ItemListener() {
             public void itemStateChanged(ItemEvent e) {
-
                 String query = sortComboBox.getSelectedItem().toString();
-
                 sortData(query, search_class_table, model);
-
             }
-
         });
-
-
         sortComboBox.setModel(new DefaultComboBoxModel(new String[] {"None", "Name (A-Z)", "Name (Z-A)", "Price (low-high)", "Price (high-low)", "Paid orders", "Shipped orders"}));
         sortComboBox.setBounds(10, 163, 103, 22);
         search_class_frame.getContentPane().add(sortComboBox);
@@ -308,7 +299,6 @@ public class add_and_search_transaction extends JDialog{
 		 Sort function
 		 Arrays.sort(myArray); // sort in ascending order
 		 Arrays.sort(myArray, Comparator.reverseOrder()); // sort in descending order
-
 		 */
         //call sort function to sort data
 
@@ -327,7 +317,7 @@ public class add_and_search_transaction extends JDialog{
         search_class_frame.getContentPane().add(dollarSignLabel);
 
         JButton homepageButton = new JButton("Homepage");
-        homepageButton.setForeground(new Color(218, 165, 32));
+        homepageButton.setForeground(new Color(255,236 , 72));
         homepageButton.setBackground(Color.BLACK);
 
         homepageButton.addActionListener(new ActionListener() {
@@ -358,6 +348,14 @@ public class add_and_search_transaction extends JDialog{
                 TableRowSorter<DefaultTableModel> table_row_four = new TableRowSorter<DefaultTableModel>(modelFour);
                 search_class_table.setRowSorter(table_row_four);
                 table_row_four.setRowFilter(RowFilter.regexFilter(searchTrackingField.getText().trim()));
+                Homepage homepage = null;
+                try {
+                    homepage = new Homepage (null);
+                } catch (Exception ex) {
+                    ex.printStackTrace ( );
+                }
+                homepage.setVisible (true);
+                dispose ();
             }
         });
         searchTrackingField.setText("");
@@ -366,7 +364,7 @@ public class add_and_search_transaction extends JDialog{
         search_class_frame.getContentPane().add(searchTrackingField);
 
         JButton transactionLogButton = new JButton("Transaction Log");
-        transactionLogButton.setForeground(new Color(218, 165, 32));
+        transactionLogButton.setForeground(new Color(255,236 , 72));
         transactionLogButton.setBackground(Color.BLACK);
 
         transactionLogButton.addActionListener(new ActionListener() {
@@ -374,9 +372,9 @@ public class add_and_search_transaction extends JDialog{
                 //Open transaction with sellers page
 
                 transactionLogPage transactionLog = new transactionLogPage();
-
-                transactionLog.setVisible(true);
                 dispose();
+                transactionLog.setVisible(true);
+
 
 
                 /*
@@ -394,7 +392,6 @@ public class add_and_search_transaction extends JDialog{
 		search_cost_field.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(java.awt.event.KeyEvent e) {
-
 				DefaultTableModel model = (DefaultTableModel)search_class_table.getModel();
 				TableRowSorter<DefaultTableModel> table_row_two = new TableRowSorter<DefaultTableModel>(model);
 				search_class_table.setRowSorter(table_row_two);
@@ -429,9 +426,7 @@ public class add_and_search_transaction extends JDialog{
 
 					/*
 					else if( (theQuery == "Name (A-Z)") || (theQuery == "Price (high-low)") ){
-
 						//search_table.setRowSorter(sorter);
-
 					}
 					*/
 
@@ -441,4 +436,3 @@ public class add_and_search_transaction extends JDialog{
         add_and_search_transaction transactionWithSellers = new add_and_search_transaction();
     }
 }//add_and_search_function
-

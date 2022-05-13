@@ -52,6 +52,7 @@ public class Homepage extends JDialog {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
 
+
         Image logo = new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/logo.png"))).getImage();
         Image button1 = new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/inventory.png"))).getImage();
         Image button2 = new ImageIcon(Objects.requireNonNull(this.getClass().getResource("/package.png"))).getImage();
@@ -76,16 +77,17 @@ public class Homepage extends JDialog {
         TimeZone CST = TimeZone.getTimeZone("CST6CDT");
         TimeZone EST = TimeZone.getTimeZone("EST5EDT");
         Date currentTime = new Date ( );
-            timeFormat.setTimeZone (PHT);
-            time1.setText (timeFormat.format (currentTime));
-            timeFormat.setTimeZone (PST);
-            time2.setText (timeFormat.format (currentTime));
-            timeFormat.setTimeZone (MST);
-            time3.setText (timeFormat.format (currentTime));
-            timeFormat.setTimeZone (CST);
-            time4.setText (timeFormat.format (currentTime));
-            timeFormat.setTimeZone (EST);
-            time5.setText (timeFormat.format (currentTime));
+        timeFormat.setTimeZone (PHT);
+        time1.setText (timeFormat.format (currentTime));
+        timeFormat.setTimeZone (PST);
+        time2.setText (timeFormat.format (currentTime));
+        timeFormat.setTimeZone (MST);
+        time3.setText (timeFormat.format (currentTime));
+        timeFormat.setTimeZone (CST);
+        time4.setText (timeFormat.format (currentTime));
+        timeFormat.setTimeZone (EST);
+        time5.setText (timeFormat.format (currentTime));
+
 
         URL url = new URL("http://data.fixer.io/api/latest?access_key=cad2cf17e01c03d9f3226162e57e569d");
         StringBuilder result = new StringBuilder();
@@ -109,43 +111,45 @@ public class Homepage extends JDialog {
             displayCurrency.setText("1 USD = " + decimal2nd.format(exchangeValue) + " PHP");
         }
         else{
-            displayCurrency.setText("Cannot display current USD to PHP exchange rate at this time. API request limit reached.");
+            displayCurrency.setText("Cannot display current USD to PHP exchange rate at this time");
         }
 
         inventoryManagementButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                dispose();
                 InventoryPageTable inventory = new InventoryPageTable();
+               // dispose();
                 String[] runInventory = {};
                 inventory.main(runInventory);
-                dispose();
+
             }
         });
 
         packageInformationButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                dispose();
                 PackageSearch packageInfo = null;
                 try {
-                    packageInfo = new PackageSearch(getHomepage());
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                } catch (ClassNotFoundException ex) {
-                    ex.printStackTrace();
+                    packageInfo = new PackageSearch();
+                } catch (SQLException | ClassNotFoundException ex) {
+                    throw new RuntimeException(ex);
                 }
                 packageInfo.setVisible(true);
-                dispose();
+                //dispose();
             }
-
         });
 
         transactionLogButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                transactionLogPage transactionLog = new transactionLogPage();
-                String[] runTransactionLog = {};
-                transactionLog.main(runTransactionLog);
-                dispose();
+                dispose ();
+                transactionLogPage transactionLogPage = new transactionLogPage ();
+               transactionLogPage.setVisible (true);
+               setVisible (false);
+
+
             }
         });
 
@@ -153,19 +157,18 @@ public class Homepage extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dispose();
-                loginForm login = new loginForm(null, null);
             }
-        });setVisible(true);
-        
-    }
+        });setVisible (true);
 
+
+
+    }
+/*
     public static void main(String[] args) throws Exception {
         Homepage homepage = new Homepage(null);
     }
-    public Homepage getHomepage(){
-        return this;
-    }
+
+*/
+
 
 }
-
-

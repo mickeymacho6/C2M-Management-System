@@ -8,7 +8,7 @@ import java.sql.*;
 
 
 
-
+//Setting the Login form panel author Reza salmanian
 public class loginForm extends JDialog{
     private JPanel icon;
     private JLabel usernameLabel;
@@ -19,7 +19,8 @@ public class loginForm extends JDialog{
     private JButton btnCreateAccount;
     private JButton btnCancel;
     private JPanel LoginPanel;
-    private JButton forgotPasswordButton;
+    private JButton btnForgotPassword;
+    private JButton btnForgotUsername;
 
     //constructor
     public loginForm(JFrame parent, String username)
@@ -52,7 +53,7 @@ public class loginForm extends JDialog{
             });
             dispose();
         }
-
+        //will let the user to login
         btnLogin.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -74,7 +75,7 @@ public class loginForm extends JDialog{
                     } catch (Exception ex) {
                         ex.printStackTrace ( );
                     }
-                    homepage.setVisible(true);
+                    //homepage.setVisible(true);
 
                 }
 
@@ -95,7 +96,7 @@ public class loginForm extends JDialog{
 
             }
         });
-        forgotPasswordButton.addActionListener (new ActionListener ( ) {
+        btnForgotPassword.addActionListener (new ActionListener ( ) {
             /**
              * Invoked when an action occurs.
              *
@@ -104,21 +105,39 @@ public class loginForm extends JDialog{
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    ForgotPassword recovery = new ForgotPassword();
+                    Password_Recovery recovery = new Password_Recovery ();
                 } catch (SQLException ex) {
                     ex.printStackTrace ( );
                 }
                 dispose ();
             }
         });
+        //setVisible(true);
+
+
+        btnForgotUsername.addActionListener (new ActionListener ( ) {
+            /**
+             * Invoked when an action occurs.
+             *
+             * @param e the event to be processed
+             */
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Username_Recovery Username_recovery = new Username_Recovery ();
+                dispose ();
+            }
+               // Username_Recovery Username_recovery = new Username_Recovery ();
+
+
+
+
+        });
         setVisible(true);
-
-
-
     }
 
-
+    //Global variable
     public static User User;
+    //Connecting to the DB server
     private User getAuthenticatedUser(String username, String password) throws SQLException {
         User User =null;
         //return User;
@@ -131,7 +150,7 @@ public class loginForm extends JDialog{
             Connection conn = DriverManager.getConnection(DB_URL,USERNAME,PASSWORD);
             System.out.println("Connected to SQL Server");
             Statement stmt = conn.createStatement();
-            String sql = "SELECT * FROM dbo.users WHERE username=? AND password=?";
+            String sql = "SELECT * FROM dbo.users WHERE username=? AND password=?"; //Selecting from DB table
             PreparedStatement preparedStatement = conn.prepareStatement(sql);
             preparedStatement.setString(1,username);
             preparedStatement.setString(2,password);
@@ -177,7 +196,7 @@ public class loginForm extends JDialog{
     }
 
 
-
+    //Future clear button
     private void actionPerformed(ActionEvent e) {
         textField1.setText(null);
         passwordField1.setText(null);

@@ -6,6 +6,10 @@ import java.sql.*;
 
 import static javax.swing.JOptionPane.showInternalMessageDialog;
 
+
+
+
+//Setting the Registration form panel author Reza salmanian
 public class RegistrationForm extends JDialog{
     private JTextField textName;
     private JTextField textEmail;
@@ -23,7 +27,7 @@ public class RegistrationForm extends JDialog{
     public RegistrationForm(JDialog parent)
     {
         super(parent);
-        setTitle("Create a new account");
+        setTitle("Create account");
         setContentPane(RegisterPanel);
         setMinimumSize(new Dimension(430,500));
         setModal(true);

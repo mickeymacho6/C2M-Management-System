@@ -180,7 +180,7 @@
         <properties>
           <font name="Arial Rounded MT Bold" size="14" style="0"/>
           <foreground color="-15787199"/>
-          <text value="Security Qeustion"/>
+          <text value="Security Question"/>
         </properties>
       </component>
       <component id="852c4" class="javax.swing.JLabel">
