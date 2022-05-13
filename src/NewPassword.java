@@ -14,7 +14,7 @@ public class NewPassword extends JDialog {
     private JPasswordField passwordField1;
     private JPasswordField passwordField2;
 
-    public NewPassword (JFrame parent)
+    public NewPassword (JFrame parent, User user)
     {
         super(parent);
         setTitle(" Card2Cart New Password Form");
@@ -115,7 +115,7 @@ public class NewPassword extends JDialog {
     //Main method
     public static void main(String[] args)
     {   //object of registration form
-        NewPassword new_form = new NewPassword(null);
+        NewPassword new_form = new NewPassword(null, null);
         User User = new_form.User;
         if (User != null)
         {

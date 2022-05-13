@@ -137,7 +137,7 @@ public class ForgotPassword extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (enterCodeHereTextField.getText().equals(String.valueOf(chosenID))) {
                     dispose();
-                    NewPassword newPassword = new NewPassword(null);
+                    NewPassword newPassword = new NewPassword(null, user);
                 } else {
                     incorrectCodeLabel.setVisible(true);
                 }
