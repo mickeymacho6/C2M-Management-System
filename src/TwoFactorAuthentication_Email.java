@@ -37,13 +37,16 @@ public class TwoFactorAuthentication_Email {
 
     }
     public static void main(String[] args) {
-        Two_Factor_Authentication twoFA = new Two_Factor_Authentication(null);
-        JButton verify = twoFA.verifyButton;
+        /*
+        //Two_Factor_Authentication twoFA = new Two_Factor_Authentication(null);
+        //JButton verify = twoFA.verifyButton;
 
         if (verify != null) {
             System.out.println("Verified");
         }  else {
             System.out.println("Error");
         }
+
+         */
     }
 }

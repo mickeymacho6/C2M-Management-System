@@ -41,10 +41,10 @@ public class Two_Factor_Authentication extends JDialog {
 
 
 
-   public Two_Factor_Authentication(JFrame parent) {
+   public Two_Factor_Authentication(JFrame parent) throws Exception{
       super(parent);
       setTitle(" Card2Cart Login");
-      setContentPane(contentPane);
+     // setContentPane(contentPane);
       setMinimumSize(new Dimension(400,475));
       setModal(true);
       setLocationRelativeTo(parent);
@@ -74,7 +74,7 @@ public class Two_Factor_Authentication extends JDialog {
 
    public static void main(String[] args) {
       twoFAMenu();
-      Two_Factor_Authentication twoFA = new Two_Factor_Authentication(null);
+      //Two_Factor_Authentication twoFA = new Two_Factor_Authentication(null);
 
       /*
       JButton verify = twoFA.verifyButton;
@@ -248,7 +248,12 @@ public class Two_Factor_Authentication extends JDialog {
 
             if (verificationCodeStr.equals(authCode.getText().toString())) {
                System.out.println("Success");
-
+                Homepage homepage = null;
+                try {
+                    homepage = new Homepage(null);
+                } catch (Exception ex) {
+                    ex.printStackTrace ( );
+                }
 
 
             } else {
