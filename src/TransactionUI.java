@@ -28,12 +28,8 @@ public class TransactionUI extends JFrame{
     private JButton transactionLogButton;
     private JButton homepageButton;
     private JButton clearButton;
-    //private List<Object> row;
-    private ArrayList<Object[]> rows = new ArrayList<>();
     private Object[][] data;
     private Object[] header = {"Order#", "Tracking#", "Date Ordered", "Shipped", "Product Name", "Seller", "Price"};
-    private TransactionUI ui;
-    private String sql = "";
     private Connection connection;
 
     public TransactionUI() {
@@ -69,14 +65,7 @@ public class TransactionUI extends JFrame{
         DefaultTableModel model = new DefaultTableModel();
 
 
-        data = new Object[][]{
-                {"1", "54378", "10/10/20", "11/11/20", "Babe Ruth", "Myles Eastman", "100.00"},
-                {"2", "37809", "10/11/20", "11/09/20", "Jackie Robinson", "Yuji Naka", "200.00"}
-                //{"3", "54290", "10/14/20", "11/11/20", "Mike Trout", "John Kirby", "300.00"},
-                //{"4", "54324", "10/16/20", "11/12/20", "Hank Aaron", "Lyn Cell", "400.00"},
-                //{"5", "65306", "10/20/20", "11/30/20", "Ty Cobb", "Chris Rock", "500.00"}
-        };
-
+        data = new Object[2][7]; // creating blank table
 
         model.setColumnIdentifiers(header);
 
@@ -179,8 +168,6 @@ public class TransactionUI extends JFrame{
 
     private void updateTable(DefaultTableModel t)
     {
-        //DefaultTableModel temp = (DefaultTableModel) table.getModel();
-        Object[] row = new Object[7];
         int i = 0;
         try {
             Statement st = connection.createStatement();
@@ -222,12 +209,10 @@ public class TransactionUI extends JFrame{
                 data[i][5] = seller;
                 data[i][6] = cost;
                 t.addRow(data[i]);
-                //t.addRow(dataTable.get(i).toArray());
                 i++;
             }
             latestTransaction.setText(dataToString(data[i - 1]));
 
-            //DefaultTableModel model = new DefaultTableModel();
             t.setColumnIdentifiers(header);
             t.getDataVector().toArray();
             table.setModel(t = new DefaultTableModel(data, header) {
